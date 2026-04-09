@@ -17,8 +17,35 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 40px;
+      gap: 36px;
       padding: 32px;
+    }
+
+    /* LANG SWITCHER */
+    .langs {
+      position: fixed;
+      top: 20px;
+      right: 24px;
+      display: flex;
+      gap: 6px;
+    }
+    .lang-btn {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,.2);
+      color: rgba(255,255,255,.5);
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 9px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: .15s;
+      font-family: inherit;
+      letter-spacing: .5px;
+    }
+    .lang-btn:hover, .lang-btn.active {
+      background: #1a73e8;
+      border-color: #1a73e8;
+      color: #fff;
     }
 
     /* LOGO */
@@ -28,7 +55,6 @@
       align-items: center;
       gap: 16px;
     }
-
     .logo-mark {
       width: 80px;
       height: 80px;
@@ -41,45 +67,43 @@
       font-weight: 800;
       color: #fff;
       letter-spacing: -1px;
-      box-shadow: 0 8px 32px rgba(26, 115, 232, 0.45);
+      box-shadow: 0 8px 32px rgba(26,115,232,.45);
     }
-
     .logo-name {
       font-size: 32px;
       font-weight: 700;
       color: #fff;
       letter-spacing: -0.5px;
     }
-
-    .logo-name span {
-      color: #1a73e8;
-    }
-
+    .logo-name span { color: #1a73e8; }
     .logo-sub {
-      font-size: 13px;
-      color: rgba(255,255,255,0.35);
-      letter-spacing: 1.5px;
+      font-size: 12px;
+      color: rgba(255,255,255,.35);
+      letter-spacing: 1.8px;
       text-transform: uppercase;
       margin-top: -4px;
     }
 
     /* TAGLINE */
-    .tagline {
-      text-align: center;
-    }
-
+    .tagline { text-align: center; }
     .tagline h1 {
       font-size: 42px;
       font-weight: 800;
-      color: #fff;
       letter-spacing: -1px;
       line-height: 1.15;
     }
-
     .tagline p {
       margin-top: 12px;
       font-size: 15px;
-      color: rgba(255,255,255,0.45);
+      color: rgba(255,255,255,.45);
+    }
+
+    /* ACTIONS */
+    .actions {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
     }
 
     /* BOT BUTTON */
@@ -95,63 +119,141 @@
       font-size: 16px;
       font-weight: 600;
       transition: background .2s, transform .15s, box-shadow .2s;
-      box-shadow: 0 4px 20px rgba(26,115,232,0.4);
+      box-shadow: 0 4px 20px rgba(26,115,232,.4);
+      white-space: nowrap;
     }
-
     .bot-btn:hover {
       background: #0d5cc7;
       transform: translateY(-2px);
-      box-shadow: 0 8px 28px rgba(26,115,232,0.5);
+      box-shadow: 0 8px 28px rgba(26,115,232,.5);
     }
-
     .bot-btn svg {
       width: 22px;
       height: 22px;
       flex-shrink: 0;
     }
 
+    /* EMAIL */
+    .email-line {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      color: rgba(255,255,255,.4);
+    }
+    .email-line a {
+      color: rgba(255,255,255,.65);
+      text-decoration: none;
+      transition: color .15s;
+    }
+    .email-line a:hover { color: #fff; }
+    .email-line svg {
+      width: 15px;
+      height: 15px;
+      opacity: .4;
+      flex-shrink: 0;
+    }
+
     /* FOOTER */
     .footer {
       position: fixed;
-      bottom: 24px;
+      bottom: 20px;
       font-size: 11px;
-      color: rgba(255,255,255,0.2);
+      color: rgba(255,255,255,.18);
       letter-spacing: .3px;
     }
 
     @media (max-width: 480px) {
-      .tagline h1 { font-size: 30px; }
-      .logo-name  { font-size: 26px; }
-      .logo-mark  { width: 64px; height: 64px; font-size: 20px; }
+      .tagline h1  { font-size: 30px; }
+      .logo-name   { font-size: 26px; }
+      .logo-mark   { width: 64px; height: 64px; font-size: 20px; }
+      .bot-btn     { font-size: 14px; padding: 14px 24px; }
     }
   </style>
 </head>
 <body>
 
+  <!-- LANG -->
+  <div class="langs">
+    <button class="lang-btn active" onclick="setLang('ru')">RU</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" onclick="setLang('he')">HE</button>
+  </div>
+
   <!-- LOGO -->
   <div class="logo">
     <div class="logo-mark">FF</div>
     <div class="logo-name">Flat<span>Finder</span>IL</div>
-    <div class="logo-sub">Недвижимость Израиля</div>
+    <div class="logo-sub" data-i="sub">Недвижимость Израиля</div>
   </div>
 
   <!-- TAGLINE -->
   <div class="tagline">
-    <h1>Скоро открытие</h1>
-    <p>Портал о рынке недвижимости Израиля — уже совсем скоро</p>
+    <h1 data-i="h1">Скоро открытие</h1>
+    <p data-i="p">Портал о рынке недвижимости Израиля — уже совсем скоро</p>
   </div>
 
-  <!-- BOT LINK -->
-  <a href="https://t.me/flatfinderil_bot" target="_blank" class="bot-btn">
-    <!-- Telegram icon -->
-    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M22 2L11 13" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-    Открыть бот @flatfinderil_bot
-  </a>
+  <!-- ACTIONS -->
+  <div class="actions">
+    <a href="https://t.me/flatfinderil_bot" target="_blank" class="bot-btn">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M22 2L11 13" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span data-i="btn">Открыть бот @flatfinderil_bot</span>
+    </a>
+
+    <div class="email-line">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" stroke-width="2"/>
+        <path d="M2 7l10 7 10-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <span data-i="contact">Связаться:</span>
+      <a href="mailto:info@flatfinderil.com">info@flatfinderil.com</a>
+    </div>
+  </div>
 
   <div class="footer">© 2026 FlatFinderIL · flatfinderil.com</div>
 
+<script>
+const T = {
+  ru: {
+    sub:     "Недвижимость Израиля",
+    h1:      "Скоро открытие",
+    p:       "Портал о рынке недвижимости Израиля — уже совсем скоро",
+    btn:     "Открыть бот @flatfinderil_bot",
+    contact: "Связаться:",
+  },
+  en: {
+    sub:     "Israel Real Estate",
+    h1:      "Coming Soon",
+    p:       "Israel real estate portal — launching very soon",
+    btn:     "Open bot @flatfinderil_bot",
+    contact: "Contact us:",
+  },
+  he: {
+    sub:     "נדל\"ן בישראל",
+    h1:      "בקרוב",
+    p:       "פורטל הנדל\"ן של ישראל — כבר בקרוב",
+    btn:     "פתח בוט @flatfinderil_bot",
+    contact: "צור קשר:",
+  }
+};
+
+function setLang(l) {
+  const t = T[l];
+  document.querySelectorAll('[data-i]').forEach(el => {
+    const k = el.getAttribute('data-i');
+    if (t[k] !== undefined) el.textContent = t[k];
+  });
+  document.querySelectorAll('.lang-btn').forEach(b =>
+    b.classList.toggle('active', b.textContent === l.toUpperCase())
+  );
+  document.documentElement.lang = l;
+  document.body.style.direction = l === 'he' ? 'rtl' : 'ltr';
+}
+
+setLang('ru');
+</script>
 </body>
 </html>
