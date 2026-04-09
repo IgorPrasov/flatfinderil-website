@@ -1,1216 +1,157 @@
 <!DOCTYPE html>
-<html lang="ru" dir="ltr">
+<html lang="ru">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <meta name="description" content="FlatFinderIL — рынок недвижимости Израиля: новости, новые проекты, ипотека, государственные программы. Север, Центр, Юг страны.">
-  <title>FlatFinderIL — Недвижимость Израиля</title>
+  <meta name="description" content="FlatFinderIL — недвижимость Израиля. Скоро открытие.">
+  <title>FlatFinderIL — Скоро открытие</title>
   <style>
-/* ═══════════════════════════════════════════
-   RESET & TOKENS
-═══════════════════════════════════════════ */
-*{margin:0;padding:0;box-sizing:border-box}
-:root{
-  --navy:   #0d1b2a;
-  --navy2:  #1b2d3f;
-  --blue:   #1a73e8;
-  --blue2:  #0d5cc7;
-  --accent: #e8a020;
-  --green:  #1e7e50;
-  --red:    #c0392b;
-  --purple: #6c3483;
-  --text:   #1a1a1a;
-  --text2:  #444;
-  --text3:  #777;
-  --bg:     #f3f4f6;
-  --card:   #ffffff;
-  --border: #dde1e7;
-  --r:      8px;
-}
-body{font-family:'Segoe UI',Arial,sans-serif;color:var(--text);background:var(--bg);font-size:14px;line-height:1.5}
-a{text-decoration:none;color:inherit}
-img{display:block;max-width:100%}
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
-/* ═══════════════════════════════════════════
-   TOP BAR
-═══════════════════════════════════════════ */
-.topbar{
-  background:var(--navy);
-  padding:6px 24px;
-  display:flex;align-items:center;justify-content:space-between;
-  font-size:11px;color:rgba(255,255,255,.5);
-}
-.topbar-left{display:flex;gap:16px;align-items:center}
-.topbar-left span{display:flex;align-items:center;gap:4px}
-.topbar-right{display:flex;gap:8px;align-items:center}
-.lang-btn{
-  background:transparent;border:1px solid rgba(255,255,255,.2);
-  color:rgba(255,255,255,.6);font-size:10px;padding:2px 7px;
-  border-radius:3px;cursor:pointer;transition:.15s;font-family:inherit;
-}
-.lang-btn:hover,.lang-btn.active{background:var(--blue);border-color:var(--blue);color:#fff}
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #0d1b2a;
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+      padding: 32px;
+    }
 
-/* ═══════════════════════════════════════════
-   HEADER
-═══════════════════════════════════════════ */
-header{
-  background:var(--card);
-  border-bottom:3px solid var(--blue);
-  padding:0 24px;
-  position:sticky;top:0;z-index:200;
-  box-shadow:0 2px 8px rgba(0,0,0,.08);
-}
-.header-inner{
-  max-width:1280px;margin:0 auto;
-  display:flex;align-items:center;gap:32px;height:64px;
-}
-.logo{display:flex;align-items:center;gap:10px;flex-shrink:0}
-.logo-mark{
-  width:40px;height:40px;background:var(--blue);
-  border-radius:6px;display:flex;align-items:center;justify-content:center;
-  font-size:13px;font-weight:800;color:#fff;letter-spacing:-0.5px;
-}
-.logo-name{font-size:20px;font-weight:700;color:var(--navy)}
-.logo-name span{color:var(--blue)}
-nav{display:flex;gap:2px;flex:1}
-nav a{
-  font-size:13px;font-weight:500;color:var(--text2);
-  padding:8px 14px;border-radius:var(--r);transition:.15s;white-space:nowrap;
-}
-nav a:hover{color:var(--blue);background:#f0f5ff}
-nav a.active{color:var(--blue);font-weight:600}
-.header-right{display:flex;align-items:center;gap:10px;flex-shrink:0}
-.search-box{
-  display:flex;align-items:center;gap:6px;
-  background:var(--bg);border:1px solid var(--border);
-  border-radius:6px;padding:6px 12px;font-size:12px;color:var(--text3);
-  cursor:pointer;transition:.15s;
-}
-.search-box:hover{border-color:var(--blue)}
-.btn-tg{
-  background:var(--blue);color:#fff;
-  padding:8px 18px;border-radius:6px;
-  font-size:13px;font-weight:600;
-  display:flex;align-items:center;gap:6px;
-  transition:.15s;white-space:nowrap;
-}
-.btn-tg:hover{background:var(--blue2);transform:translateY(-1px)}
+    /* LOGO */
+    .logo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
 
-/* ═══════════════════════════════════════════
-   BREAKING NEWS TICKER
-═══════════════════════════════════════════ */
-.ticker{
-  background:var(--blue);
-  display:flex;align-items:center;overflow:hidden;
-}
-.ticker-label{
-  background:var(--accent);color:var(--navy);
-  font-size:10px;font-weight:700;padding:6px 12px;
-  white-space:nowrap;text-transform:uppercase;letter-spacing:.5px;flex-shrink:0;
-}
-.ticker-track{
-  flex:1;overflow:hidden;padding:0 16px;
-  font-size:12px;color:#fff;white-space:nowrap;
-}
-.ticker-inner{display:inline-block;animation:ticker 40s linear infinite}
-@keyframes ticker{0%{transform:translateX(100vw)}100%{transform:translateX(-100%)}}
+    .logo-mark {
+      width: 80px;
+      height: 80px;
+      background: #1a73e8;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -1px;
+      box-shadow: 0 8px 32px rgba(26, 115, 232, 0.45);
+    }
 
-/* ═══════════════════════════════════════════
-   HERO
-═══════════════════════════════════════════ */
-.hero{
-  background:linear-gradient(160deg, var(--navy) 0%, #0d2a4a 50%, #0a1e38 100%);
-  padding:56px 24px 44px;
-  position:relative;overflow:hidden;
-}
-.hero::before{
-  content:'';position:absolute;inset:0;
-  background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-}
-.hero-inner{max-width:1280px;margin:0 auto;position:relative}
-.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
-.hero-left h1{
-  font-size:clamp(26px,4vw,42px);font-weight:800;color:#fff;
-  line-height:1.15;margin-bottom:16px;
-}
-.hero-left h1 em{color:var(--accent);font-style:normal}
-.hero-left p{font-size:15px;color:rgba(255,255,255,.7);margin-bottom:28px;line-height:1.7}
-.hero-btns{display:flex;gap:10px;flex-wrap:wrap}
-.btn-hero-primary{
-  background:var(--blue);color:#fff;padding:12px 24px;
-  border-radius:6px;font-size:14px;font-weight:600;
-  display:flex;align-items:center;gap:8px;transition:.15s;
-}
-.btn-hero-primary:hover{background:var(--blue2);transform:translateY(-2px);box-shadow:0 6px 20px rgba(26,115,232,.4)}
-.btn-hero-outline{
-  background:transparent;color:#fff;padding:12px 24px;
-  border-radius:6px;font-size:14px;font-weight:500;
-  border:1.5px solid rgba(255,255,255,.3);transition:.15s;
-}
-.btn-hero-outline:hover{border-color:#fff;background:rgba(255,255,255,.06)}
+    .logo-name {
+      font-size: 32px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.5px;
+    }
 
-/* Regions panel */
-.regions-panel{display:flex;flex-direction:column;gap:10px}
-.region-card{
-  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
-  border-radius:var(--r);padding:14px 16px;
-  display:flex;align-items:center;gap:14px;cursor:pointer;transition:.2s;
-}
-.region-card:hover{background:rgba(255,255,255,.1);transform:translateX(4px)}
-.region-card.active{background:rgba(26,115,232,.25);border-color:var(--blue)}
-.region-icon{font-size:22px;width:36px;text-align:center;flex-shrink:0}
-.region-info h4{font-size:13px;font-weight:700;color:#fff;margin-bottom:2px}
-.region-info p{font-size:11px;color:rgba(255,255,255,.5)}
-.region-badge{
-  margin-left:auto;background:var(--blue);color:#fff;
-  font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;flex-shrink:0;
-}
+    .logo-name span {
+      color: #1a73e8;
+    }
 
-/* ═══════════════════════════════════════════
-   STATS STRIP
-═══════════════════════════════════════════ */
-.stats-strip{background:var(--navy2);padding:16px 24px}
-.stats-inner{
-  max-width:1280px;margin:0 auto;
-  display:grid;grid-template-columns:repeat(5,1fr);
-  divide-x:1px solid rgba(255,255,255,.1);
-}
-.stat-item{
-  text-align:center;padding:4px 12px;
-  border-right:1px solid rgba(255,255,255,.08);
-}
-.stat-item:last-child{border-right:none}
-.stat-num{font-size:22px;font-weight:700;color:#fff}
-.stat-num em{font-style:normal;color:var(--accent)}
-.stat-lbl{font-size:10px;color:rgba(255,255,255,.45);margin-top:2px;text-transform:uppercase;letter-spacing:.4px}
+    .logo-sub {
+      font-size: 13px;
+      color: rgba(255,255,255,0.35);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-top: -4px;
+    }
 
-/* ═══════════════════════════════════════════
-   MAIN LAYOUT
-═══════════════════════════════════════════ */
-.wrap{max-width:1280px;margin:0 auto;padding:28px 24px}
-.layout{display:grid;grid-template-columns:1fr 300px;gap:28px}
+    /* TAGLINE */
+    .tagline {
+      text-align: center;
+    }
 
-/* ═══════════════════════════════════════════
-   SECTION HEADERS
-═══════════════════════════════════════════ */
-.sec-head{
-  display:flex;align-items:center;justify-content:space-between;
-  margin-bottom:16px;padding-bottom:10px;
-  border-bottom:2px solid var(--border);
-}
-.sec-head h2{
-  font-size:17px;font-weight:700;color:var(--navy);
-  display:flex;align-items:center;gap:8px;
-}
-.sec-head h2::before{
-  content:'';width:4px;height:18px;
-  background:var(--blue);border-radius:2px;flex-shrink:0;
-}
-.sec-head a{font-size:12px;color:var(--blue);font-weight:500}
+    .tagline h1 {
+      font-size: 42px;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -1px;
+      line-height: 1.15;
+    }
 
-/* TAGS */
-.tag{display:inline-flex;align-items:center;font-size:10px;font-weight:700;
-  padding:2px 7px;border-radius:3px;text-transform:uppercase;letter-spacing:.3px;margin-bottom:6px}
-.tag-news    {background:#e8f0fe;color:#1a73e8}
-.tag-project {background:#e6f4ea;color:#1e7e50}
-.tag-mortgage{background:#fef3e2;color:#e8a020}
-.tag-program {background:#f3e8fd;color:#6c3483}
-.tag-hot     {background:#fce8e6;color:#c0392b}
-.tag-south   {background:#fff8e1;color:#f57f17}
-.tag-center  {background:#e3f2fd;color:#1565c0}
-.tag-north   {background:#e8f5e9;color:#2e7d32}
+    .tagline p {
+      margin-top: 12px;
+      font-size: 15px;
+      color: rgba(255,255,255,0.45);
+    }
 
-/* ═══════════════════════════════════════════
-   NEWS CARDS
-═══════════════════════════════════════════ */
-.featured{
-  background:var(--card);border-radius:var(--r);
-  border:1px solid var(--border);overflow:hidden;
-  cursor:pointer;transition:.2s;margin-bottom:16px;
-}
-.featured:hover{box-shadow:0 6px 24px rgba(26,115,232,.12);transform:translateY(-2px)}
-.featured-img{
-  height:200px;
-  background:linear-gradient(135deg, var(--navy) 0%, #0d3d6b 100%);
-  display:flex;align-items:center;justify-content:center;
-  font-size:56px;position:relative;overflow:hidden;
-}
-.featured-img::after{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(to top, rgba(0,0,0,.5), transparent);
-}
-.featured-body{padding:18px 20px 16px}
-.featured-body h2{
-  font-size:18px;font-weight:700;color:var(--navy);
-  margin-bottom:8px;line-height:1.3;
-}
-.featured-body p{font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:12px}
-.meta{display:flex;align-items:center;gap:12px}
-.meta-date{font-size:11px;color:var(--text3)}
-.meta-src{font-size:11px;color:var(--text3);display:flex;align-items:center;gap:4px}
-.meta-read{margin-left:auto;font-size:12px;color:var(--blue);font-weight:600}
+    /* BOT BUTTON */
+    .bot-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: #1a73e8;
+      color: #fff;
+      text-decoration: none;
+      padding: 16px 32px;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      transition: background .2s, transform .15s, box-shadow .2s;
+      box-shadow: 0 4px 20px rgba(26,115,232,0.4);
+    }
 
-.news-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
-.card{
-  background:var(--card);border-radius:var(--r);
-  border:1px solid var(--border);padding:14px;
-  cursor:pointer;transition:.2s;
-}
-.card:hover{box-shadow:0 4px 16px rgba(26,115,232,.1);transform:translateY(-2px);border-color:rgba(26,115,232,.2)}
-.card h3{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:6px;line-height:1.35}
-.card p{font-size:12px;color:var(--text2);line-height:1.5}
+    .bot-btn:hover {
+      background: #0d5cc7;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(26,115,232,0.5);
+    }
 
-.list-card{
-  background:var(--card);border-radius:var(--r);
-  border:1px solid var(--border);padding:14px 16px;
-  cursor:pointer;transition:.2s;margin-bottom:10px;
-  display:flex;gap:14px;align-items:flex-start;
-}
-.list-card:hover{box-shadow:0 4px 16px rgba(26,115,232,.1);transform:translateX(3px)}
-.list-card-num{
-  font-size:22px;font-weight:800;color:rgba(26,115,232,.15);
-  line-height:1;flex-shrink:0;width:28px;text-align:center;margin-top:2px;
-}
-.list-card h3{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:4px;line-height:1.3}
-.list-card p{font-size:12px;color:var(--text2);line-height:1.5}
+    .bot-btn svg {
+      width: 22px;
+      height: 22px;
+      flex-shrink: 0;
+    }
 
-/* ═══════════════════════════════════════════
-   REGION SECTIONS
-═══════════════════════════════════════════ */
-.region-section{
-  background:var(--card);border-radius:var(--r);
-  border:1px solid var(--border);overflow:hidden;margin-bottom:28px;
-}
-.region-sec-head{
-  padding:12px 18px;display:flex;align-items:center;gap:10px;
-}
-.region-sec-head h3{font-size:15px;font-weight:700;color:#fff}
-.region-sec-head p{font-size:11px;opacity:.7;margin-top:1px}
-.region-sec-body{padding:16px 18px}
-.region-news-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
-.region-card-mini{
-  background:var(--bg);border-radius:6px;padding:12px;
-  cursor:pointer;transition:.2s;border:1px solid var(--border);
-}
-.region-card-mini:hover{background:#fff;box-shadow:0 3px 12px rgba(0,0,0,.08)}
-.region-card-mini .icon{font-size:20px;margin-bottom:8px}
-.region-card-mini h4{font-size:12px;font-weight:700;color:var(--navy);margin-bottom:4px;line-height:1.3}
-.region-card-mini p{font-size:11px;color:var(--text3);line-height:1.4}
+    /* FOOTER */
+    .footer {
+      position: fixed;
+      bottom: 24px;
+      font-size: 11px;
+      color: rgba(255,255,255,0.2);
+      letter-spacing: .3px;
+    }
 
-/* ═══════════════════════════════════════════
-   SIDEBAR
-═══════════════════════════════════════════ */
-.sidebar{display:flex;flex-direction:column;gap:18px}
-.widget{
-  background:var(--card);border-radius:var(--r);
-  border:1px solid var(--border);overflow:hidden;
-}
-.widget-head{
-  background:var(--navy);padding:10px 14px;
-  font-size:12px;font-weight:700;color:#fff;
-  display:flex;align-items:center;gap:6px;
-}
-.widget-body{padding:14px}
-
-/* BOT CTA */
-.bot-widget{
-  background:linear-gradient(140deg, var(--navy) 0%, #0d3d6b 100%);
-  border-radius:var(--r);padding:20px;text-align:center;color:#fff;
-  border:none;
-}
-.bot-widget .icon{font-size:36px;margin-bottom:10px}
-.bot-widget h3{font-size:15px;font-weight:700;margin-bottom:6px}
-.bot-widget p{font-size:12px;opacity:.7;margin-bottom:16px;line-height:1.5}
-.btn-bot{
-  display:flex;align-items:center;justify-content:center;gap:6px;
-  background:var(--blue);color:#fff;padding:10px 0;
-  border-radius:6px;font-size:13px;font-weight:600;
-  width:100%;transition:.15s;
-}
-.btn-bot:hover{background:var(--blue2)}
-
-/* CALCULATOR */
-.calc-row{margin-bottom:14px}
-.calc-row label{font-size:11px;color:var(--text3);display:block;margin-bottom:4px}
-.calc-row input[type=range]{width:100%;accent-color:var(--blue);cursor:pointer}
-.calc-val{font-size:13px;font-weight:600;color:var(--navy);margin-top:3px}
-.calc-result{
-  background:var(--navy);border-radius:6px;
-  padding:12px;text-align:center;margin-top:4px;
-}
-.calc-result .rl{font-size:10px;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.4px}
-.calc-result .rv{font-size:22px;font-weight:800;color:var(--accent)}
-
-/* QUICK LINKS */
-.ql{display:flex;flex-direction:column;gap:6px}
-.ql-item{
-  display:flex;align-items:center;gap:10px;
-  padding:8px 10px;border-radius:6px;background:var(--bg);
-  transition:.15s;cursor:pointer;
-}
-.ql-item:hover{background:#e8f0fe}
-.ql-icon{
-  width:28px;height:28px;border-radius:6px;
-  background:var(--blue);display:flex;align-items:center;justify-content:center;
-  font-size:13px;flex-shrink:0;
-}
-.ql-text{font-size:12px;font-weight:500;color:var(--navy)}
-
-/* MARKET DATA */
-.market-table{width:100%;border-collapse:collapse}
-.market-table tr{border-bottom:1px solid var(--border)}
-.market-table tr:last-child{border-bottom:none}
-.market-table td{padding:7px 4px;font-size:12px;vertical-align:middle}
-.market-table .city{font-weight:600;color:var(--navy)}
-.market-table .price{color:var(--text2);text-align:right}
-.market-table .change{text-align:right;font-size:11px;font-weight:600}
-.up{color:var(--red)}
-.dn{color:var(--green)}
-
-/* PROGRAMS MINI */
-.prog-list{display:flex;flex-direction:column;gap:8px}
-.prog-item{
-  display:flex;gap:10px;padding:9px;
-  border-radius:6px;background:var(--bg);cursor:pointer;transition:.15s;
-}
-.prog-item:hover{background:#f3e8fd}
-.prog-icon{font-size:16px;flex-shrink:0;margin-top:1px}
-.prog-item h4{font-size:12px;font-weight:600;color:var(--navy);margin-bottom:2px}
-.prog-item p{font-size:11px;color:var(--text3);line-height:1.4}
-
-/* ═══════════════════════════════════════════
-   MORTGAGE GUIDE (FULL ROW)
-═══════════════════════════════════════════ */
-.mort-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:10px}
-.mort-card{
-  background:var(--card);border-radius:var(--r);border:1px solid var(--border);
-  padding:16px;cursor:pointer;transition:.2s;border-top:3px solid var(--blue);
-}
-.mort-card:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(26,115,232,.1)}
-.mort-card h4{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:6px}
-.mort-card p{font-size:12px;color:var(--text2);line-height:1.5}
-.mort-card .rate{font-size:20px;font-weight:800;color:var(--blue);margin:8px 0 2px}
-.mort-card .rate-lbl{font-size:10px;color:var(--text3)}
-
-/* PROGRAMS SECTION */
-.prog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.prog-big{
-  background:var(--card);border-radius:var(--r);border:1px solid var(--border);
-  padding:18px;cursor:pointer;transition:.2s;overflow:hidden;position:relative;
-}
-.prog-big:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,.08)}
-.prog-big::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:4px;
-}
-.prog-big.blue::before{background:var(--blue)}
-.prog-big.green::before{background:var(--green)}
-.prog-big.purple::before{background:var(--purple)}
-.prog-big .ico{font-size:28px;margin-bottom:10px}
-.prog-big h3{font-size:14px;font-weight:700;color:var(--navy);margin-bottom:6px;line-height:1.3}
-.prog-big p{font-size:12px;color:var(--text2);line-height:1.55}
-.prog-big .sub{font-size:11px;color:var(--text3);margin-top:8px;padding-top:8px;border-top:1px solid var(--border)}
-.prog-big .amount{font-size:16px;font-weight:700;color:var(--blue);margin-top:6px}
-
-/* ═══════════════════════════════════════════
-   FOOTER
-═══════════════════════════════════════════ */
-footer{background:var(--navy);color:rgba(255,255,255,.5);padding:44px 24px 20px;margin-top:40px}
-.footer-inner{max-width:1280px;margin:0 auto}
-.footer-top{
-  display:grid;grid-template-columns:2.5fr 1fr 1fr 1fr;gap:36px;
-  padding-bottom:28px;border-bottom:1px solid rgba(255,255,255,.08);
-}
-.footer-brand p{font-size:12px;line-height:1.7;margin-top:12px;max-width:260px}
-.footer-logo{display:flex;align-items:center;gap:10px}
-.footer-logo .mark{width:36px;height:36px;background:var(--blue);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:#fff}
-.footer-logo .name{font-size:17px;font-weight:700;color:#fff}
-.footer-logo .name span{color:var(--blue)}
-.footer-col h4{font-size:12px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px}
-.footer-col a{display:block;font-size:12px;margin-bottom:7px;transition:.15s}
-.footer-col a:hover{color:#fff}
-.footer-bottom{
-  display:flex;align-items:center;justify-content:space-between;
-  padding-top:18px;font-size:11px;
-}
-.social-row{display:flex;gap:8px}
-.soc{
-  width:30px;height:30px;border-radius:6px;
-  background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;
-  font-size:13px;transition:.15s;
-}
-.soc:hover{background:var(--blue)}
-
-/* ═══════════════════════════════════════════
-   RESPONSIVE
-═══════════════════════════════════════════ */
-@media(max-width:1050px){
-  .layout{grid-template-columns:1fr 270px}
-  .mort-grid{grid-template-columns:1fr 1fr}
-  .footer-top{grid-template-columns:1fr 1fr}
-}
-@media(max-width:800px){
-  .hero-grid{grid-template-columns:1fr}
-  .regions-panel{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
-  .layout{grid-template-columns:1fr}
-  .sidebar{order:0}
-  .news-grid{grid-template-columns:1fr}
-  .mort-grid{grid-template-columns:1fr 1fr}
-  .prog-grid{grid-template-columns:1fr}
-  .region-news-row{grid-template-columns:1fr}
-  .stats-inner{grid-template-columns:repeat(3,1fr)}
-  .footer-top{grid-template-columns:1fr 1fr}
-  nav{display:none}
-  .topbar-left .topbar-date{display:none}
-}
-@media(max-width:540px){
-  .hero{padding:36px 16px 28px}
-  .wrap{padding:16px}
-  .stats-inner{grid-template-columns:repeat(2,1fr)}
-  .prog-grid{grid-template-columns:1fr}
-  .mort-grid{grid-template-columns:1fr}
-  .footer-top{grid-template-columns:1fr}
-  .regions-panel{grid-template-columns:1fr}
-}
+    @media (max-width: 480px) {
+      .tagline h1 { font-size: 30px; }
+      .logo-name  { font-size: 26px; }
+      .logo-mark  { width: 64px; height: 64px; font-size: 20px; }
+    }
   </style>
 </head>
 <body>
 
-<!-- TOP BAR -->
-<div class="topbar">
-  <div class="topbar-left">
-    <span class="topbar-date">📅 9 апреля 2026</span>
-    <span>📰 <span data-i="topbar_news">Новости рынка недвижимости Израиля</span></span>
+  <!-- LOGO -->
+  <div class="logo">
+    <div class="logo-mark">FF</div>
+    <div class="logo-name">Flat<span>Finder</span>IL</div>
+    <div class="logo-sub">Недвижимость Израиля</div>
   </div>
-  <div class="topbar-right">
-    <button class="lang-btn active" onclick="setLang('ru')">RU</button>
-    <button class="lang-btn" onclick="setLang('he')">HE</button>
-    <button class="lang-btn" onclick="setLang('en')">EN</button>
+
+  <!-- TAGLINE -->
+  <div class="tagline">
+    <h1>Скоро открытие</h1>
+    <p>Портал о рынке недвижимости Израиля — уже совсем скоро</p>
   </div>
-</div>
 
-<!-- HEADER -->
-<header>
-  <div class="header-inner">
-    <a href="/" class="logo">
-      <div class="logo-mark">FF</div>
-      <div class="logo-name">Flat<span>Finder</span>IL</div>
-    </a>
-    <nav>
-      <a href="#news" class="active" data-i="nav_news">Новости</a>
-      <a href="#regions" data-i="nav_regions">Регионы</a>
-      <a href="#projects" data-i="nav_projects">Проекты</a>
-      <a href="#mortgage" data-i="nav_mortgage">Ипотека</a>
-      <a href="#programs" data-i="nav_programs">Программы</a>
-    </nav>
-    <div class="header-right">
-      <div class="search-box">🔍 <span data-i="search_hint">Поиск по сайту...</span></div>
-      <a href="https://t.me/flatfinderil_bot" target="_blank" class="btn-tg">
-        ✈️ <span data-i="tg_btn">Найти жильё</span>
-      </a>
-    </div>
-  </div>
-</header>
+  <!-- BOT LINK -->
+  <a href="https://t.me/flatfinderil_bot" target="_blank" class="bot-btn">
+    <!-- Telegram icon -->
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M22 2L11 13" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    Открыть бот @flatfinderil_bot
+  </a>
 
-<!-- TICKER -->
-<div class="ticker">
-  <div class="ticker-label" data-i="ticker_label">СРОЧНО</div>
-  <div class="ticker-track">
-    <div class="ticker-inner" id="tickerText">
-      Банк Израиля сохранил ставку на уровне 3.75% &nbsp;•&nbsp;
-      Цены на жильё в Центре выросли на 7% за квартал &nbsp;•&nbsp;
-      Новый проект в Беэр-Шеве: 800 квартир для молодых семей &nbsp;•&nbsp;
-      Программа «Мехир ла-Миштакен» открыла новую лотерею &nbsp;•&nbsp;
-      Ашдод: крупнейший торгово-жилой комплекс «Эден» заложен на юге страны &nbsp;•&nbsp;
-      Льготная ипотека для репатриантов продлена до конца 2026 года
-    </div>
-  </div>
-</div>
+  <div class="footer">© 2026 FlatFinderIL · flatfinderil.com</div>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-inner">
-    <div class="hero-grid">
-      <div class="hero-left">
-        <h1 data-i="hero_title">Рынок недвижимости <em>Израиля</em> — полная картина</h1>
-        <p data-i="hero_sub">Актуальные новости, строительные проекты, ипотечные программы и государственные субсидии для всех слоёв населения. Север, Центр и Юг страны.</p>
-        <div class="hero-btns">
-          <a href="https://t.me/flatfinderil_bot" target="_blank" class="btn-hero-primary">
-            🔍 <span data-i="hero_btn1">Найти квартиру в боте</span>
-          </a>
-          <a href="#news" class="btn-hero-outline" data-i="hero_btn2">Читать новости</a>
-        </div>
-      </div>
-      <div class="regions-panel">
-        <div class="region-card active" onclick="scrollTo('north')">
-          <div class="region-icon">🌿</div>
-          <div class="region-info">
-            <h4 data-i="reg_north">Север страны</h4>
-            <p>Хайфа, Нетания, Акко, Тверия</p>
-          </div>
-          <div class="region-badge">12</div>
-        </div>
-        <div class="region-card" onclick="scrollTo('center')">
-          <div class="region-icon">🏙️</div>
-          <div class="region-info">
-            <h4 data-i="reg_center">Центр страны</h4>
-            <p>Тель-Авив, Петах-Тиква, Герцлия</p>
-          </div>
-          <div class="region-badge">18</div>
-        </div>
-        <div class="region-card" onclick="scrollTo('south')">
-          <div class="region-icon">☀️</div>
-          <div class="region-info">
-            <h4 data-i="reg_south">Юг страны</h4>
-            <p>Беэр-Шева, Ашдод, Эйлат</p>
-          </div>
-          <div class="region-badge">9</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- STATS STRIP -->
-<div class="stats-strip">
-  <div class="stats-inner">
-    <div class="stat-item">
-      <div class="stat-num"><em>3.75</em>%</div>
-      <div class="stat-lbl" data-i="stat_rate">Ставка Банка Израиля</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-num"><em>4.2M</em> ₪</div>
-      <div class="stat-lbl" data-i="stat_tlv">Ср. цена, Тель-Авив</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-num"><em>+8</em>%</div>
-      <div class="stat-lbl" data-i="stat_growth">Рост цен, Центр Q1</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-num"><em>23</em></div>
-      <div class="stat-lbl" data-i="stat_cities">Города в базе</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-num"><em>5000</em>+</div>
-      <div class="stat-lbl" data-i="stat_listings">Объявлений</div>
-    </div>
-  </div>
-</div>
-
-<!-- MAIN -->
-<div class="wrap">
-  <div class="layout">
-
-    <!-- CONTENT -->
-    <main>
-
-      <!-- TOP NEWS -->
-      <div id="news" style="padding-top:4px"></div>
-      <div class="sec-head">
-        <h2 data-i="sec_news">Главные новости</h2>
-        <a href="#" data-i="all_news">Все новости →</a>
-      </div>
-
-      <div class="featured" onclick="toBotLink()">
-        <div class="featured-img">🏗️</div>
-        <div class="featured-body">
-          <span class="tag tag-hot" data-i="tag_hot">Главное</span>
-          <h2 data-i="n1_title">Цены на жильё в Тель-Авиве выросли на 8% за первый квартал 2026 года</h2>
-          <p data-i="n1_body">По данным Центрального бюро статистики, средняя цена квартиры в Тель-Авиве достигла рекордных 4.2 млн шекелей. Эксперты связывают рост с дефицитом предложения на фоне восстановления спроса. Особенно заметна динамика в районах Флорентин, Неве-Цедек и Порт.</p>
-          <div class="meta">
-            <span class="meta-date">9 апреля 2026</span>
-            <span class="meta-src">📰 ЦСБ Израиля</span>
-            <span class="meta-read" data-i="read_more">Читать полностью →</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="news-grid">
-        <div class="card" onclick="toBotLink()">
-          <span class="tag tag-mortgage" data-i="tag_mortgage">Ипотека</span>
-          <h3 data-i="n2_title">Банк Израиля снизил ставку до 3.75% — ежемесячный платёж упал на 400 ₪</h3>
-          <p data-i="n2_body">Центробанк четвёртый раз подряд снижает ставку. Для заёмщика с ипотекой 1.5M₪ экономия составит около 400 шекелей в месяц.</p>
-          <div class="meta" style="margin-top:10px">
-            <span class="meta-date">5 апреля 2026</span>
-            <span class="meta-read" data-i="read_more">Читать →</span>
-          </div>
-        </div>
-        <div class="card" onclick="toBotLink()">
-          <span class="tag tag-program" data-i="tag_program">Программа</span>
-          <h3 data-i="n3_title">Минстрой открыл новую лотерею «Мехир ла-Миштакен» в 6 городах</h3>
-          <p data-i="n3_body">Заявки принимаются до 30 апреля. Квартиры в Беэр-Шеве, Ашдоде, Хадере, Лоде, Кирьят-Гате и Димоне — скидка до 30%.</p>
-          <div class="meta" style="margin-top:10px">
-            <span class="meta-date">3 апреля 2026</span>
-            <span class="meta-read" data-i="read_more">Читать →</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- REGIONS -->
-      <div id="regions"></div>
-
-      <!-- NORTH -->
-      <div id="north" class="region-section">
-        <div class="region-sec-head" style="background:linear-gradient(135deg,#1e4d2b,#2e7d32)">
-          <div style="font-size:24px">🌿</div>
-          <div>
-            <h3 data-i="reg_north_title">Север страны</h3>
-            <p>Хайфа · Нетания · Хадера · Акко · Тверия · Нагария</p>
-          </div>
-        </div>
-        <div class="region-sec-body">
-          <div class="region-news-row">
-            <div class="region-card-mini" onclick="toBotLink()">
-              <div class="icon">🌊</div>
-              <span class="tag tag-project" data-i="tag_project">Проект</span>
-              <h4 data-i="rn1_title">Хайфа: «Бат-Галим Тауэр» — 320 кв. у моря, от 2.1M₪</h4>
-              <p data-i="rn1_body">40-этажный комплекс с панорамным видом на Средиземное море. Сдача 2028.</p>
-            </div>
-            <div class="region-card-mini" onclick="toBotLink()">
-              <div class="icon">🏢</div>
-              <span class="tag tag-news" data-i="tag_news">Новость</span>
-              <h4 data-i="rn2_title">Нетания: 1200 квартир «Ям Хатихон» — старт продаж открыт</h4>
-              <p data-i="rn2_body">Компания Gav-Yam открыла продажи на этапе котлована. Первая очередь — конец 2027.</p>
-            </div>
-            <div class="region-card-mini" onclick="toBotLink()">
-              <div class="icon">🏛️</div>
-              <span class="tag tag-program" data-i="tag_program">Программа</span>
-              <h4 data-i="rn3_title">Хадера: субсидия 200K₪ для молодых семей в новом квартале</h4>
-              <p data-i="rn3_body">Муниципальная программа привлечения молодёжи. Заявки до 1 мая 2026.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- CENTER -->
-      <div id="center" class="region-section">
-        <div class="region-sec-head" style="background:linear-gradient(135deg,#0d2a5c,#1565c0)">
-          <div style="font-size:24px">🏙️</div>
-          <div>
-            <h3 data-i="reg_center_title">Центр страны</h3>
-            <p>Тель-Авив · Гуш-Дан · Петах-Тиква · Герцлия · Раанана · Реховот · Модиин</p>
-          </div>
-        </div>
-        <div class="region-sec-body">
-          <div class="region-news-row">
-            <div class="region-card-mini" onclick="toBotLink()">
-              <div class="icon">🏙️</div>
-              <span class="tag tag-project" data-i="tag_project">Проект</span>
-              <h4 data-i="rc1_title">Тель-Авив: «Мошава Тахтит» — 850 кв., Пинуй-Бинуй Africa Israel</h4>
-              <p data-i="rc1_body">Масштабная реновация. Жильцы получают новую квартиру бесплатно. Сдача 2027.</p>
-            </div>
-            <div class="region-card-mini" onclick="toBotLink()">
-              <div class="icon">🌿</div>
-              <span class="tag tag-project" data-i="tag_project">Проект</span>
-              <h4 data-i="rc2_title">Модиин: «Эко-Сити» — 500 зелёных квартир, субсидия до 150K₪</h4>
-              <p data-i="rc2_body">Первый квартал с нулевым углеродным следом. Солнечные панели + электрозарядки.</p>
-            </div>
-            <div class="region-card-mini" onclick="toBotLink()">
-              <div class="icon">📊</div>
-              <span class="tag tag-news" data-i="tag_news">Аналитика</span>
-              <h4 data-i="rc3_title">Петах-Тиква обогнала Холон по объёму новостроек в Гуш-Дан</h4>
-              <p data-i="rc3_body">Сдано 3,200 новых квартир за Q1 2026. Цены на 15% ниже тель-авивских.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- SOUTH -->
-      <div id="south" class="region-section">
-        <div class="region-sec-head" style="background:linear-gradient(135deg,#7f3f00,#e65100)">
-          <div style="font-size:24px">☀️</div>
-          <div>
-            <h3 data-i="reg_south_title">Юг страны</h3>
-            <p>Беэр-Шева · Ашдод · Ашкелон · Эйлат · Нетивот · Кирьят-Гат · Димона</p>
-          </div>
-        </div>
-        <div class="region-sec-body">
-          <div class="region-news-row">
-            <div class="region-card-mini" onclick="toBotLink()">
-              <div class="icon">🏜️</div>
-              <span class="tag tag-project" data-i="tag_project">Проект</span>
-              <h4 data-i="rs1_title">Беэр-Шева: «Rav-Bariach City» — 2,400 квартир, новый городской квартал</h4>
-              <p data-i="rs1_body">Крупнейший проект на Юге. Школы, торговый центр, парки. Цены от 1.2M₪.</p>
-            </div>
-            <div class="region-card-mini" onclick="toBotLink()">
-              <div class="icon">⚓</div>
-              <span class="tag tag-news" data-i="tag_news">Новость</span>
-              <h4 data-i="rs2_title">Ашдод: торгово-жилой комплекс «Эден» заложен у порта</h4>
-              <p data-i="rs2_body">600 квартир + торговая галерея + офисы. Инвестиции 1.8 млрд ₪. Сдача 2028.</p>
-            </div>
-            <div class="region-card-mini" onclick="toBotLink()">
-              <div class="icon">🌴</div>
-              <span class="tag tag-project" data-i="tag_project">Проект</span>
-              <h4 data-i="rs3_title">Эйлат: «Reef Towers» — курортные апартаменты у Красного моря</h4>
-              <p data-i="rs3_body">180 апартаментов премиум-класса. Вид на Красное море. От 2.8M₪. Инвест. потенциал.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- MORTGAGE -->
-      <div id="mortgage" style="margin-top:8px"></div>
-      <div class="sec-head">
-        <h2 data-i="sec_mortgage">Ипотека и кредиты</h2>
-        <a href="#" data-i="all_mort">Все статьи →</a>
-      </div>
-
-      <div class="mort-grid">
-        <div class="mort-card" onclick="toBotLink()">
-          <div class="tag tag-mortgage" data-i="tag_mortgage">Ипотека</div>
-          <h4 data-i="m1_title">Прайм+</h4>
-          <div class="rate">3.75%</div>
-          <div class="rate-lbl" data-i="m1_lbl">Переменная ставка</div>
-          <p data-i="m1_body">Привязан к ставке Банка Израиля. Рискованный, но выгодный при снижении ставки.</p>
-        </div>
-        <div class="mort-card" onclick="toBotLink()">
-          <div class="tag tag-mortgage" data-i="tag_mortgage">Ипотека</div>
-          <h4 data-i="m2_title">Маслул кавуа</h4>
-          <div class="rate">4.9%</div>
-          <div class="rate-lbl" data-i="m2_lbl">Фиксированная ставка</div>
-          <p data-i="m2_body">Стабильный платёж на весь срок. Подходит для долгосрочного планирования бюджета.</p>
-        </div>
-        <div class="mort-card" onclick="toBotLink()">
-          <div class="tag tag-mortgage" data-i="tag_mortgage">Ипотека</div>
-          <h4 data-i="m3_title">Маслул миштане</h4>
-          <div class="rate">4.2%</div>
-          <div class="rate-lbl" data-i="m3_lbl">Переменная (CPI)</div>
-          <p data-i="m3_body">Индексируется по индексу потребительских цен. Классический выбор израильтян.</p>
-        </div>
-        <div class="mort-card" onclick="toBotLink()" style="border-top-color:var(--accent)">
-          <div class="tag tag-program" data-i="tag_program">Льготная</div>
-          <h4 data-i="m4_title">Для репатриантов</h4>
-          <div class="rate" style="color:var(--accent)">3.0%</div>
-          <div class="rate-lbl" data-i="m4_lbl">Субсидированная ставка</div>
-          <p data-i="m4_body">Льготная ипотека для новых репатриантов — без минимального первоначального взноса.</p>
-        </div>
-      </div>
-
-      <div class="news-grid" style="margin-bottom:28px">
-        <div class="list-card" onclick="toBotLink()">
-          <div class="list-card-num">01</div>
-          <div>
-            <span class="tag tag-mortgage" data-i="tag_mortgage">Ипотека</span>
-            <h3 data-i="mg1_title">Сравнение банков 2026: кто даёт лучшие условия машканты?</h3>
-            <p data-i="mg1_body">Hapoalim, Leumi, Discount, Mizrahi — разница в ежемесячных выплатах до 800 ₪.</p>
-          </div>
-        </div>
-        <div class="list-card" onclick="toBotLink()">
-          <div class="list-card-num">02</div>
-          <div>
-            <span class="tag tag-mortgage" data-i="tag_mortgage">Ипотека</span>
-            <h3 data-i="mg2_title">Рефинансирование ипотеки: когда выгодно и как сделать правильно</h3>
-            <p data-i="mg2_body">При снижении ставки на 1% рефинансирование может сэкономить 200-500 ₪ в месяц.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- PROGRAMS -->
-      <div id="programs"></div>
-      <div class="sec-head">
-        <h2 data-i="sec_programs">Государственные программы</h2>
-        <a href="#" data-i="all_prog">Все программы →</a>
-      </div>
-
-      <div class="prog-grid" style="margin-bottom:32px">
-        <div class="prog-big blue" onclick="toBotLink()">
-          <div class="ico">🏛️</div>
-          <span class="tag tag-program" data-i="tag_program">Программа</span>
-          <h3 data-i="pr1_title">Мехир ла-Миштакен</h3>
-          <p data-i="pr1_body">Государственная программа продажи жилья по сниженной цене для граждан, не имеющих собственности. Лотерея, очередь по баллам.</p>
-          <div class="amount" data-i="pr1_amount">Скидка до 30%</div>
-          <div class="sub" data-i="pr1_sub">Новая лотерея открыта до 30 апреля 2026</div>
-        </div>
-        <div class="prog-big green" onclick="toBotLink()">
-          <div class="ico">✈️</div>
-          <span class="tag tag-north" data-i="tag_olim">Репатрианты</span>
-          <h3 data-i="pr2_title">Льготы для олим хадашим</h3>
-          <p data-i="pr2_body">Субсидия на аренду, льготная ипотека без первоначального взноса, грант на покупку первого жилья. Действует первые 3 года после алии.</p>
-          <div class="amount" data-i="pr2_amount">До 3,000 ₪/мес субсидия</div>
-          <div class="sub" data-i="pr2_sub">Программа продлена до конца 2026 года</div>
-        </div>
-        <div class="prog-big purple" onclick="toBotLink()">
-          <div class="ico">👨‍👩‍👧</div>
-          <span class="tag tag-program" data-i="tag_program">Программа</span>
-          <h3 data-i="pr3_title">Субсидия молодым семьям</h3>
-          <p data-i="pr3_body">Для семей до 45 лет без собственного жилья. Безвозвратный грант на покупку или строительство первой квартиры.</p>
-          <div class="amount" data-i="pr3_amount">До 400,000 ₪ гранта</div>
-          <div class="sub" data-i="pr3_sub">Приём заявок с 1 апреля 2026</div>
-        </div>
-      </div>
-
-      <div class="news-grid">
-        <div class="list-card" onclick="toBotLink()">
-          <div class="list-card-num">03</div>
-          <div>
-            <span class="tag tag-program" data-i="tag_program">Программа</span>
-            <h3 data-i="pr4_title">Жильё для пожилых и инвалидов: комплексы с обслуживанием</h3>
-            <p data-i="pr4_body">Специальные субсидии Минстроя. Адаптированные квартиры. Субсидия на аренду до 2,200₪/мес.</p>
-          </div>
-        </div>
-        <div class="list-card" onclick="toBotLink()">
-          <div class="list-card-num">04</div>
-          <div>
-            <span class="tag tag-program" data-i="tag_program">Программа</span>
-            <h3 data-i="pr5_title">Тама 38 и Пинуй-Бинуй: как получить новую квартиру бесплатно</h3>
-            <p data-i="pr5_body">Жильцы старых домов могут участвовать в реновации и получить современную квартиру в обмен на свою.</p>
-          </div>
-        </div>
-      </div>
-
-    </main>
-
-    <!-- SIDEBAR -->
-    <aside class="sidebar">
-
-      <!-- BOT CTA -->
-      <div class="bot-widget">
-        <div class="icon">🤖</div>
-        <h3 data-i="cta_title">Найдите квартиру в боте</h3>
-        <p data-i="cta_body">Умный поиск по 23 городам. Фильтры по цене, комнатам, инфраструктуре. Уведомления о новых объявлениях.</p>
-        <a href="https://t.me/flatfinderil_bot" target="_blank" class="btn-bot">
-          📲 <span data-i="cta_btn">Открыть @flatfinderil_bot</span>
-        </a>
-      </div>
-
-      <!-- MARKET DATA -->
-      <div class="widget">
-        <div class="widget-head">📊 <span data-i="wid_market">Цены по городам</span></div>
-        <div class="widget-body" style="padding:0 14px">
-          <table class="market-table">
-            <tr><td class="city">Тель-Авив</td><td class="price">4.2M ₪</td><td class="change up">+8%</td></tr>
-            <tr><td class="city">Иерусалим</td><td class="price">2.9M ₪</td><td class="change up">+5%</td></tr>
-            <tr><td class="city">Герцлия</td><td class="price">3.1M ₪</td><td class="change up">+6%</td></tr>
-            <tr><td class="city">Хайфа</td><td class="price">1.8M ₪</td><td class="change up">+4%</td></tr>
-            <tr><td class="city">Беэр-Шева</td><td class="price">1.1M ₪</td><td class="change up">+11%</td></tr>
-            <tr><td class="city">Ашдод</td><td class="price">1.4M ₪</td><td class="change up">+9%</td></tr>
-            <tr><td class="city">Нетания</td><td class="price">1.9M ₪</td><td class="change up">+7%</td></tr>
-            <tr><td class="city">Эйлат</td><td class="price">1.6M ₪</td><td class="change dn">−2%</td></tr>
-          </table>
-        </div>
-      </div>
-
-      <!-- CALCULATOR -->
-      <div class="widget">
-        <div class="widget-head">💳 <span data-i="calc_title">Калькулятор ипотеки</span></div>
-        <div class="widget-body">
-          <div class="calc-row">
-            <label data-i="calc_price">Стоимость жилья</label>
-            <input type="range" id="cPrice" min="500000" max="5000000" step="100000" value="2000000" oninput="calcMort()">
-            <div class="calc-val" id="cPriceV">2,000,000 ₪</div>
-          </div>
-          <div class="calc-row">
-            <label data-i="calc_down">Взнос (%)</label>
-            <input type="range" id="cDown" min="10" max="50" step="5" value="25" oninput="calcMort()">
-            <div class="calc-val" id="cDownV">25% — 500,000 ₪</div>
-          </div>
-          <div class="calc-row">
-            <label data-i="calc_years">Срок (лет)</label>
-            <input type="range" id="cYears" min="10" max="30" step="5" value="20" oninput="calcMort()">
-            <div class="calc-val" id="cYearsV">20 лет</div>
-          </div>
-          <div class="calc-result">
-            <div class="rl" data-i="calc_monthly">Ежемесячный платёж</div>
-            <div class="rv" id="cResult">~5,900 ₪</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- PROGRAMS MINI -->
-      <div class="widget">
-        <div class="widget-head">🏛️ <span data-i="wid_prog">Программы помощи</span></div>
-        <div class="widget-body">
-          <div class="prog-list">
-            <div class="prog-item" onclick="toBotLink()">
-              <div class="prog-icon">🏛️</div>
-              <div>
-                <h4 data-i="pw1_title">Мехир ла-Миштакен</h4>
-                <p data-i="pw1_body">Скидка до 30%. Лотерея открыта</p>
-              </div>
-            </div>
-            <div class="prog-item" onclick="toBotLink()">
-              <div class="prog-icon">✈️</div>
-              <div>
-                <h4 data-i="pw2_title">Льготы для репатриантов</h4>
-                <p data-i="pw2_body">Субсидия аренды до 3,000₪/мес</p>
-              </div>
-            </div>
-            <div class="prog-item" onclick="toBotLink()">
-              <div class="prog-icon">👨‍👩‍👧</div>
-              <div>
-                <h4 data-i="pw3_title">Молодые семьи</h4>
-                <p data-i="pw3_body">Грант до 400,000 ₪</p>
-              </div>
-            </div>
-            <div class="prog-item" onclick="toBotLink()">
-              <div class="prog-icon">🔨</div>
-              <div>
-                <h4 data-i="pw4_title">Тама 38 / Пинуй-Бинуй</h4>
-                <p data-i="pw4_body">Новая квартира взамен старой</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- QUICK LINKS -->
-      <div class="widget">
-        <div class="widget-head">🔗 <span data-i="wid_links">Полезные ссылки</span></div>
-        <div class="widget-body">
-          <div class="ql">
-            <a href="https://www.gov.il/ru/departments/ministry_of_construction_and_housing" target="_blank" class="ql-item">
-              <div class="ql-icon">🏛️</div>
-              <span class="ql-text" data-i="ql1">Минстрой Израиля</span>
-            </a>
-            <a href="https://www.boi.org.il/ru/" target="_blank" class="ql-item">
-              <div class="ql-icon">🏦</div>
-              <span class="ql-text" data-i="ql2">Банк Израиля</span>
-            </a>
-            <a href="https://www.madlan.co.il" target="_blank" class="ql-item">
-              <div class="ql-icon">📍</div>
-              <span class="ql-text" data-i="ql3">Мадлан — цены</span>
-            </a>
-            <a href="https://t.me/flatfinderil_bot" target="_blank" class="ql-item">
-              <div class="ql-icon">🤖</div>
-              <span class="ql-text" data-i="ql4">FlatFinderIL бот</span>
-            </a>
-          </div>
-        </div>
-      </div>
-
-    </aside>
-  </div>
-</div>
-
-<!-- FOOTER -->
-<footer>
-  <div class="footer-inner">
-    <div class="footer-top">
-      <div class="footer-brand">
-        <div class="footer-logo">
-          <div class="mark">FF</div>
-          <div class="name">Flat<span>Finder</span>IL</div>
-        </div>
-        <p data-i="footer_about">Информационный портал о рынке недвижимости Израиля. Новости, аналитика, строительные проекты, ипотечные программы и государственные субсидии для всех регионов и слоёв населения.</p>
-        <div class="social-row" style="margin-top:16px">
-          <a href="https://t.me/flatfinderil_bot" target="_blank" class="soc">✈️</a>
-          <a href="#" class="soc">📘</a>
-          <a href="#" class="soc">📸</a>
-        </div>
-      </div>
-      <div class="footer-col">
-        <h4 data-i="footer_col1">Разделы</h4>
-        <a href="#news" data-i="nav_news">Новости</a>
-        <a href="#regions" data-i="nav_regions">Регионы</a>
-        <a href="#projects" data-i="nav_projects">Проекты</a>
-        <a href="#mortgage" data-i="nav_mortgage">Ипотека</a>
-        <a href="#programs" data-i="nav_programs">Программы</a>
-      </div>
-      <div class="footer-col">
-        <h4 data-i="footer_col2">Регионы</h4>
-        <a href="#north" data-i="reg_north">Север</a>
-        <a href="#center" data-i="reg_center">Центр</a>
-        <a href="#south" data-i="reg_south">Юг</a>
-      </div>
-      <div class="footer-col">
-        <h4 data-i="footer_col3">Контакты</h4>
-        <a href="mailto:info@flatfinderil.com">info@flatfinderil.com</a>
-        <a href="https://t.me/flatfinderil_bot" target="_blank">@flatfinderil_bot</a>
-        <a href="https://flatfinderil.com">flatfinderil.com</a>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <span>© 2026 FlatFinderIL · <span data-i="footer_rights">Все права защищены</span></span>
-      <span style="display:flex;gap:16px;align-items:center">
-        <a href="/terms.html" style="color:rgba(255,255,255,.45);font-size:11px;transition:.15s" data-i="footer_tos">Пользовательское соглашение</a>
-        <span style="color:rgba(255,255,255,.2)">flatfinderil.com</span>
-      </span>
-    </div>
-  </div>
-</footer>
-
-<script>
-// ── TRANSLATIONS ─────────────────────────────────────────────────────────────
-const T = {
-  ru:{
-    topbar_news:"Новости рынка недвижимости Израиля",
-    nav_news:"Новости",nav_regions:"Регионы",nav_projects:"Проекты",nav_mortgage:"Ипотека",nav_programs:"Программы",
-    tg_btn:"Найти жильё",search_hint:"Поиск по сайту...",ticker_label:"СРОЧНО",
-    hero_title:"Рынок недвижимости <em>Израиля</em> — полная картина",
-    hero_sub:"Актуальные новости, строительные проекты, ипотечные программы и государственные субсидии. Север, Центр и Юг страны.",
-    hero_btn1:"Найти квартиру в боте",hero_btn2:"Читать новости",
-    reg_north:"Север страны",reg_center:"Центр страны",reg_south:"Юг страны",
-    stat_rate:"Ставка Банка Израиля",stat_tlv:"Ср. цена, Тель-Авив",stat_growth:"Рост цен, Центр Q1",stat_cities:"Города в базе",stat_listings:"Объявлений",
-    sec_news:"Главные новости",all_news:"Все новости →",
-    sec_mortgage:"Ипотека и кредиты",all_mort:"Все статьи →",
-    sec_programs:"Государственные программы",all_prog:"Все программы →",
-    tag_hot:"Главное",tag_project:"Проект",tag_mortgage:"Ипотека",tag_program:"Программа",tag_news:"Новость",tag_olim:"Репатрианты",
-    read_more:"Читать →",
-    n1_title:"Цены на жильё в Тель-Авиве выросли на 8% за Q1 2026",
-    n1_body:"По данным ЦСБ, средняя цена квартиры в Тель-Авиве достигла рекордных 4.2 млн шекелей. Рост особенно заметен в районах Флорентин, Неве-Цедек и Порт.",
-    n2_title:"Банк Израиля снизил ставку до 3.75% — платёж упал на 400₪",
-    n2_body:"Четвёртое снижение подряд. Заёмщик с ипотекой 1.5M₪ экономит около 400 шекелей в месяц.",
-    n3_title:"Минстрой открыл лотерею «Мехир ла-Миштакен» в 6 городах",
-    n3_body:"Заявки до 30 апреля. Квартиры в Беэр-Шеве, Ашдоде, Хадере, Лоде — скидка до 30%.",
-    reg_north_title:"Север страны",reg_center_title:"Центр страны",reg_south_title:"Юг страны",
-    rn1_title:"Хайфа: «Бат-Галим Тауэр» — 320 кв. у моря, от 2.1M₪",rn1_body:"40-этажный комплекс с видом на море. Сдача 2028.",
-    rn2_title:"Нетания: 1200 квартир «Ям Хатихон» — старт продаж",rn2_body:"Компания Gav-Yam открыла продажи. Первая очередь — конец 2027.",
-    rn3_title:"Хадера: субсидия 200K₪ для молодых семей",rn3_body:"Муниципальная программа. Заявки до 1 мая 2026.",
-    rc1_title:"ТА: «Мошава Тахтит» — 850 кв., Пинуй-Бинуй",rc1_body:"Реновация. Жильцы получают новую квартиру бесплатно. Сдача 2027.",
-    rc2_title:"Модиин: «Эко-Сити» — 500 зелёных квартир",rc2_body:"Первый квартал с нулевым углеродным следом. Субсидия до 150K₪.",
-    rc3_title:"Петах-Тиква обогнала Холон по объёму новостроек",rc3_body:"Сдано 3,200 квартир за Q1. Цены на 15% ниже тель-авивских.",
-    rs1_title:"Беэр-Шева: «Rav-Bariach City» — 2,400 квартир",rs1_body:"Крупнейший проект на Юге. Цены от 1.2M₪.",
-    rs2_title:"Ашдод: комплекс «Эден» заложен у порта",rs2_body:"600 квартир + торговая галерея. Сдача 2028.",
-    rs3_title:"Эйлат: «Reef Towers» у Красного моря",rs3_body:"180 апартаментов премиум. Вид на Красное море. От 2.8M₪.",
-    m1_title:"Прайм+",m1_lbl:"Переменная ставка",m1_body:"Привязан к ставке Банка Израиля. Выгодный при снижении ставки.",
-    m2_title:"Маслул кавуа",m2_lbl:"Фиксированная ставка",m2_body:"Стабильный платёж на весь срок. Для тех, кто планирует бюджет.",
-    m3_title:"Маслул миштане",m3_lbl:"Переменная (CPI)",m3_body:"Индексируется по потребительским ценам. Классический выбор.",
-    m4_title:"Для репатриантов",m4_lbl:"Субсидированная ставка",m4_body:"Льготная ипотека без минимального первоначального взноса.",
-    mg1_title:"Сравнение банков 2026: кто даёт лучшие условия?",mg1_body:"Hapoalim, Leumi, Discount, Mizrahi — разница до 800₪/мес.",
-    mg2_title:"Рефинансирование: когда выгодно и как сделать правильно",mg2_body:"При снижении ставки на 1% экономия 200-500₪ в месяц.",
-    pr1_title:"Мехир ла-Миштакен",pr1_body:"Государственная программа продажи жилья по сниженной цене. Лотерея, очередь по баллам.",pr1_amount:"Скидка до 30%",pr1_sub:"Новая лотерея открыта до 30 апреля 2026",
-    pr2_title:"Льготы для олим хадашим",pr2_body:"Субсидия на аренду, льготная ипотека без первоначального взноса, грант на покупку жилья.",pr2_amount:"До 3,000 ₪/мес субсидия",pr2_sub:"Программа продлена до конца 2026 года",
-    pr3_title:"Субсидия молодым семьям",pr3_body:"Для семей до 45 лет без собственного жилья. Безвозвратный грант на покупку.",pr3_amount:"До 400,000 ₪ гранта",pr3_sub:"Приём заявок с 1 апреля 2026",
-    pr4_title:"Жильё для пожилых и инвалидов",pr4_body:"Субсидии Минстроя. Адаптированные квартиры. До 2,200₪/мес.",
-    pr5_title:"Тама 38 и Пинуй-Бинуй: квартира бесплатно",pr5_body:"Жильцы старых домов получают современную квартиру в обмен на свою.",
-    cta_title:"Найдите квартиру в боте",cta_body:"Умный поиск по 23 городам. Фильтры по цене, комнатам, инфраструктуре.",cta_btn:"Открыть @flatfinderil_bot",
-    wid_market:"Цены по городам",wid_prog:"Программы помощи",wid_links:"Полезные ссылки",
-    calc_title:"Калькулятор ипотеки",calc_price:"Стоимость жилья",calc_down:"Взнос (%)",calc_years:"Срок (лет)",calc_monthly:"Ежемесячный платёж",
-    pw1_title:"Мехир ла-Миштакен",pw1_body:"Скидка до 30%. Лотерея открыта",
-    pw2_title:"Льготы для репатриантов",pw2_body:"Субсидия аренды до 3,000₪/мес",
-    pw3_title:"Молодые семьи",pw3_body:"Грант до 400,000 ₪",
-    pw4_title:"Тама 38 / Пинуй-Бинуй",pw4_body:"Новая квартира взамен старой",
-    ql1:"Минстрой Израиля",ql2:"Банк Израиля",ql3:"Мадлан — цены",ql4:"FlatFinderIL бот",
-    footer_about:"Информационный портал о рынке недвижимости Израиля. Новости, аналитика, проекты, ипотека и государственные субсидии для всех регионов.",
-    footer_rights:"Все права защищены",footer_col1:"Разделы",footer_col2:"Регионы",footer_col3:"Контакты",footer_tos:"Пользовательское соглашение",
-  },
-  en:{
-    topbar_news:"Israel Real Estate Market News",
-    nav_news:"News",nav_regions:"Regions",nav_projects:"Projects",nav_mortgage:"Mortgage",nav_programs:"Programs",
-    tg_btn:"Find housing",search_hint:"Search...",ticker_label:"LIVE",
-    hero_title:"Israel Real Estate Market — <em>the full picture</em>",
-    hero_sub:"Current news, construction projects, mortgage programs and state subsidies for all regions and population segments.",
-    hero_btn1:"Find apartment in bot",hero_btn2:"Read news",
-    reg_north:"North",reg_center:"Center",reg_south:"South",
-    stat_rate:"Bank of Israel rate",stat_tlv:"Avg. price, Tel Aviv",stat_growth:"Price growth, Center Q1",stat_cities:"Cities in database",stat_listings:"Listings",
-    sec_news:"Top News",all_news:"All news →",sec_mortgage:"Mortgage & Loans",all_mort:"All articles →",sec_programs:"Government Programs",all_prog:"All programs →",
-    tag_hot:"Top Story",tag_project:"Project",tag_mortgage:"Mortgage",tag_program:"Program",tag_news:"News",tag_olim:"Immigrants",read_more:"Read →",
-    n1_title:"Tel Aviv home prices up 8% in Q1 2026",n1_body:"Average apartment price in Tel Aviv hit a record 4.2M shekels. Growth especially visible in Florentin, Neve Tzedek and Port areas.",
-    n2_title:"Bank of Israel cuts rate to 3.75% — monthly payment drops 400₪",n2_body:"Fourth consecutive cut. Borrowers with 1.5M₪ mortgage save about 400 shekels per month.",
-    n3_title:"Ministry opens 'Mechir LaMishtaken' lottery in 6 cities",n3_body:"Applications until April 30. Apartments in Beer Sheva, Ashdod, Hadera — up to 30% discount.",
-    reg_north_title:"North of Israel",reg_center_title:"Center of Israel",reg_south_title:"South of Israel",
-    rn1_title:"Haifa: 'Bat Galim Tower' — 320 apts at sea, from 2.1M₪",rn1_body:"40-floor complex with Mediterranean views. Completion 2028.",
-    rn2_title:"Netanya: 1,200 apts 'Yam HaTichon' — sales launched",rn2_body:"Gav-Yam opened pre-construction sales. First phase — end 2027.",
-    rn3_title:"Hadera: 200K₪ subsidy for young families",rn3_body:"Municipal program. Applications until May 1, 2026.",
-    rc1_title:"Tel Aviv: 'Moshava Tahtit' — 850 apts, Pinui-Binui",rc1_body:"Large-scale renewal. Residents get new apartment for free. 2027.",
-    rc2_title:"Modi'in: 'Eco-City' — 500 green apartments",rc2_body:"First zero-carbon district. Subsidies up to 150K₪.",
-    rc3_title:"Petah Tikva surpasses Holon in new construction volume",rc3_body:"3,200 new apartments in Q1. Prices 15% below Tel Aviv.",
-    rs1_title:"Beer Sheva: 'Rav-Bariach City' — 2,400 apartments",rs1_body:"Largest project in the South. From 1.2M₪.",
-    rs2_title:"Ashdod: 'Eden' complex launched near port",rs2_body:"600 apartments + shopping gallery. Completion 2028.",
-    rs3_title:"Eilat: 'Reef Towers' on the Red Sea",rs3_body:"180 premium apartments. Red Sea view. From 2.8M₪.",
-    m1_title:"Prime+",m1_lbl:"Variable rate",m1_body:"Linked to Bank of Israel rate. Profitable when rate falls.",
-    m2_title:"Maslul Kavu'a",m2_lbl:"Fixed rate",m2_body:"Stable payment for the full term. For those planning a budget.",
-    m3_title:"Maslul Mishtane",m3_lbl:"Variable (CPI)",m3_body:"Indexed to consumer prices. Classic Israeli choice.",
-    m4_title:"For new immigrants",m4_lbl:"Subsidized rate",m4_body:"Favorable mortgage without minimum down payment.",
-    mg1_title:"Bank comparison 2026: who offers best mortgage terms?",mg1_body:"Hapoalim, Leumi, Discount, Mizrahi — difference up to 800₪/mo.",
-    mg2_title:"Refinancing: when is it worth it and how to do it right",mg2_body:"A 1% rate drop can save 200-500₪ per month.",
-    pr1_title:"Mechir LaMishtaken",pr1_body:"Government program selling housing at reduced prices. Lottery, points-based queue.",pr1_amount:"Up to 30% discount",pr1_sub:"New lottery open until April 30, 2026",
-    pr2_title:"Benefits for new immigrants (Olim Hadashim)",pr2_body:"Rental subsidy, subsidized mortgage without down payment, housing grant.",pr2_amount:"Up to 3,000 ₪/mo subsidy",pr2_sub:"Program extended through end of 2026",
-    pr3_title:"Young family subsidy",pr3_body:"For families under 45 without own housing. Non-repayable grant for first purchase.",pr3_amount:"Up to 400,000 ₪ grant",pr3_sub:"Applications open from April 1, 2026",
-    pr4_title:"Housing for elderly and disabled",pr4_body:"Ministry subsidies. Adapted apartments. Up to 2,200₪/mo.",
-    pr5_title:"Tama 38 and Pinui-Binui: free new apartment",pr5_body:"Residents of old buildings get a modern apartment in exchange.",
-    cta_title:"Find your apartment in the bot",cta_body:"Smart search across 23 cities. Filters by price, rooms, infrastructure.",cta_btn:"Open @flatfinderil_bot",
-    wid_market:"Prices by city",wid_prog:"Assistance programs",wid_links:"Useful links",
-    calc_title:"Mortgage calculator",calc_price:"Property price",calc_down:"Down payment (%)",calc_years:"Term (years)",calc_monthly:"Monthly payment",
-    pw1_title:"Mechir LaMishtaken",pw1_body:"Up to 30% discount. Lottery open",
-    pw2_title:"Benefits for immigrants",pw2_body:"Rent subsidy up to 3,000₪/mo",
-    pw3_title:"Young families",pw3_body:"Grant up to 400,000 ₪",
-    pw4_title:"Tama 38 / Pinui-Binui",pw4_body:"New apartment for old one",
-    ql1:"Ministry of Housing",ql2:"Bank of Israel",ql3:"Madlan — prices",ql4:"FlatFinderIL bot",
-    footer_about:"Israel real estate information portal. News, analytics, projects, mortgage and government subsidies for all regions.",
-    footer_rights:"All rights reserved",footer_col1:"Sections",footer_col2:"Regions",footer_col3:"Contact",footer_tos:"Terms of Use",
-  },
-  he:{
-    topbar_news:"חדשות שוק הנדל\"ן בישראל",
-    nav_news:"חדשות",nav_regions:"אזורים",nav_projects:"פרויקטים",nav_mortgage:"משכנתה",nav_programs:"תוכניות",
-    tg_btn:"מצא דיור",search_hint:"חיפוש באתר...",ticker_label:"בשידור חי",
-    hero_title:"שוק הנדל\"ן בישראל — <em>התמונה המלאה</em>",
-    hero_sub:"חדשות עדכניות, פרויקטי בנייה, תוכניות משכנתה וסובסידיות ממשלתיות לכל שכבות האוכלוסייה. צפון, מרכז ודרום.",
-    hero_btn1:"מצא דירה בבוט",hero_btn2:"קרא חדשות",
-    reg_north:"צפון הארץ",reg_center:"מרכז הארץ",reg_south:"דרום הארץ",
-    stat_rate:"ריבית בנק ישראל",stat_tlv:"מחיר ממוצע, תל אביב",stat_growth:"עליית מחירים, מרכז",stat_cities:"ערים במאגר",stat_listings:"מודעות",
-    sec_news:"החדשות הראשיות",all_news:"כל החדשות ←",sec_mortgage:"משכנתה והלוואות",all_mort:"כל המאמרים ←",sec_programs:"תוכניות ממשלתיות",all_prog:"כל התוכניות ←",
-    tag_hot:"ראשי",tag_project:"פרויקט",tag_mortgage:"משכנתה",tag_program:"תוכנית",tag_news:"חדשות",tag_olim:"עולים",read_more:"קרא עוד ←",
-    n1_title:"מחירי הדיור בתל אביב עלו ב-8% ברבעון הראשון של 2026",n1_body:"לפי הלמ\"ס, מחיר ממוצע לדירה בתל אביב הגיע לשיא של 4.2 מיליון שקלים. עלייה בולטת בשכונות פלורנטין, נווה צדק ונמל.",
-    n2_title:"בנק ישראל הוריד ריבית ל-3.75% — התשלום החודשי ירד ב-400₪",n2_body:"הפחתה רביעית ברציפות. לווה עם משכנתה של 1.5M₪ חוסך כ-400 שקל בחודש.",
-    n3_title:"משרד הבינוי פתח הגרלת מחיר למשתכן ב-6 ערים",n3_body:"הגשת בקשות עד 30 באפריל. דירות בבאר שבע, אשדוד, חדרה, לוד — עד 30% הנחה.",
-    reg_north_title:"צפון הארץ",reg_center_title:"מרכז הארץ",reg_south_title:"דרום הארץ",
-    rn1_title:"חיפה: 'מגדל בת גלים' — 320 דירות לחוף, מ-2.1M₪",rn1_body:"קומפלקס 40 קומות עם נוף לים התיכון. מסירה 2028.",
-    rn2_title:"נתניה: 1,200 דירות 'ים התיכון' — פתיחת מכירות",rn2_body:"גב-ים פתחה מכירות בשלב היסודות. שלב ראשון — סוף 2027.",
-    rn3_title:"חדרה: סובסידיה 200K₪ למשפחות צעירות",rn3_body:"תוכנית עירונית. הגשת בקשות עד 1 במאי 2026.",
-    rc1_title:"ת\"א: 'מושבה תחתית' — 850 דירות, פינוי-בינוי",rc1_body:"שיפוץ מקיף. הדיירים מקבלים דירה חדשה בחינם. 2027.",
-    rc2_title:"מודיעין: 'אקו-סיטי' — 500 דירות ירוקות",rc2_body:"השכונה הראשונה עם אפס פחמן. סובסידיות עד 150K₪.",
-    rc3_title:"פתח תקווה עקפה את חולון בהיקף בנייה חדשה",rc3_body:"נמסרו 3,200 דירות ברבעון הראשון. מחירים נמוכים ב-15% מת\"א.",
-    rs1_title:"באר שבע: 'עיר רב-בריח' — 2,400 דירות",rs1_body:"הפרויקט הגדול ביותר בדרום. מ-1.2M₪.",
-    rs2_title:"אשדוד: מתחם 'עדן' הונח ליד הנמל",rs2_body:"600 דירות + גלריית קניות. מסירה 2028.",
-    rs3_title:"אילת: 'Reef Towers' על הים האדום",rs3_body:"180 דירות פרמיום. נוף לים האדום. מ-2.8M₪.",
-    m1_title:"פריים+",m1_lbl:"ריבית משתנה",m1_body:"צמוד לריבית בנק ישראל. כדאי כשהריבית יורדת.",
-    m2_title:"מסלול קבוע",m2_lbl:"ריבית קבועה",m2_body:"תשלום יציב לכל התקופה. מתאים לתכנון תקציבי.",
-    m3_title:"מסלול משתנה",m3_lbl:"משתנה (מדד)",m3_body:"צמוד למדד המחירים לצרכן. הבחירה הקלאסית הישראלית.",
-    m4_title:"לעולים חדשים",m4_lbl:"ריבית מסובסדת",m4_body:"משכנתה בתנאים מועדפים ללא הון עצמי מינימלי.",
-    mg1_title:"השוואת בנקים 2026: מי מציע תנאים הטובים ביותר?",mg1_body:"פועלים, לאומי, דיסקונט, מזרחי — הפרש עד 800₪ לחודש.",
-    mg2_title:"מחזור משכנתה: מתי כדאי ואיך לעשות נכון",mg2_body:"הפחתת ריבית ב-1% יכולה לחסוך 200-500₪ לחודש.",
-    pr1_title:"מחיר למשתכן",pr1_body:"תוכנית ממשלתית למכירת דיור במחיר מופחת. הגרלה, תור לפי ניקוד.",pr1_amount:"הנחה של עד 30%",pr1_sub:"הגרלה חדשה פתוחה עד 30 באפריל 2026",
-    pr2_title:"הטבות לעולים חדשים",pr2_body:"סובסידיה לשכירות, משכנתה מועדפת ללא הון עצמי, מענק לרכישת דירה.",pr2_amount:"עד 3,000 ₪/חודש סובסידיה",pr2_sub:"התוכנית הוארכה עד סוף 2026",
-    pr3_title:"סובסידיה למשפחות צעירות",pr3_body:"למשפחות עד גיל 45 ללא דיור בבעלותן. מענק חד-פעמי לרכישה.",pr3_amount:"עד 400,000 ₪ מענק",pr3_sub:"הגשת בקשות מ-1 באפריל 2026",
-    pr4_title:"דיור לקשישים ונכים",pr4_body:"סובסידיות משרד הבינוי. דירות מותאמות. עד 2,200₪/חודש.",
-    pr5_title:"תמ\"א 38 ופינוי-בינוי: דירה חדשה בחינם",pr5_body:"דיירי בניינים ישנים מקבלים דירה מודרנית בתמורה לדירתם.",
-    cta_title:"מצא דירה בבוט",cta_body:"חיפוש חכם ב-23 ערים. סינון לפי מחיר, חדרים, תשתיות.",cta_btn:"פתח @flatfinderil_bot",
-    wid_market:"מחירים לפי עיר",wid_prog:"תוכניות סיוע",wid_links:"קישורים שימושיים",
-    calc_title:"מחשבון משכנתה",calc_price:"מחיר הנכס",calc_down:"הון עצמי (%)",calc_years:"תקופה (שנים)",calc_monthly:"תשלום חודשי",
-    pw1_title:"מחיר למשתכן",pw1_body:"הנחה עד 30%. הגרלה פתוחה",
-    pw2_title:"הטבות לעולים חדשים",pw2_body:"סובסידיית שכירות עד 3,000₪/חודש",
-    pw3_title:"משפחות צעירות",pw3_body:"מענק עד 400,000 ₪",
-    pw4_title:"תמ\"א 38 / פינוי-בינוי",pw4_body:"דירה חדשה תמורת ישנה",
-    ql1:"משרד הבינוי",ql2:"בנק ישראל",ql3:"מדלן — מחירים",ql4:"בוט FlatFinderIL",
-    footer_about:"פורטל מידע על שוק הנדל\"ן בישראל. חדשות, אנליזה, פרויקטים, משכנתה וסובסידיות ממשלתיות לכל האזורים.",
-    footer_rights:"כל הזכויות שמורות",footer_col1:"קטגוריות",footer_col2:"אזורים",footer_col3:"צור קשר",footer_tos:"תנאי שימוש",
-  }
-};
-
-let lang = 'ru';
-function setLang(l) {
-  lang = l;
-  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.textContent===l.toUpperCase()));
-  document.documentElement.lang = l;
-  document.body.style.direction = l==='he' ? 'rtl' : 'ltr';
-  const t = T[l];
-  document.querySelectorAll('[data-i]').forEach(el => {
-    const k = el.getAttribute('data-i');
-    if (t[k]!==undefined) el.innerHTML = t[k];
-  });
-  const yt = { ru:'лет', en:' years', he:' שנים' }[l];
-  document.getElementById('cYearsV').textContent = document.getElementById('cYears').value + yt;
-}
-
-function calcMort() {
-  const price = +document.getElementById('cPrice').value;
-  const down  = +document.getElementById('cDown').value;
-  const years = +document.getElementById('cYears').value;
-  const loan  = price * (1 - down/100);
-  const r = 0.0375/12, n = years*12;
-  const pay = loan * r * Math.pow(1+r,n) / (Math.pow(1+r,n)-1);
-  document.getElementById('cPriceV').textContent = price.toLocaleString()+' ₪';
-  document.getElementById('cDownV').textContent  = down+'% — '+(price*down/100).toLocaleString()+' ₪';
-  const yt = {ru:'лет',en:' years',he:' שנים'}[lang]||'лет';
-  document.getElementById('cYearsV').textContent = years+yt;
-  document.getElementById('cResult').textContent = '~'+Math.round(pay).toLocaleString()+' ₪';
-}
-
-function toBotLink() { window.open('https://t.me/flatfinderil_bot','_blank'); }
-function scrollTo(id) { document.getElementById(id)?.scrollIntoView({behavior:'smooth'}); }
-
-calcMort();
-setLang('ru');
-</script>
 </body>
 </html>
