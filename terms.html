@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="ru" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta name="description" content="FlatFinderIL — Пользовательское соглашение. Сайт и бот являются информационным агрегатором объявлений о недвижимости.">
+  <title>Пользовательское соглашение — FlatFinderIL</title>
+  <style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --navy:#0d1b2a;--navy2:#1b2d3f;--blue:#1a73e8;--blue2:#0d5cc7;
+  --accent:#e8a020;--text:#1a1a1a;--text2:#444;--text3:#777;
+  --bg:#f3f4f6;--card:#ffffff;--border:#dde1e7;--r:8px;
+}
+body{font-family:'Segoe UI',Arial,sans-serif;color:var(--text);background:var(--bg);font-size:15px;line-height:1.7}
+a{text-decoration:none;color:var(--blue)}
+a:hover{text-decoration:underline}
+
+/* TOP BAR */
+.topbar{background:var(--navy);padding:6px 24px;display:flex;align-items:center;justify-content:space-between;font-size:11px;color:rgba(255,255,255,.5)}
+.topbar-right{display:flex;gap:8px;align-items:center}
+.lang-btn{background:transparent;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.6);font-size:10px;padding:2px 7px;border-radius:3px;cursor:pointer;transition:.15s;font-family:inherit}
+.lang-btn:hover,.lang-btn.active{background:var(--blue);border-color:var(--blue);color:#fff}
+
+/* HEADER */
+header{background:var(--card);border-bottom:3px solid var(--blue);padding:0 24px;position:sticky;top:0;z-index:200;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+.header-inner{max-width:960px;margin:0 auto;display:flex;align-items:center;gap:24px;height:64px}
+.logo{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.logo-mark{width:40px;height:40px;background:var(--blue);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:#fff;letter-spacing:-0.5px}
+.logo-name{font-size:20px;font-weight:700;color:var(--navy)}
+.logo-name span{color:var(--blue)}
+.back-link{margin-left:auto;font-size:13px;color:var(--blue);display:flex;align-items:center;gap:6px}
+
+/* MAIN */
+.wrap{max-width:780px;margin:0 auto;padding:48px 24px 80px}
+
+/* HERO BADGE */
+.doc-badge{display:inline-flex;align-items:center;gap:8px;background:#f0f5ff;border:1px solid #c5d9fb;border-radius:20px;padding:5px 14px;font-size:12px;font-weight:600;color:var(--blue);margin-bottom:20px;letter-spacing:.3px}
+
+h1{font-size:28px;font-weight:800;color:var(--navy);margin-bottom:8px;line-height:1.3}
+.subtitle{font-size:14px;color:var(--text3);margin-bottom:36px}
+
+/* HIGHLIGHT BOX — агрегатор */
+.agg-box{background:#f0f5ff;border-left:4px solid var(--blue);border-radius:0 var(--r) var(--r) 0;padding:18px 22px;margin-bottom:36px;font-size:14px;color:var(--navy2);line-height:1.7}
+.agg-box strong{font-weight:700;color:var(--blue)}
+
+/* SECTIONS */
+.sec{margin-bottom:36px}
+.sec h2{font-size:17px;font-weight:700;color:var(--navy);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+.sec p{font-size:14px;color:var(--text2);margin-bottom:10px}
+.sec ul{padding-left:20px;margin-bottom:10px}
+.sec ul li{font-size:14px;color:var(--text2);margin-bottom:5px}
+
+/* FOOTER */
+footer{background:var(--navy);color:rgba(255,255,255,.4);padding:28px 24px;font-size:12px;text-align:center}
+footer a{color:rgba(255,255,255,.55)}
+footer a:hover{color:#fff;text-decoration:underline}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <span>FlatFinderIL · Пользовательское соглашение</span>
+  <div class="topbar-right">
+    <button class="lang-btn active" onclick="setLang('ru')">RU</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" onclick="setLang('he')">HE</button>
+  </div>
+</div>
+
+<header>
+  <div class="header-inner">
+    <a href="/" class="logo">
+      <div class="logo-mark">FF</div>
+      <div class="logo-name">Flat<span>Finder</span>IL</div>
+    </a>
+    <a href="/" class="back-link" data-i="back">← Главная</a>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="doc-badge" data-i="badge">📄 Юридический документ</div>
+
+  <h1 data-i="h1">Пользовательское соглашение</h1>
+  <p class="subtitle" data-i="updated">Последнее обновление: 9 апреля 2026 г. · Применяется к сайту flatfinderil.com и Telegram-боту @flatfinderil_bot</p>
+
+  <!-- КЛЮЧЕВОЕ: агрегатор -->
+  <div class="agg-box" data-i="agg_box">
+    <strong>FlatFinderIL — исключительно информационный агрегатор.</strong>
+    Сайт и Telegram-бот автоматически собирают и отображают объявления о недвижимости из открытых источников. Мы <strong>не являемся</strong> агентством недвижимости, брокером, продавцом или арендодателем. Мы не участвуем в переговорах, сделках или заключении договоров между сторонами.
+  </div>
+
+  <!-- 1 -->
+  <div class="sec">
+    <h2 data-i="s1_h">1. Стороны и предмет соглашения</h2>
+    <p data-i="s1_p1">Настоящее соглашение заключается между пользователем («Пользователь», «вы») и проектом FlatFinderIL («Платформа», «мы»). Платформа предоставляет информационные услуги посредством сайта <a href="https://flatfinderil.com">flatfinderil.com</a> и Telegram-бота @flatfinderil_bot.</p>
+    <p data-i="s1_p2">Использование платформы означает безоговорочное согласие с условиями настоящего соглашения. Если вы не согласны с каким-либо пунктом, пожалуйста, прекратите использование платформы.</p>
+  </div>
+
+  <!-- 2 -->
+  <div class="sec">
+    <h2 data-i="s2_h">2. Статус платформы — информационный агрегатор</h2>
+    <p data-i="s2_p1">FlatFinderIL функционирует исключительно как <strong>информационный агрегатор</strong> объявлений о недвижимости в Израиле. Платформа:</p>
+    <ul>
+      <li data-i="s2_l1">агрегирует и отображает объявления из открытых публичных источников;</li>
+      <li data-i="s2_l2">предоставляет инструменты поиска и фильтрации объявлений;</li>
+      <li data-i="s2_l3">публикует новости и аналитику рынка недвижимости Израиля;</li>
+      <li data-i="s2_l4">предоставляет ипотечный калькулятор в информационных целях.</li>
+    </ul>
+    <p data-i="s2_p2">Платформа <strong>не является</strong> и не выступает в роли: агентства недвижимости; риэлтора или брокера; стороны сделки купли-продажи или аренды; посредника в финансовых расчётах; консультанта по юридическим или финансовым вопросам.</p>
+  </div>
+
+  <!-- 3 -->
+  <div class="sec">
+    <h2 data-i="s3_h">3. Объявления пользователей</h2>
+    <p data-i="s3_p1">Пользователи вправе размещать объявления о недвижимости через Telegram-бот. Публикуя объявление, вы подтверждаете, что:</p>
+    <ul>
+      <li data-i="s3_l1">являетесь собственником объекта или уполномоченным представителем;</li>
+      <li data-i="s3_l2">предоставленные сведения достоверны и актуальны;</li>
+      <li data-i="s3_l3">объявление не нарушает права третьих лиц и нормы законодательства Государства Израиль.</li>
+    </ul>
+    <p data-i="s3_p2">Платформа вправе удалить любое объявление без объяснения причин. Платформа не проверяет и не несёт ответственности за достоверность размещённых объявлений.</p>
+  </div>
+
+  <!-- 4 -->
+  <div class="sec">
+    <h2 data-i="s4_h">4. Отказ от ответственности</h2>
+    <p data-i="s4_p1">Платформа предоставляется «как есть». Мы не гарантируем:</p>
+    <ul>
+      <li data-i="s4_l1">достоверность, полноту или актуальность информации в объявлениях;</li>
+      <li data-i="s4_l2">соответствие объектов недвижимости описаниям;</li>
+      <li data-i="s4_l3">успешное завершение каких-либо переговоров или сделок между пользователями;</li>
+      <li data-i="s4_l4">точность ипотечного калькулятора — расчёты носят исключительно ориентировочный характер.</li>
+    </ul>
+    <p data-i="s4_p2">Платформа не несёт ответственности за любые убытки, ущерб или споры, возникшие в результате использования материалов сайта или бота, в том числе в ходе совершения сделок с недвижимостью.</p>
+    <p data-i="s4_p3">Перед совершением любой сделки с недвижимостью мы рекомендуем обратиться к лицензированному риэлтору и юридическому консультанту.</p>
+  </div>
+
+  <!-- 5 -->
+  <div class="sec">
+    <h2 data-i="s5_h">5. Интеллектуальная собственность</h2>
+    <p data-i="s5_p1">Все оригинальные материалы платформы (дизайн, редакционные тексты, логотип, программный код) защищены авторским правом и принадлежат FlatFinderIL. Агрегируемые новости и объявления из открытых источников принадлежат их авторам.</p>
+    <p data-i="s5_p2">Запрещается воспроизведение, распространение или использование материалов платформы в коммерческих целях без письменного разрешения.</p>
+  </div>
+
+  <!-- 6 -->
+  <div class="sec">
+    <h2 data-i="s6_h">6. Конфиденциальность и персональные данные</h2>
+    <p data-i="s6_p1">При использовании Telegram-бота платформа получает от Telegram стандартные данные: числовой идентификатор пользователя, язык интерфейса. Имя и юзернейм Telegram обрабатываются только для отображения результатов внутри бота и не передаются третьим лицам.</p>
+    <p data-i="s6_p2">Контактные данные (телефон, e-mail), добавленные в объявление, отображаются в боте для потенциальных арендаторов/покупателей — только в объёме, явно указанном пользователем при публикации.</p>
+    <p data-i="s6_p3">Мы не продаём и не передаём персональные данные третьим лицам в коммерческих целях.</p>
+  </div>
+
+  <!-- 7 -->
+  <div class="sec">
+    <h2 data-i="s7_h">7. Подписка и оплата</h2>
+    <p data-i="s7_p1">Доступ к расширенным функциям бота осуществляется по подписке. Тарифы и условия отображаются в боте перед оплатой. После оплаты возврат средств не производится, если иное не предусмотрено применимым законодательством.</p>
+    <p data-i="s7_p2">Платформа использует сторонние платёжные сервисы и не хранит данные платёжных карт пользователей.</p>
+  </div>
+
+  <!-- 8 -->
+  <div class="sec">
+    <h2 data-i="s8_h">8. Запрещённые действия</h2>
+    <p data-i="s8_p">При использовании платформы запрещается:</p>
+    <ul>
+      <li data-i="s8_l1">размещать заведомо ложные объявления;</li>
+      <li data-i="s8_l2">использовать платформу для мошеннических действий;</li>
+      <li data-i="s8_l3">осуществлять автоматический сбор данных (парсинг) без письменного разрешения;</li>
+      <li data-i="s8_l4">нарушать законодательство Государства Израиль.</li>
+    </ul>
+  </div>
+
+  <!-- 9 -->
+  <div class="sec">
+    <h2 data-i="s9_h">9. Изменение условий</h2>
+    <p data-i="s9_p">Платформа вправе в одностороннем порядке изменять настоящее соглашение. Продолжение использования платформы после публикации изменений означает согласие с обновлёнными условиями. Актуальная редакция всегда доступна по адресу <a href="https://flatfinderil.com/terms.html">flatfinderil.com/terms.html</a>.</p>
+  </div>
+
+  <!-- 10 -->
+  <div class="sec">
+    <h2 data-i="s10_h">10. Применимое право и разрешение споров</h2>
+    <p data-i="s10_p">Настоящее соглашение регулируется законодательством Государства Израиль. Споры разрешаются путём переговоров, а при невозможности — в судах по месту нахождения платформы. По вопросам обращайтесь: <a href="mailto:info@flatfinderil.com">info@flatfinderil.com</a>.</p>
+  </div>
+
+</div><!-- /wrap -->
+
+<footer>
+  <div>© 2026 FlatFinderIL · <span data-i="footer_rights">Все права защищены</span> · <a href="/">flatfinderil.com</a> · <a href="mailto:info@flatfinderil.com">info@flatfinderil.com</a></div>
+</footer>
+
+<script>
+const T = {
+  ru:{
+    back:"← Главная",
+    badge:"📄 Юридический документ",
+    h1:"Пользовательское соглашение",
+    updated:"Последнее обновление: 9 апреля 2026 г. · Применяется к сайту flatfinderil.com и Telegram-боту @flatfinderil_bot",
+    agg_box:"<strong>FlatFinderIL — исключительно информационный агрегатор.</strong> Сайт и Telegram-бот автоматически собирают и отображают объявления о недвижимости из открытых источников. Мы <strong>не являемся</strong> агентством недвижимости, брокером, продавцом или арендодателем. Мы не участвуем в переговорах, сделках или заключении договоров между сторонами.",
+    s1_h:"1. Стороны и предмет соглашения",
+    s1_p1:"Настоящее соглашение заключается между пользователем («Пользователь», «вы») и проектом FlatFinderIL («Платформа», «мы»). Платформа предоставляет информационные услуги посредством сайта <a href=\"https://flatfinderil.com\">flatfinderil.com</a> и Telegram-бота @flatfinderil_bot.",
+    s1_p2:"Использование платформы означает безоговорочное согласие с условиями настоящего соглашения. Если вы не согласны с каким-либо пунктом, пожалуйста, прекратите использование платформы.",
+    s2_h:"2. Статус платформы — информационный агрегатор",
+    s2_p1:"FlatFinderIL функционирует исключительно как <strong>информационный агрегатор</strong> объявлений о недвижимости в Израиле. Платформа:",
+    s2_l1:"агрегирует и отображает объявления из открытых публичных источников;",
+    s2_l2:"предоставляет инструменты поиска и фильтрации объявлений;",
+    s2_l3:"публикует новости и аналитику рынка недвижимости Израиля;",
+    s2_l4:"предоставляет ипотечный калькулятор в информационных целях.",
+    s2_p2:"Платформа <strong>не является</strong> и не выступает в роли: агентства недвижимости; риэлтора или брокера; стороны сделки купли-продажи или аренды; посредника в финансовых расчётах; консультанта по юридическим или финансовым вопросам.",
+    s3_h:"3. Объявления пользователей",
+    s3_p1:"Пользователи вправе размещать объявления о недвижимости через Telegram-бот. Публикуя объявление, вы подтверждаете, что:",
+    s3_l1:"являетесь собственником объекта или уполномоченным представителем;",
+    s3_l2:"предоставленные сведения достоверны и актуальны;",
+    s3_l3:"объявление не нарушает права третьих лиц и нормы законодательства Государства Израиль.",
+    s3_p2:"Платформа вправе удалить любое объявление без объяснения причин. Платформа не проверяет и не несёт ответственности за достоверность размещённых объявлений.",
+    s4_h:"4. Отказ от ответственности",
+    s4_p1:"Платформа предоставляется «как есть». Мы не гарантируем:",
+    s4_l1:"достоверность, полноту или актуальность информации в объявлениях;",
+    s4_l2:"соответствие объектов недвижимости описаниям;",
+    s4_l3:"успешное завершение каких-либо переговоров или сделок между пользователями;",
+    s4_l4:"точность ипотечного калькулятора — расчёты носят исключительно ориентировочный характер.",
+    s4_p2:"Платформа не несёт ответственности за любые убытки, ущерб или споры, возникшие в результате использования материалов сайта или бота, в том числе в ходе совершения сделок с недвижимостью.",
+    s4_p3:"Перед совершением любой сделки с недвижимостью мы рекомендуем обратиться к лицензированному риэлтору и юридическому консультанту.",
+    s5_h:"5. Интеллектуальная собственность",
+    s5_p1:"Все оригинальные материалы платформы (дизайн, редакционные тексты, логотип, программный код) защищены авторским правом и принадлежат FlatFinderIL. Агрегируемые новости и объявления из открытых источников принадлежат их авторам.",
+    s5_p2:"Запрещается воспроизведение, распространение или использование материалов платформы в коммерческих целях без письменного разрешения.",
+    s6_h:"6. Конфиденциальность и персональные данные",
+    s6_p1:"При использовании Telegram-бота платформа получает от Telegram стандартные данные: числовой идентификатор пользователя, язык интерфейса. Имя и юзернейм Telegram обрабатываются только для отображения результатов внутри бота и не передаются третьим лицам.",
+    s6_p2:"Контактные данные (телефон, e-mail), добавленные в объявление, отображаются в боте для потенциальных арендаторов/покупателей — только в объёме, явно указанном пользователем при публикации.",
+    s6_p3:"Мы не продаём и не передаём персональные данные третьим лицам в коммерческих целях.",
+    s7_h:"7. Подписка и оплата",
+    s7_p1:"Доступ к расширенным функциям бота осуществляется по подписке. Тарифы и условия отображаются в боте перед оплатой. После оплаты возврат средств не производится, если иное не предусмотрено применимым законодательством.",
+    s7_p2:"Платформа использует сторонние платёжные сервисы и не хранит данные платёжных карт пользователей.",
+    s8_h:"8. Запрещённые действия",
+    s8_p:"При использовании платформы запрещается:",
+    s8_l1:"размещать заведомо ложные объявления;",
+    s8_l2:"использовать платформу для мошеннических действий;",
+    s8_l3:"осуществлять автоматический сбор данных (парсинг) без письменного разрешения;",
+    s8_l4:"нарушать законодательство Государства Израиль.",
+    s9_h:"9. Изменение условий",
+    s9_p:"Платформа вправе в одностороннем порядке изменять настоящее соглашение. Продолжение использования платформы после публикации изменений означает согласие с обновлёнными условиями. Актуальная редакция всегда доступна по адресу <a href=\"https://flatfinderil.com/terms.html\">flatfinderil.com/terms.html</a>.",
+    s10_h:"10. Применимое право и разрешение споров",
+    s10_p:"Настоящее соглашение регулируется законодательством Государства Израиль. Споры разрешаются путём переговоров, а при невозможности — в судах по месту нахождения платформы. По вопросам обращайтесь: <a href=\"mailto:info@flatfinderil.com\">info@flatfinderil.com</a>.",
+    footer_rights:"Все права защищены",
+  },
+  en:{
+    back:"← Home",
+    badge:"📄 Legal Document",
+    h1:"Terms of Use",
+    updated:"Last updated: April 9, 2026 · Applies to flatfinderil.com and Telegram bot @flatfinderil_bot",
+    agg_box:"<strong>FlatFinderIL is solely an information aggregator.</strong> The website and Telegram bot automatically collect and display real estate listings from publicly available sources. We are <strong>not</strong> a real estate agency, broker, seller, or landlord. We do not participate in negotiations, transactions, or contracting between parties.",
+    s1_h:"1. Parties and Scope",
+    s1_p1:"This agreement is between the user ("User", "you") and FlatFinderIL ("Platform", "we"). The Platform provides information services through <a href=\"https://flatfinderil.com\">flatfinderil.com</a> and Telegram bot @flatfinderil_bot.",
+    s1_p2:"Using the Platform means unconditional acceptance of these Terms. If you disagree with any provision, please stop using the Platform.",
+    s2_h:"2. Platform Status — Information Aggregator",
+    s2_p1:"FlatFinderIL operates solely as an <strong>information aggregator</strong> of real estate listings in Israel. The Platform:",
+    s2_l1:"aggregates and displays listings from open public sources;",
+    s2_l2:"provides search and filtering tools;",
+    s2_l3:"publishes Israeli real estate news and market analytics;",
+    s2_l4:"provides a mortgage calculator for informational purposes only.",
+    s2_p2:"The Platform is <strong>not</strong> and does not act as: a real estate agency; a realtor or broker; a party to any sale or rental transaction; a financial intermediary; a legal or financial adviser.",
+    s3_h:"3. User Listings",
+    s3_p1:"Users may post real estate listings via the Telegram bot. By posting a listing, you confirm that:",
+    s3_l1:"you are the owner or an authorised representative of the property;",
+    s3_l2:"the information provided is accurate and up to date;",
+    s3_l3:"the listing does not violate third-party rights or Israeli law.",
+    s3_p2:"The Platform may remove any listing without explanation. The Platform does not verify and is not responsible for the accuracy of listings.",
+    s4_h:"4. Disclaimer of Warranties",
+    s4_p1:"The Platform is provided \"as is\". We do not guarantee:",
+    s4_l1:"the accuracy, completeness, or timeliness of listing information;",
+    s4_l2:"that properties match their descriptions;",
+    s4_l3:"the successful conclusion of any negotiations or transactions between users;",
+    s4_l4:"the accuracy of the mortgage calculator — calculations are indicative only.",
+    s4_p2:"The Platform is not liable for any losses, damages, or disputes arising from the use of website or bot materials, including in connection with real estate transactions.",
+    s4_p3:"Before entering into any real estate transaction, we recommend consulting a licensed realtor and legal adviser.",
+    s5_h:"5. Intellectual Property",
+    s5_p1:"All original Platform materials (design, editorial texts, logo, source code) are copyright-protected and owned by FlatFinderIL. Aggregated news and listings from open sources belong to their respective authors.",
+    s5_p2:"Reproduction, distribution, or commercial use of Platform materials without written permission is prohibited.",
+    s6_h:"6. Privacy and Personal Data",
+    s6_p1:"When using the Telegram bot, the Platform receives standard Telegram data: numeric user ID and interface language. Telegram name and username are processed only to display results within the bot and are not shared with third parties.",
+    s6_p2:"Contact details (phone, e-mail) added to a listing are shown in the bot to potential tenants/buyers — only to the extent explicitly stated by the user when publishing.",
+    s6_p3:"We do not sell or transfer personal data to third parties for commercial purposes.",
+    s7_h:"7. Subscription and Payment",
+    s7_p1:"Access to advanced bot features is available via subscription. Rates and terms are shown in the bot before payment. Payments are non-refundable unless required by applicable law.",
+    s7_p2:"The Platform uses third-party payment services and does not store users' payment card data.",
+    s8_h:"8. Prohibited Actions",
+    s8_p:"When using the Platform, you may not:",
+    s8_l1:"post knowingly false listings;",
+    s8_l2:"use the Platform for fraudulent purposes;",
+    s8_l3:"perform automated data scraping without written permission;",
+    s8_l4:"violate the laws of the State of Israel.",
+    s9_h:"9. Changes to Terms",
+    s9_p:"The Platform may unilaterally amend these Terms. Continued use after changes are published constitutes acceptance of the updated Terms. The current version is always available at <a href=\"https://flatfinderil.com/terms.html\">flatfinderil.com/terms.html</a>.",
+    s10_h:"10. Governing Law and Dispute Resolution",
+    s10_p:"This agreement is governed by the laws of the State of Israel. Disputes shall be resolved through negotiation, or if not possible, in courts at the Platform's place of business. For inquiries: <a href=\"mailto:info@flatfinderil.com\">info@flatfinderil.com</a>.",
+    footer_rights:"All rights reserved",
+  },
+  he:{
+    back:"← ראשי",
+    badge:"📄 מסמך משפטי",
+    h1:"תנאי שימוש",
+    updated:"עדכון אחרון: 9 באפריל 2026 · חל על flatfinderil.com ובוט הטלגרם @flatfinderil_bot",
+    agg_box:"<strong>FlatFinderIL הוא אגרגטור מידע בלבד.</strong> האתר ובוט הטלגרם אוספים ומציגים אוטומטית מודעות נדל\"ן ממקורות פתוחים. אנו <strong>אינו</strong> סוכנות נדל\"ן, מתווך, מוכר או משכיר. אנו אינו משתתפים במשא ומתן, עסקאות או חוזים בין הצדדים.",
+    s1_h:"1. הצדדים ומושא ההסכם",
+    s1_p1:"הסכם זה נכרת בין המשתמש (\"משתמש\", \"אתה\") לבין פרויקט FlatFinderIL (\"הפלטפורמה\", \"אנחנו\"). הפלטפורמה מספקת שירותי מידע דרך <a href=\"https://flatfinderil.com\">flatfinderil.com</a> ובוט טלגרם @flatfinderil_bot.",
+    s1_p2:"שימוש בפלטפורמה מהווה הסכמה מוחלטת לתנאים אלה. אם אינך מסכים לאיזה מהסעיפים, אנא הפסק את השימוש בפלטפורמה.",
+    s2_h:"2. מעמד הפלטפורמה — אגרגטור מידע",
+    s2_p1:"FlatFinderIL פועלת אך ורק כ<strong>אגרגטור מידע</strong> של מודעות נדל\"ן בישראל. הפלטפורמה:",
+    s2_l1:"מאגדת ומציגה מודעות ממקורות פומביים פתוחים;",
+    s2_l2:"מספקת כלי חיפוש וסינון מודעות;",
+    s2_l3:"מפרסמת חדשות ואנליזה של שוק הנדל\"ן הישראלי;",
+    s2_l4:"מספקת מחשבון משכנתה למטרות מידע בלבד.",
+    s2_p2:"הפלטפורמה <strong>אינה</strong> ואינה פועלת כ: סוכנות נדל\"ן; מתווך או ברוקר; צד בעסקת מכר או שכירות; מתווך פיננסי; יועץ משפטי או פיננסי.",
+    s3_h:"3. מודעות משתמשים",
+    s3_p1:"משתמשים רשאים לפרסם מודעות נדל\"ן דרך בוט הטלגרם. בפרסום מודעה אתה מאשר כי:",
+    s3_l1:"אתה הבעלים או נציג מורשה של הנכס;",
+    s3_l2:"המידע שנמסר מדויק ועדכני;",
+    s3_l3:"המודעה אינה מפרה זכויות צד שלישי ואינה עוברת על חוקי מדינת ישראל.",
+    s3_p2:"הפלטפורמה רשאית להסיר כל מודעה ללא הסבר. הפלטפורמה אינה בודקת ואינה אחראית לנכונות המודעות.",
+    s4_h:"4. הגבלת אחריות",
+    s4_p1:"הפלטפורמה מסופקת \"כפי שהיא\". אנו לא מבטיחים:",
+    s4_l1:"נכונות, שלמות או עדכניות המידע במודעות;",
+    s4_l2:"התאמת הנכסים לתיאוריהם;",
+    s4_l3:"השלמה מוצלחת של משא ומתן או עסקאות בין משתמשים;",
+    s4_l4:"דיוק מחשבון המשכנתה — החישובים הם אינדיקטיביים בלבד.",
+    s4_p2:"הפלטפורמה אינה אחראית לנזקים, הפסדים או סכסוכים הנובעים משימוש בחומרי האתר או הבוט, לרבות בקשר לעסקאות נדל\"ן.",
+    s4_p3:"לפני כל עסקת נדל\"ן אנו ממליצים להתייעץ עם מתווך מורשה ויועץ משפטי.",
+    s5_h:"5. קניין רוחני",
+    s5_p1:"כל חומרי הפלטפורמה המקוריים (עיצוב, טקסטים, לוגו, קוד) מוגנים בזכויות יוצרים ושייכים ל-FlatFinderIL. חדשות ומודעות ממקורות פתוחים שייכות למחבריהן.",
+    s5_p2:"אסור לשכפל, להפיץ או לעשות שימוש מסחרי בחומרי הפלטפורמה ללא אישור בכתב.",
+    s6_h:"6. פרטיות ומידע אישי",
+    s6_p1:"בשימוש בבוט הטלגרם הפלטפורמה מקבלת מטלגרם נתונים סטנדרטיים: מזהה משתמש מספרי ושפת ממשק. שם וכינוי הטלגרם מעובדים רק להצגת תוצאות בתוך הבוט ואינם נמסרים לצדדים שלישיים.",
+    s6_p2:"פרטי קשר (טלפון, אימייל) שנוספו למודעה מוצגים בבוט לשוכרים/קונים פוטנציאליים — רק במידה שצוינה במפורש בעת הפרסום.",
+    s6_p3:"אנו לא מוכרים ולא מעבירים מידע אישי לצדדים שלישיים למטרות מסחריות.",
+    s7_h:"7. מנוי ותשלום",
+    s7_p1:"גישה לתכונות מתקדמות של הבוט מתבצעת במנוי. תעריפים ותנאים מוצגים בבוט לפני התשלום. לאחר התשלום אין החזרות, אלא אם נדרש על פי חוק.",
+    s7_p2:"הפלטפורמה משתמשת בשירותי תשלום של צד שלישי ואינה שומרת פרטי כרטיסי אשראי.",
+    s8_h:"8. פעולות אסורות",
+    s8_p:"בשימוש בפלטפורמה אסור:",
+    s8_l1:"לפרסם מודעות כוזבות ביודעין;",
+    s8_l2:"להשתמש בפלטפורמה לצרכי הונאה;",
+    s8_l3:"לבצע סריקת נתונים אוטומטית ללא אישור בכתב;",
+    s8_l4:"להפר את חוקי מדינת ישראל.",
+    s9_h:"9. שינויים בתנאים",
+    s9_p:"הפלטפורמה רשאית לשנות תנאים אלה באופן חד-צדדי. המשך השימוש לאחר פרסום שינויים מהווה הסכמה לתנאים המעודכנים. הגרסה הנוכחית תמיד זמינה בכתובת <a href=\"https://flatfinderil.com/terms.html\">flatfinderil.com/terms.html</a>.",
+    s10_h:"10. דין חל ויישוב סכסוכים",
+    s10_p:"הסכם זה כפוף לחוקי מדינת ישראל. סכסוכים יוסדרו בדרך של משא ומתן, ובכישלון — בבתי המשפט במקום מושב הפלטפורמה. לפניות: <a href=\"mailto:info@flatfinderil.com\">info@flatfinderil.com</a>.",
+    footer_rights:"כל הזכויות שמורות",
+  }
+};
+
+let lang = 'ru';
+function setLang(l) {
+  lang = l;
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.textContent===l.toUpperCase()));
+  document.documentElement.lang = l;
+  document.body.style.direction = l==='he' ? 'rtl' : 'ltr';
+  const t = T[l];
+  document.querySelectorAll('[data-i]').forEach(el => {
+    const k = el.getAttribute('data-i');
+    if(t[k] !== undefined) el.innerHTML = t[k];
+  });
+}
+setLang('ru');
+</script>
+</body>
+</html>
