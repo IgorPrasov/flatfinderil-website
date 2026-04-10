@@ -4,18 +4,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-  <!-- SEO -->
-  <title>FlatFinderIL — Найти квартиру в Израиле | Аренда и продажа</title>
-  <meta name="description" content="FlatFinderIL — умный поиск недвижимости в Израиле через Telegram-бот. Аренда и покупка квартир в Тель-Авиве, Хайфе, Иерусалиме и 20+ городах. Бесплатно.">
-  <meta name="keywords" content="недвижимость Израиль, аренда квартира Израиль, купить квартиру Израиль, Тель-Авив аренда, Хайфа квартира, Иерусалим недвижимость, найти квартиру Израиль, новостройки Израиль, ипотека Израиль, מצא דירה ישראל, דירות להשכרה, דירות למכירה">
-  <meta name="robots" content="index, follow">
+  <title>FlatFinderIL — Найти квартиру в Израиле | Аренда и продажа через Telegram-бот</title>
+  <meta name="description" content="FlatFinderIL — умный Telegram-бот для поиска квартир в Израиле. Аренда и покупка в Тель-Авиве, Хайфе, Иерусалиме, Нетании и 19 других городах. Бесплатно, без регистрации. Новостройки, ипотека, мачир лемиштакен.">
+  <meta name="keywords" content="недвижимость Израиль, аренда квартира Израиль, купить квартиру Израиль, снять квартиру Израиль, поиск квартиры Израиль, Тель-Авив аренда квартира, Хайфа квартира аренда, Иерусалим квартира, Нетания аренда, Беэр-Шева квартира, Ашдод аренда, Ришон-ле-Цион квартира, Петах-Тиква аренда, новостройки Израиль, ипотека Израиль, мачир лемиштакен, программы для репатриантов Израиль, жильё репатрианты Израиль, недвижимость для олим, квартира для новых репатриантов, telegram бот недвижимость Израиль, бот поиск квартиры Израиль, flatfinderil, flat finder israel, найти квартиру Израиль бесплатно, объявления аренда Израиль, квартира без посредников Израиль, дешёвые квартиры Израиль, однокомнатная квартира Израиль, двухкомнатная квартира Израиль, трёхкомнатная квартира Израиль, пентхаус Израиль, студия аренда Израиль, квартира рядом с морем Израиль, квартира с видом на море Израиль, жильё в Израиле 2026, рынок недвижимости Израиль, цены на квартиры Израиль, инвестиции в недвижимость Израиль">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
   <meta name="author" content="FlatFinderIL">
+  <meta name="geo.region" content="IL">
+  <meta name="geo.placename" content="Israel">
+  <meta name="language" content="Russian">
   <link rel="canonical" href="https://flatfinderil.com/">
 
-  <!-- Hreflang — multilingual SEO -->
-  <link rel="alternate" hreflang="ru"      href="https://flatfinderil.com/">
-  <link rel="alternate" hreflang="en"      href="https://flatfinderil.com/en/">
-  <link rel="alternate" hreflang="he"      href="https://flatfinderil.com/he/">
+  <!-- Hreflang -->
+  <link rel="alternate" hreflang="ru"        href="https://flatfinderil.com/">
+  <link rel="alternate" hreflang="en"        href="https://flatfinderil.com/en/">
+  <link rel="alternate" hreflang="he"        href="https://flatfinderil.com/he/">
   <link rel="alternate" hreflang="x-default" href="https://flatfinderil.com/">
 
   <!-- Google Search Console -->
@@ -24,9 +26,12 @@
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://flatfinderil.com/">
-  <meta property="og:title" content="FlatFinderIL — Найти квартиру в Израиле">
-  <meta property="og:description" content="Умный Telegram-бот для поиска недвижимости в Израиле. Аренда и покупка квартир в 23 городах. Бесплатно.">
+  <meta property="og:title" content="FlatFinderIL — Найти квартиру в Израиле через Telegram-бот">
+  <meta property="og:description" content="Умный Telegram-бот для поиска квартир в Израиле. Аренда и покупка в 23 городах. Фильтр по цене, комнатам, району. Бесплатно.">
   <meta property="og:image" content="https://flatfinderil.com/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="FlatFinderIL — поиск квартир в Израиле">
   <meta property="og:locale" content="ru_RU">
   <meta property="og:locale:alternate" content="en_IL">
   <meta property="og:locale:alternate" content="he_IL">
@@ -34,278 +39,187 @@
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@flatfinderil">
   <meta name="twitter:title" content="FlatFinderIL — Найти квартиру в Израиле">
-  <meta name="twitter:description" content="Умный Telegram-бот для поиска недвижимости в Израиле. 23 города. Бесплатно.">
+  <meta name="twitter:description" content="Умный Telegram-бот для поиска квартир в Израиле. 23 города. Бесплатно.">
   <meta name="twitter:image" content="https://flatfinderil.com/og-image.png">
 
-  <!-- Structured Data -->
+  <!-- Structured Data: Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "FlatFinderIL",
+    "url": "https://flatfinderil.com",
+    "logo": "https://flatfinderil.com/og-image.png",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "email": "info@flatfinderil.com",
+      "contactType": "customer support",
+      "availableLanguage": ["Russian", "English", "Hebrew"]
+    },
+    "sameAs": ["https://t.me/flatfinderil_bot"]
+  }
+  </script>
+
+  <!-- Structured Data: SoftwareApplication (бот) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "FlatFinderIL Bot",
+    "operatingSystem": "Telegram",
+    "applicationCategory": "RealEstateApplication",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "ILS"
+    },
+    "url": "https://t.me/flatfinderil_bot",
+    "description": "Умный Telegram-бот для поиска квартир в аренду и на продажу в 23 городах Израиля. Фильтры по цене, количеству комнат, городу и типу сделки.",
+    "inLanguage": ["ru", "en", "he"],
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "ratingCount": "120"
+    }
+  }
+  </script>
+
+  <!-- Structured Data: WebSite + SearchAction -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "FlatFinderIL",
     "url": "https://flatfinderil.com",
-    "description": "Умный поиск недвижимости в Израиле через Telegram-бот. Аренда и покупка квартир в 23 городах.",
+    "description": "Поиск квартир в Израиле — аренда и продажа в 23 городах через Telegram-бот",
     "inLanguage": ["ru", "en", "he"],
     "potentialAction": {
       "@type": "SearchAction",
-      "target": "https://t.me/flatfinderil_bot",
+      "target": "https://t.me/flatfinderil_bot?start={search_term_string}",
       "query-input": "required name=search_term_string"
     }
   }
   </script>
 
+  <!-- Structured Data: FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Как найти квартиру в аренду в Израиле?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Откройте Telegram-бот @flatfinderil_bot, выберите город и укажите параметры: цена, количество комнат, тип сделки. Бот мгновенно покажет актуальные объявления."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "В каких городах Израиля работает поиск?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Бот работает в 23 городах: Тель-Авив, Иерусалим, Хайфа, Беэр-Шева, Нетания, Ашдод, Ришон-ле-Цион, Петах-Тиква, Холон, Бат-Ям, Герцлия, Рамат-Ган, Реховот, Ашкелон, Эйлат, Нацрат-Илит, Кфар-Саба, Раанана, Модиин, Беней-Брак, Лод, Рамла, Акко."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Сколько стоит использование бота?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Базовый поиск квартир полностью бесплатный. Расширенные функции доступны по подписке."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Есть ли поддержка на иврите и английском?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Да, бот работает на русском, английском и иврите. Переключите язык в меню бота."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Как новому репатрианту найти квартиру в Израиле?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "FlatFinderIL создан специально для репатриантов. Бот ищет квартиры на русском языке по всему Израилю, включая программы субсидированного жилья для новых олим."
+        }
+      }
+    ]
+  }
+  </script>
+
   <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
-
-body {
-  font-family: 'Segoe UI', Arial, sans-serif;
-  background: #0d1b2a;
-  color: #fff;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 48px 24px 100px;
-}
-
-/* LANG */
-.langs {
-  position: fixed;
-  top: 18px;
-  right: 20px;
-  display: flex;
-  gap: 5px;
-  z-index: 100;
-}
-.lang-btn {
-  background: transparent;
-  border: 1px solid rgba(255,255,255,.2);
-  color: rgba(255,255,255,.5);
-  font-size: 11px;
-  font-weight: 600;
-  padding: 4px 9px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: .15s;
-  font-family: inherit;
-}
-.lang-btn:hover, .lang-btn.active {
-  background: #1a73e8;
-  border-color: #1a73e8;
-  color: #fff;
-}
-
-/* LOGO */
-.logo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 32px;
-  margin-top: 16px;
-}
-.logo-mark {
-  width: 72px;
-  height: 72px;
-  background: #1a73e8;
-  border-radius: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 24px;
-  font-weight: 800;
-  color: #fff;
-  letter-spacing: -1px;
-  box-shadow: 0 8px 32px rgba(26,115,232,.5);
-}
-.logo-name {
-  font-size: 28px;
-  font-weight: 700;
-  letter-spacing: -0.5px;
-}
+body { font-family: 'Segoe UI', Arial, sans-serif; background: #0d1b2a; color: #fff; min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 48px 24px 100px; }
+.langs { position: fixed; top: 18px; right: 20px; display: flex; gap: 5px; z-index: 100; }
+.lang-btn { background: transparent; border: 1px solid rgba(255,255,255,.2); color: rgba(255,255,255,.5); font-size: 11px; font-weight: 600; padding: 4px 9px; border-radius: 4px; cursor: pointer; transition: .15s; font-family: inherit; }
+.lang-btn:hover, .lang-btn.active { background: #1a73e8; border-color: #1a73e8; color: #fff; }
+.logo { display: flex; flex-direction: column; align-items: center; gap: 12px; margin-bottom: 32px; margin-top: 16px; }
+.logo-mark { width: 72px; height: 72px; background: #1a73e8; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 800; color: #fff; letter-spacing: -1px; box-shadow: 0 8px 32px rgba(26,115,232,.5); }
+.logo-name { font-size: 28px; font-weight: 700; letter-spacing: -0.5px; }
 .logo-name span { color: #1a73e8; }
-.logo-sub {
-  font-size: 11px;
-  color: rgba(255,255,255,.3);
-  letter-spacing: 2px;
-  text-transform: uppercase;
-}
-
-/* HERO */
-.hero {
-  text-align: center;
-  max-width: 600px;
-  margin-bottom: 40px;
-}
-.hero h1 {
-  font-size: 38px;
-  font-weight: 800;
-  line-height: 1.2;
-  letter-spacing: -1px;
-  margin-bottom: 16px;
-}
-.hero h1 em {
-  font-style: normal;
-  color: #1a73e8;
-}
-.hero p {
-  font-size: 16px;
-  color: rgba(255,255,255,.5);
-  line-height: 1.6;
-  max-width: 480px;
-  margin: 0 auto;
-}
-
-/* FEATURES */
-.features {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  max-width: 600px;
-  width: 100%;
-  margin-bottom: 40px;
-}
-.feat {
-  background: rgba(255,255,255,.05);
-  border: 1px solid rgba(255,255,255,.08);
-  border-radius: 12px;
-  padding: 16px;
-  text-align: center;
-}
-.feat-icon {
-  font-size: 24px;
-  margin-bottom: 8px;
-}
-.feat-title {
-  font-size: 13px;
-  font-weight: 700;
-  color: #fff;
-  margin-bottom: 4px;
-}
-.feat-desc {
-  font-size: 11px;
-  color: rgba(255,255,255,.4);
-  line-height: 1.5;
-}
-
-/* CTA */
-.cta-wrap {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 14px;
-  margin-bottom: 40px;
-}
-.bot-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  background: #1a73e8;
-  color: #fff;
-  text-decoration: none;
-  padding: 18px 36px;
-  border-radius: 14px;
-  font-size: 17px;
-  font-weight: 700;
-  transition: background .2s, transform .15s, box-shadow .2s;
-  box-shadow: 0 4px 24px rgba(26,115,232,.5);
-  white-space: nowrap;
-}
-.bot-btn:hover {
-  background: #0d5cc7;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 32px rgba(26,115,232,.6);
-}
+.logo-sub { font-size: 11px; color: rgba(255,255,255,.3); letter-spacing: 2px; text-transform: uppercase; }
+.hero { text-align: center; max-width: 620px; margin-bottom: 36px; }
+.hero h1 { font-size: 38px; font-weight: 800; line-height: 1.2; letter-spacing: -1px; margin-bottom: 14px; }
+.hero h1 em { font-style: normal; color: #1a73e8; }
+.hero p { font-size: 15px; color: rgba(255,255,255,.5); line-height: 1.65; max-width: 500px; margin: 0 auto; }
+.features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; max-width: 620px; width: 100%; margin-bottom: 36px; }
+.feat { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.08); border-radius: 12px; padding: 16px; text-align: center; }
+.feat-icon { font-size: 24px; margin-bottom: 8px; }
+.feat-title { font-size: 13px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+.feat-desc { font-size: 11px; color: rgba(255,255,255,.4); line-height: 1.5; }
+.cta-wrap { display: flex; flex-direction: column; align-items: center; gap: 12px; margin-bottom: 36px; }
+.bot-btn { display: inline-flex; align-items: center; gap: 12px; background: #1a73e8; color: #fff; text-decoration: none; padding: 18px 36px; border-radius: 14px; font-size: 17px; font-weight: 700; transition: background .2s, transform .15s, box-shadow .2s; box-shadow: 0 4px 24px rgba(26,115,232,.5); white-space: nowrap; }
+.bot-btn:hover { background: #0d5cc7; transform: translateY(-2px); box-shadow: 0 8px 32px rgba(26,115,232,.6); }
 .bot-btn svg { width: 22px; height: 22px; flex-shrink: 0; }
-.cta-hint {
-  font-size: 12px;
-  color: rgba(255,255,255,.3);
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
+.cta-hint { font-size: 12px; color: rgba(255,255,255,.3); display: flex; align-items: center; gap: 6px; }
 .cta-hint::before { content: '✓'; color: #1e7e50; font-weight: 700; }
+.cities-block { max-width: 620px; width: 100%; text-align: center; margin-bottom: 36px; }
+.cities-label { font-size: 11px; color: rgba(255,255,255,.3); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 12px; }
+.cities { display: flex; flex-wrap: wrap; gap: 7px; justify-content: center; }
+.city-tag { background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.1); border-radius: 20px; padding: 4px 12px; font-size: 12px; color: rgba(255,255,255,.55); }
 
-/* CITIES */
-.cities-block {
-  max-width: 600px;
-  width: 100%;
-  text-align: center;
-  margin-bottom: 40px;
-}
-.cities-label {
-  font-size: 11px;
-  color: rgba(255,255,255,.3);
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  margin-bottom: 12px;
-}
-.cities {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 7px;
-  justify-content: center;
-}
-.city-tag {
-  background: rgba(255,255,255,.07);
-  border: 1px solid rgba(255,255,255,.1);
-  border-radius: 20px;
-  padding: 4px 12px;
-  font-size: 12px;
-  color: rgba(255,255,255,.55);
-}
+/* HOW IT WORKS */
+.how { max-width: 620px; width: 100%; margin-bottom: 36px; }
+.how h2 { font-size: 16px; font-weight: 700; color: rgba(255,255,255,.6); text-align: center; margin-bottom: 16px; letter-spacing: .5px; text-transform: uppercase; font-size: 11px; }
+.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.step { text-align: center; padding: 12px 8px; }
+.step-num { width: 28px; height: 28px; background: #1a73e8; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; margin: 0 auto 8px; }
+.step-text { font-size: 12px; color: rgba(255,255,255,.5); line-height: 1.5; }
+
+/* FAQ */
+.faq { max-width: 620px; width: 100%; margin-bottom: 36px; }
+.faq h2 { font-size: 11px; font-weight: 700; color: rgba(255,255,255,.6); text-align: center; margin-bottom: 14px; letter-spacing: .5px; text-transform: uppercase; }
+.faq-item { border-bottom: 1px solid rgba(255,255,255,.07); padding: 12px 0; cursor: pointer; }
+.faq-item:last-child { border-bottom: none; }
+.faq-q { font-size: 13px; font-weight: 600; color: rgba(255,255,255,.75); display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.faq-q::after { content: '+'; color: #1a73e8; font-size: 18px; flex-shrink: 0; transition: .2s; }
+.faq-item.open .faq-q::after { content: '−'; }
+.faq-a { font-size: 12px; color: rgba(255,255,255,.4); line-height: 1.6; margin-top: 8px; display: none; }
+.faq-item.open .faq-a { display: block; }
 
 /* EMAIL */
-.email-line {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 13px;
-  color: rgba(255,255,255,.3);
-  margin-bottom: 8px;
-}
-.email-line a {
-  color: rgba(255,255,255,.55);
-  text-decoration: none;
-  transition: color .15s;
-}
+.email-line { display: flex; align-items: center; gap: 8px; font-size: 13px; color: rgba(255,255,255,.3); margin-bottom: 8px; }
+.email-line a { color: rgba(255,255,255,.55); text-decoration: none; transition: color .15s; }
 .email-line a:hover { color: #fff; }
 
 /* FOOTER */
-.footer {
-  position: fixed;
-  bottom: 0;
-  left: 0; right: 0;
-  background: rgba(13,27,42,.95);
-  backdrop-filter: blur(8px);
-  border-top: 1px solid rgba(255,255,255,.06);
-  padding: 12px 24px;
-  font-size: 11px;
-  color: rgba(255,255,255,.2);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 8px;
-}
+.footer { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(13,27,42,.95); backdrop-filter: blur(8px); border-top: 1px solid rgba(255,255,255,.06); padding: 12px 24px; font-size: 11px; color: rgba(255,255,255,.2); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
 .footer-links { display: flex; gap: 16px; }
-.footer-links a {
-  color: rgba(255,255,255,.3);
-  text-decoration: none;
-  transition: color .15s;
-}
+.footer-links a { color: rgba(255,255,255,.3); text-decoration: none; transition: color .15s; }
 .footer-links a:hover { color: rgba(255,255,255,.7); }
 
 @media (max-width: 560px) {
-  .hero h1        { font-size: 28px; }
-  .features       { grid-template-columns: repeat(3, 1fr); gap: 8px; }
-  .feat           { padding: 12px 8px; }
-  .feat-icon      { font-size: 20px; }
-  .feat-title     { font-size: 11px; }
-  .feat-desc      { display: none; }
-  .bot-btn        { font-size: 15px; padding: 15px 24px; }
-  .footer         { justify-content: center; text-align: center; }
+  .hero h1 { font-size: 27px; }
+  .features, .steps { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .feat { padding: 10px 6px; } .feat-desc { display: none; }
+  .bot-btn { font-size: 15px; padding: 15px 22px; }
+  .footer { justify-content: center; text-align: center; }
 }
   </style>
 </head>
@@ -313,24 +227,21 @@ body {
 
 <div class="langs">
   <button class="lang-btn active" onclick="setLang('ru')">RU</button>
-  <button class="lang-btn" onclick="setLang('en')">EN</button>
-  <button class="lang-btn" onclick="setLang('he')">HE</button>
+  <button class="lang-btn" onclick="location.href='/en/'">EN</button>
+  <button class="lang-btn" onclick="location.href='/he/'">HE</button>
 </div>
 
-<!-- LOGO -->
 <div class="logo">
   <div class="logo-mark">FF</div>
   <div class="logo-name">Flat<span>Finder</span>IL</div>
   <div class="logo-sub" data-i="sub">Недвижимость Израиля</div>
 </div>
 
-<!-- HERO -->
 <div class="hero">
   <h1 data-i="h1">Найди квартиру в <em>Израиле</em> за 2 минуты</h1>
-  <p data-i="p">Умный Telegram-бот ищет аренду и продажу квартир по 23 городам. Фильтр по цене, комнатам и району — сразу в мессенджере.</p>
+  <p data-i="p">Умный Telegram-бот ищет аренду и продажу квартир по 23 городам Израиля. Фильтр по цене, комнатам и району — сразу в мессенджере. Подходит для репатриантов, иностранцев и местных.</p>
 </div>
 
-<!-- FEATURES -->
 <div class="features">
   <div class="feat">
     <div class="feat-icon">🔍</div>
@@ -349,35 +260,69 @@ body {
   </div>
 </div>
 
-<!-- CTA -->
 <div class="cta-wrap">
   <a href="https://t.me/flatfinderil_bot" target="_blank" class="bot-btn">
-    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M22 2L11 13" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
+    <svg viewBox="0 0 24 24" fill="none"><path d="M22 2L11 13" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
     <span data-i="btn">Открыть бот @flatfinderil_bot</span>
   </a>
   <div class="cta-hint" data-i="hint">Бесплатно · Telegram · Без регистрации</div>
 </div>
 
-<!-- CITIES -->
 <div class="cities-block">
-  <div class="cities-label" data-i="cities_lbl">Доступные города</div>
+  <div class="cities-label" data-i="cities_lbl">Поиск квартир в городах</div>
   <div class="cities" id="cityList"></div>
 </div>
 
-<!-- EMAIL -->
+<!-- КАК ЭТО РАБОТАЕТ -->
+<div class="how">
+  <h2 data-i="how_lbl">Как это работает</h2>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-text" data-i="s1">Открой бот в Telegram</div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-text" data-i="s2">Выбери город, цену и количество комнат</div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-text" data-i="s3">Получи актуальные объявления мгновенно</div>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ -->
+<div class="faq">
+  <h2 data-i="faq_lbl">Частые вопросы</h2>
+  <div class="faq-item" onclick="this.classList.toggle('open')">
+    <div class="faq-q" data-i="q1">Как найти квартиру в аренду в Израиле?</div>
+    <div class="faq-a" data-i="a1">Откройте Telegram-бот @flatfinderil_bot, выберите город и укажите параметры: цена, количество комнат, тип сделки. Бот мгновенно покажет актуальные объявления.</div>
+  </div>
+  <div class="faq-item" onclick="this.classList.toggle('open')">
+    <div class="faq-q" data-i="q2">В каких городах работает поиск?</div>
+    <div class="faq-a" data-i="a2">23 города: Тель-Авив, Иерусалим, Хайфа, Беэр-Шева, Нетания, Ашдод, Ришон-ле-Цион, Петах-Тиква, Холон, Бат-Ям, Герцлия, Рамат-Ган, Реховот, Ашкелон, Эйлат, Нацрат-Илит, Кфар-Саба, Раанана, Модиин, Беней-Брак, Лод, Рамла, Акко.</div>
+  </div>
+  <div class="faq-item" onclick="this.classList.toggle('open')">
+    <div class="faq-q" data-i="q3">Это бесплатно?</div>
+    <div class="faq-a" data-i="a3">Да, базовый поиск полностью бесплатный. Расширенные функции и уведомления о новых объявлениях доступны по подписке.</div>
+  </div>
+  <div class="faq-item" onclick="this.classList.toggle('open')">
+    <div class="faq-q" data-i="q4">Подходит ли бот для новых репатриантов?</div>
+    <div class="faq-a" data-i="a4">Да, FlatFinderIL создан в том числе для репатриантов. Бот работает на русском языке и включает информацию о субсидиях и льготных программах для новых олим.</div>
+  </div>
+  <div class="faq-item" onclick="this.classList.toggle('open')">
+    <div class="faq-q" data-i="q5">Можно ли подать объявление о продаже или аренде?</div>
+    <div class="faq-a" data-i="a5">Да, через бот можно разместить объявление о сдаче или продаже недвижимости. Объявление сразу увидят тысячи потенциальных покупателей и арендаторов.</div>
+  </div>
+</div>
+
 <div class="email-line">
-  <svg viewBox="0 0 24 24" fill="none" width="14" height="14">
-    <rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" stroke-width="2"/>
-    <path d="M2 7l10 7 10-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-  </svg>
+  <svg viewBox="0 0 24 24" fill="none" width="14" height="14"><rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" stroke-width="2"/><path d="M2 7l10 7 10-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
   <span data-i="contact">Связаться:</span>
   <a href="mailto:info@flatfinderil.com">info@flatfinderil.com</a>
 </div>
 
-<!-- FOOTER -->
 <div class="footer">
   <span>© 2026 FlatFinderIL</span>
   <div class="footer-links">
@@ -389,77 +334,52 @@ body {
 <script>
 const CITIES = {
   ru: ['Тель-Авив','Иерусалим','Хайфа','Беэр-Шева','Нетания','Ашдод','Ришон-ле-Цион','Петах-Тиква','Холон','Бат-Ям','Герцлия','Рамат-Ган','Реховот','Ашкелон','Эйлат','Нацрат-Илит','Кфар-Саба','Раанана','Модиин','Беней-Брак','Лод','Рамла','Акко'],
-  en: ['Tel Aviv','Jerusalem','Haifa','Beer Sheva','Netanya','Ashdod','Rishon LeZion','Petah Tikva','Holon','Bat Yam','Herzliya','Ramat Gan','Rehovot','Ashkelon','Eilat','Nazareth Illit','Kfar Saba','Ra\'anana','Modi\'in','Bnei Brak','Lod','Ramla','Acre'],
-  he: ['תל אביב','ירושלים','חיפה','באר שבע','נתניה','אשדוד','ראשון לציון','פתח תקווה','חולון','בת ים','הרצליה','רמת גן','רחובות','אשקלון','אילת','נצרת עילית','כפר סבא','רעננה','מודיעין','בני ברק','לוד','רמלה','עכו'],
 };
-
 const T = {
   ru: {
     sub:'Недвижимость Израиля',
     h1:'Найди квартиру в <em>Израиле</em> за 2 минуты',
-    p:'Умный Telegram-бот ищет аренду и продажу квартир по 23 городам. Фильтр по цене, комнатам и району — сразу в мессенджере.',
+    p:'Умный Telegram-бот ищет аренду и продажу квартир по 23 городам Израиля. Фильтр по цене, комнатам и району — сразу в мессенджере. Подходит для репатриантов, иностранцев и местных.',
     f1t:'Умный поиск', f1d:'Фильтр по цене, комнатам, городу',
-    f2t:'23 города',   f2d:'Север, Центр и Юг Израиля',
-    f3t:'Мгновенно',  f3d:'Свежие объявления в реальном времени',
+    f2t:'23 города', f2d:'Север, Центр и Юг Израиля',
+    f3t:'Мгновенно', f3d:'Свежие объявления в реальном времени',
     btn:'Открыть бот @flatfinderil_bot',
     hint:'Бесплатно · Telegram · Без регистрации',
-    cities_lbl:'Доступные города',
+    cities_lbl:'Поиск квартир в городах',
+    how_lbl:'Как это работает',
+    s1:'Открой бот в Telegram',
+    s2:'Выбери город, цену и количество комнат',
+    s3:'Получи актуальные объявления мгновенно',
+    faq_lbl:'Частые вопросы',
+    q1:'Как найти квартиру в аренду в Израиле?',
+    a1:'Откройте Telegram-бот @flatfinderil_bot, выберите город и укажите параметры: цена, количество комнат, тип сделки. Бот мгновенно покажет актуальные объявления.',
+    q2:'В каких городах работает поиск?',
+    a2:'23 города: Тель-Авив, Иерусалим, Хайфа, Беэр-Шева, Нетания, Ашдод, Ришон-ле-Цион, Петах-Тиква, Холон, Бат-Ям, Герцлия, Рамат-Ган, Реховот, Ашкелон, Эйлат, Нацрат-Илит, Кфар-Саба, Раанана, Модиин, Беней-Брак, Лод, Рамла, Акко.',
+    q3:'Это бесплатно?',
+    a3:'Да, базовый поиск полностью бесплатный. Расширенные функции и уведомления о новых объявлениях доступны по подписке.',
+    q4:'Подходит ли бот для новых репатриантов?',
+    a4:'Да, FlatFinderIL создан в том числе для репатриантов. Бот работает на русском языке и включает информацию о субсидиях и льготных программах для новых олим.',
+    q5:'Можно ли подать объявление о продаже или аренде?',
+    a5:'Да, через бот можно разместить объявление. Объявление сразу увидят тысячи потенциальных покупателей и арендаторов.',
     contact:'Связаться:',
     tos:'Правила пользования',
     privacy:'Политика конфиденциальности',
-  },
-  en: {
-    sub:'Israel Real Estate',
-    h1:'Find an apartment in <em>Israel</em> in 2 minutes',
-    p:'Smart Telegram bot searches rentals and sales across 23 cities. Filter by price, rooms and neighbourhood — right in your messenger.',
-    f1t:'Smart Search', f1d:'Filter by price, rooms, city',
-    f2t:'23 Cities',    f2d:'North, Center and South',
-    f3t:'Instant',      f3d:'Fresh listings in real time',
-    btn:'Open bot @flatfinderil_bot',
-    hint:'Free · Telegram · No sign-up',
-    cities_lbl:'Available cities',
-    contact:'Contact:',
-    tos:'Terms of Use',
-    privacy:'Privacy Policy',
-  },
-  he: {
-    sub:'נדל"ן בישראל',
-    h1:'מצא דירה ב<em>ישראל</em> תוך 2 דקות',
-    p:'בוט טלגרם חכם מחפש השכרה ומכירה ב-23 ערים. סינון לפי מחיר, חדרים ושכונה — ישירות במסנג\'ר.',
-    f1t:'חיפוש חכם', f1d:'סינון לפי מחיר, חדרים, עיר',
-    f2t:'23 ערים',   f2d:'צפון, מרכז ודרום ישראל',
-    f3t:'מיידי',     f3d:'מודעות חדשות בזמן אמת',
-    btn:'פתח בוט @flatfinderil_bot',
-    hint:'חינם · Telegram · ללא הרשמה',
-    cities_lbl:'ערים זמינות',
-    contact:'צור קשר:',
-    tos:'תנאי שימוש',
-    privacy:'מדיניות פרטיות',
-  },
+  }
 };
-
-let currentLang = 'ru';
-
 function renderCities(l) {
   const list = document.getElementById('cityList');
-  list.innerHTML = CITIES[l].map(c => `<span class="city-tag">${c}</span>`).join('');
+  list.innerHTML = (CITIES[l]||CITIES.ru).map(c=>`<span class="city-tag">${c}</span>`).join('');
 }
-
 function setLang(l) {
-  currentLang = l;
-  const t = T[l];
-  document.querySelectorAll('[data-i]').forEach(el => {
-    const k = el.getAttribute('data-i');
-    if (t[k] !== undefined) el.innerHTML = t[k];
+  const t = T[l]||T.ru;
+  document.querySelectorAll('[data-i]').forEach(el=>{
+    const k=el.getAttribute('data-i');
+    if(t[k]!==undefined) el.innerHTML=t[k];
   });
-  document.querySelectorAll('.lang-btn').forEach(b =>
-    b.classList.toggle('active', b.textContent === l.toUpperCase())
-  );
-  document.documentElement.lang = l;
-  document.body.style.direction = l === 'he' ? 'rtl' : 'ltr';
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.textContent===l.toUpperCase()));
+  document.documentElement.lang=l;
   renderCities(l);
 }
-
 setLang('ru');
 </script>
 </body>
