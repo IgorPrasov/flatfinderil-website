@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
 
   <!-- SEO -->
-  <title>FlatFinderIL — Недвижимость Израиля | Скоро открытие</title>
-  <meta name="description" content="FlatFinderIL — информационный портал о рынке недвижимости Израиля. Новости, аналитика, новые проекты, ипотека и государственные программы. Север, Центр, Юг.">
-  <meta name="keywords" content="недвижимость Израиль, купить квартиру Израиль, аренда квартира Израиль, ипотека Израиль, новостройки Израиль, мачир лемиштакен, נדל"ן ישראל, דירות למכירה">
+  <title>FlatFinderIL — Найти квартиру в Израиле | Аренда и продажа</title>
+  <meta name="description" content="FlatFinderIL — умный поиск недвижимости в Израиле через Telegram-бот. Аренда и покупка квартир в Тель-Авиве, Хайфе, Иерусалиме и 20+ городах. Бесплатно.">
+  <meta name="keywords" content="недвижимость Израиль, аренда квартира Израиль, купить квартиру Израиль, Тель-Авив аренда, Хайфа квартира, Иерусалим недвижимость, найти квартиру Израиль, новостройки Израиль, ипотека Израиль, מצא דירה ישראל, דירות להשכרה, דירות למכירה">
   <meta name="robots" content="index, follow">
   <meta name="author" content="FlatFinderIL">
   <link rel="canonical" href="https://flatfinderil.com/">
@@ -18,16 +18,16 @@
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://flatfinderil.com/">
-  <meta property="og:title" content="FlatFinderIL — Недвижимость Израиля">
-  <meta property="og:description" content="Информационный портал о рынке недвижимости Израиля. Новости, аналитика, проекты, ипотека и государственные программы.">
+  <meta property="og:title" content="FlatFinderIL — Найти квартиру в Израиле">
+  <meta property="og:description" content="Умный Telegram-бот для поиска недвижимости в Израиле. Аренда и покупка квартир в 23 городах. Бесплатно.">
   <meta property="og:image" content="https://flatfinderil.com/og-image.png">
   <meta property="og:locale" content="ru_RU">
   <meta property="og:site_name" content="FlatFinderIL">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="FlatFinderIL — Недвижимость Израиля">
-  <meta name="twitter:description" content="Информационный портал о рынке недвижимости Израиля.">
+  <meta name="twitter:title" content="FlatFinderIL — Найти квартиру в Израиле">
+  <meta name="twitter:description" content="Умный Telegram-бот для поиска недвижимости в Израиле. 23 города. Бесплатно.">
   <meta name="twitter:image" content="https://flatfinderil.com/og-image.png">
 
   <!-- Structured Data -->
@@ -37,7 +37,7 @@
     "@type": "WebSite",
     "name": "FlatFinderIL",
     "url": "https://flatfinderil.com",
-    "description": "Информационный портал о рынке недвижимости Израиля",
+    "description": "Умный поиск недвижимости в Израиле через Telegram-бот. Аренда и покупка квартир в 23 городах.",
     "inLanguage": ["ru", "en", "he"],
     "potentialAction": {
       "@type": "SearchAction",
@@ -46,265 +46,410 @@
     }
   }
   </script>
+
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-    body {
-      font-family: 'Segoe UI', Arial, sans-serif;
-      background: #0d1b2a;
-      color: #fff;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 36px;
-      padding: 32px;
-    }
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: #0d1b2a;
+  color: #fff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 48px 24px 100px;
+}
 
-    /* LANG SWITCHER */
-    .langs {
-      position: fixed;
-      top: 20px;
-      right: 24px;
-      display: flex;
-      gap: 6px;
-    }
-    .lang-btn {
-      background: transparent;
-      border: 1px solid rgba(255,255,255,.2);
-      color: rgba(255,255,255,.5);
-      font-size: 11px;
-      font-weight: 600;
-      padding: 4px 9px;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: .15s;
-      font-family: inherit;
-      letter-spacing: .5px;
-    }
-    .lang-btn:hover, .lang-btn.active {
-      background: #1a73e8;
-      border-color: #1a73e8;
-      color: #fff;
-    }
+/* LANG */
+.langs {
+  position: fixed;
+  top: 18px;
+  right: 20px;
+  display: flex;
+  gap: 5px;
+  z-index: 100;
+}
+.lang-btn {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,.2);
+  color: rgba(255,255,255,.5);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 9px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: .15s;
+  font-family: inherit;
+}
+.lang-btn:hover, .lang-btn.active {
+  background: #1a73e8;
+  border-color: #1a73e8;
+  color: #fff;
+}
 
-    /* LOGO */
-    .logo {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 16px;
-    }
-    .logo-mark {
-      width: 80px;
-      height: 80px;
-      background: #1a73e8;
-      border-radius: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 26px;
-      font-weight: 800;
-      color: #fff;
-      letter-spacing: -1px;
-      box-shadow: 0 8px 32px rgba(26,115,232,.45);
-    }
-    .logo-name {
-      font-size: 32px;
-      font-weight: 700;
-      color: #fff;
-      letter-spacing: -0.5px;
-    }
-    .logo-name span { color: #1a73e8; }
-    .logo-sub {
-      font-size: 12px;
-      color: rgba(255,255,255,.35);
-      letter-spacing: 1.8px;
-      text-transform: uppercase;
-      margin-top: -4px;
-    }
+/* LOGO */
+.logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 32px;
+  margin-top: 16px;
+}
+.logo-mark {
+  width: 72px;
+  height: 72px;
+  background: #1a73e8;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -1px;
+  box-shadow: 0 8px 32px rgba(26,115,232,.5);
+}
+.logo-name {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+.logo-name span { color: #1a73e8; }
+.logo-sub {
+  font-size: 11px;
+  color: rgba(255,255,255,.3);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
 
-    /* TAGLINE */
-    .tagline { text-align: center; }
-    .tagline h1 {
-      font-size: 42px;
-      font-weight: 800;
-      letter-spacing: -1px;
-      line-height: 1.15;
-    }
-    .tagline p {
-      margin-top: 12px;
-      font-size: 15px;
-      color: rgba(255,255,255,.45);
-    }
+/* HERO */
+.hero {
+  text-align: center;
+  max-width: 600px;
+  margin-bottom: 40px;
+}
+.hero h1 {
+  font-size: 38px;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -1px;
+  margin-bottom: 16px;
+}
+.hero h1 em {
+  font-style: normal;
+  color: #1a73e8;
+}
+.hero p {
+  font-size: 16px;
+  color: rgba(255,255,255,.5);
+  line-height: 1.6;
+  max-width: 480px;
+  margin: 0 auto;
+}
 
-    /* ACTIONS */
-    .actions {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 14px;
-    }
+/* FEATURES */
+.features {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  max-width: 600px;
+  width: 100%;
+  margin-bottom: 40px;
+}
+.feat {
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 12px;
+  padding: 16px;
+  text-align: center;
+}
+.feat-icon {
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+.feat-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 4px;
+}
+.feat-desc {
+  font-size: 11px;
+  color: rgba(255,255,255,.4);
+  line-height: 1.5;
+}
 
-    /* BOT BUTTON */
-    .bot-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      background: #1a73e8;
-      color: #fff;
-      text-decoration: none;
-      padding: 16px 32px;
-      border-radius: 12px;
-      font-size: 16px;
-      font-weight: 600;
-      transition: background .2s, transform .15s, box-shadow .2s;
-      box-shadow: 0 4px 20px rgba(26,115,232,.4);
-      white-space: nowrap;
-    }
-    .bot-btn:hover {
-      background: #0d5cc7;
-      transform: translateY(-2px);
-      box-shadow: 0 8px 28px rgba(26,115,232,.5);
-    }
-    .bot-btn svg {
-      width: 22px;
-      height: 22px;
-      flex-shrink: 0;
-    }
+/* CTA */
+.cta-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 40px;
+}
+.bot-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: #1a73e8;
+  color: #fff;
+  text-decoration: none;
+  padding: 18px 36px;
+  border-radius: 14px;
+  font-size: 17px;
+  font-weight: 700;
+  transition: background .2s, transform .15s, box-shadow .2s;
+  box-shadow: 0 4px 24px rgba(26,115,232,.5);
+  white-space: nowrap;
+}
+.bot-btn:hover {
+  background: #0d5cc7;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(26,115,232,.6);
+}
+.bot-btn svg { width: 22px; height: 22px; flex-shrink: 0; }
+.cta-hint {
+  font-size: 12px;
+  color: rgba(255,255,255,.3);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.cta-hint::before { content: '✓'; color: #1e7e50; font-weight: 700; }
 
-    /* EMAIL */
-    .email-line {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 14px;
-      color: rgba(255,255,255,.4);
-    }
-    .email-line a {
-      color: rgba(255,255,255,.65);
-      text-decoration: none;
-      transition: color .15s;
-    }
-    .email-line a:hover { color: #fff; }
-    .email-line svg {
-      width: 15px;
-      height: 15px;
-      opacity: .4;
-      flex-shrink: 0;
-    }
+/* CITIES */
+.cities-block {
+  max-width: 600px;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 40px;
+}
+.cities-label {
+  font-size: 11px;
+  color: rgba(255,255,255,.3);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.cities {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  justify-content: center;
+}
+.city-tag {
+  background: rgba(255,255,255,.07);
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 12px;
+  color: rgba(255,255,255,.55);
+}
 
-    /* FOOTER */
-    .footer {
-      position: fixed;
-      bottom: 20px;
-      font-size: 11px;
-      color: rgba(255,255,255,.18);
-      letter-spacing: .3px;
-    }
+/* EMAIL */
+.email-line {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: rgba(255,255,255,.3);
+  margin-bottom: 8px;
+}
+.email-line a {
+  color: rgba(255,255,255,.55);
+  text-decoration: none;
+  transition: color .15s;
+}
+.email-line a:hover { color: #fff; }
 
-    @media (max-width: 480px) {
-      .tagline h1  { font-size: 30px; }
-      .logo-name   { font-size: 26px; }
-      .logo-mark   { width: 64px; height: 64px; font-size: 20px; }
-      .bot-btn     { font-size: 14px; padding: 14px 24px; }
-    }
+/* FOOTER */
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0; right: 0;
+  background: rgba(13,27,42,.95);
+  backdrop-filter: blur(8px);
+  border-top: 1px solid rgba(255,255,255,.06);
+  padding: 12px 24px;
+  font-size: 11px;
+  color: rgba(255,255,255,.2);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.footer-links { display: flex; gap: 16px; }
+.footer-links a {
+  color: rgba(255,255,255,.3);
+  text-decoration: none;
+  transition: color .15s;
+}
+.footer-links a:hover { color: rgba(255,255,255,.7); }
+
+@media (max-width: 560px) {
+  .hero h1        { font-size: 28px; }
+  .features       { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .feat           { padding: 12px 8px; }
+  .feat-icon      { font-size: 20px; }
+  .feat-title     { font-size: 11px; }
+  .feat-desc      { display: none; }
+  .bot-btn        { font-size: 15px; padding: 15px 24px; }
+  .footer         { justify-content: center; text-align: center; }
+}
   </style>
 </head>
 <body>
 
-  <!-- LANG -->
-  <div class="langs">
-    <button class="lang-btn active" onclick="setLang('ru')">RU</button>
-    <button class="lang-btn" onclick="setLang('en')">EN</button>
-    <button class="lang-btn" onclick="setLang('he')">HE</button>
-  </div>
+<div class="langs">
+  <button class="lang-btn active" onclick="setLang('ru')">RU</button>
+  <button class="lang-btn" onclick="setLang('en')">EN</button>
+  <button class="lang-btn" onclick="setLang('he')">HE</button>
+</div>
 
-  <!-- LOGO -->
-  <div class="logo">
-    <div class="logo-mark">FF</div>
-    <div class="logo-name">Flat<span>Finder</span>IL</div>
-    <div class="logo-sub" data-i="sub">Недвижимость Израиля</div>
-  </div>
+<!-- LOGO -->
+<div class="logo">
+  <div class="logo-mark">FF</div>
+  <div class="logo-name">Flat<span>Finder</span>IL</div>
+  <div class="logo-sub" data-i="sub">Недвижимость Израиля</div>
+</div>
 
-  <!-- TAGLINE -->
-  <div class="tagline">
-    <h1 data-i="h1">Скоро открытие</h1>
-    <p data-i="p">Портал о рынке недвижимости Израиля — уже совсем скоро</p>
-  </div>
+<!-- HERO -->
+<div class="hero">
+  <h1 data-i="h1">Найди квартиру в <em>Израиле</em> за 2 минуты</h1>
+  <p data-i="p">Умный Telegram-бот ищет аренду и продажу квартир по 23 городам. Фильтр по цене, комнатам и району — сразу в мессенджере.</p>
+</div>
 
-  <!-- ACTIONS -->
-  <div class="actions">
-    <a href="https://t.me/flatfinderil_bot" target="_blank" class="bot-btn">
-      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M22 2L11 13" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-      <span data-i="btn">Открыть бот @flatfinderil_bot</span>
-    </a>
-
-    <div class="email-line">
-      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" stroke-width="2"/>
-        <path d="M2 7l10 7 10-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-      </svg>
-      <span data-i="contact">Связаться:</span>
-      <a href="mailto:info@flatfinderil.com">info@flatfinderil.com</a>
-    </div>
+<!-- FEATURES -->
+<div class="features">
+  <div class="feat">
+    <div class="feat-icon">🔍</div>
+    <div class="feat-title" data-i="f1t">Умный поиск</div>
+    <div class="feat-desc" data-i="f1d">Фильтр по цене, комнатам, городу</div>
   </div>
-
-  <div class="footer">
-    <div>© 2026 FlatFinderIL · flatfinderil.com</div>
-    <div style="margin-top:6px;display:flex;gap:16px;justify-content:center">
-      <a href="/terms.html" data-i="tos" style="color:rgba(255,255,255,.35);text-decoration:none;transition:.15s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.35)'">Правила пользования</a>
-      <span style="color:rgba(255,255,255,.15)">·</span>
-      <a href="/privacy.html" data-i="privacy" style="color:rgba(255,255,255,.35);text-decoration:none;transition:.15s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.35)'">Политика конфиденциальности</a>
-    </div>
+  <div class="feat">
+    <div class="feat-icon">🏙️</div>
+    <div class="feat-title" data-i="f2t">23 города</div>
+    <div class="feat-desc" data-i="f2d">Север, Центр и Юг Израиля</div>
   </div>
+  <div class="feat">
+    <div class="feat-icon">⚡</div>
+    <div class="feat-title" data-i="f3t">Мгновенно</div>
+    <div class="feat-desc" data-i="f3d">Свежие объявления в реальном времени</div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-wrap">
+  <a href="https://t.me/flatfinderil_bot" target="_blank" class="bot-btn">
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M22 2L11 13" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <span data-i="btn">Открыть бот @flatfinderil_bot</span>
+  </a>
+  <div class="cta-hint" data-i="hint">Бесплатно · Telegram · Без регистрации</div>
+</div>
+
+<!-- CITIES -->
+<div class="cities-block">
+  <div class="cities-label" data-i="cities_lbl">Доступные города</div>
+  <div class="cities" id="cityList"></div>
+</div>
+
+<!-- EMAIL -->
+<div class="email-line">
+  <svg viewBox="0 0 24 24" fill="none" width="14" height="14">
+    <rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" stroke-width="2"/>
+    <path d="M2 7l10 7 10-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+  </svg>
+  <span data-i="contact">Связаться:</span>
+  <a href="mailto:info@flatfinderil.com">info@flatfinderil.com</a>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <span>© 2026 FlatFinderIL</span>
+  <div class="footer-links">
+    <a href="/terms.html" data-i="tos">Правила пользования</a>
+    <a href="/privacy.html" data-i="privacy">Политика конфиденциальности</a>
+  </div>
+</div>
 
 <script>
-const T = {
-  ru: {
-    sub:     "Недвижимость Израиля",
-    h1:      "Скоро открытие",
-    p:       "Портал о рынке недвижимости Израиля — уже совсем скоро",
-    btn:     "Открыть бот @flatfinderil_bot",
-    contact: "Связаться:",
-    tos:     "Правила пользования",
-    privacy: "Политика конфиденциальности",
-  },
-  en: {
-    sub:     "Israel Real Estate",
-    h1:      "Coming Soon",
-    p:       "Israel real estate portal — launching very soon",
-    btn:     "Open bot @flatfinderil_bot",
-    contact: "Contact us:",
-    tos:     "Terms of Use",
-    privacy: "Privacy Policy",
-  },
-  he: {
-    sub:     "נדל\"ן בישראל",
-    h1:      "בקרוב",
-    p:       "פורטל הנדל\"ן של ישראל — כבר בקרוב",
-    btn:     "פתח בוט @flatfinderil_bot",
-    contact: "צור קשר:",
-    tos:     "תנאי שימוש",
-    privacy: "מדיניות פרטיות",
-  }
+const CITIES = {
+  ru: ['Тель-Авив','Иерусалим','Хайфа','Беэр-Шева','Нетания','Ашдод','Ришон-ле-Цион','Петах-Тиква','Холон','Бат-Ям','Герцлия','Рамат-Ган','Реховот','Ашкелон','Эйлат','Нацрат-Илит','Кфар-Саба','Раанана','Модиин','Беней-Брак','Лод','Рамла','Акко'],
+  en: ['Tel Aviv','Jerusalem','Haifa','Beer Sheva','Netanya','Ashdod','Rishon LeZion','Petah Tikva','Holon','Bat Yam','Herzliya','Ramat Gan','Rehovot','Ashkelon','Eilat','Nazareth Illit','Kfar Saba','Ra\'anana','Modi\'in','Bnei Brak','Lod','Ramla','Acre'],
+  he: ['תל אביב','ירושלים','חיפה','באר שבע','נתניה','אשדוד','ראשון לציון','פתח תקווה','חולון','בת ים','הרצליה','רמת גן','רחובות','אשקלון','אילת','נצרת עילית','כפר סבא','רעננה','מודיעין','בני ברק','לוד','רמלה','עכו'],
 };
 
+const T = {
+  ru: {
+    sub:'Недвижимость Израиля',
+    h1:'Найди квартиру в <em>Израиле</em> за 2 минуты',
+    p:'Умный Telegram-бот ищет аренду и продажу квартир по 23 городам. Фильтр по цене, комнатам и району — сразу в мессенджере.',
+    f1t:'Умный поиск', f1d:'Фильтр по цене, комнатам, городу',
+    f2t:'23 города',   f2d:'Север, Центр и Юг Израиля',
+    f3t:'Мгновенно',  f3d:'Свежие объявления в реальном времени',
+    btn:'Открыть бот @flatfinderil_bot',
+    hint:'Бесплатно · Telegram · Без регистрации',
+    cities_lbl:'Доступные города',
+    contact:'Связаться:',
+    tos:'Правила пользования',
+    privacy:'Политика конфиденциальности',
+  },
+  en: {
+    sub:'Israel Real Estate',
+    h1:'Find an apartment in <em>Israel</em> in 2 minutes',
+    p:'Smart Telegram bot searches rentals and sales across 23 cities. Filter by price, rooms and neighbourhood — right in your messenger.',
+    f1t:'Smart Search', f1d:'Filter by price, rooms, city',
+    f2t:'23 Cities',    f2d:'North, Center and South',
+    f3t:'Instant',      f3d:'Fresh listings in real time',
+    btn:'Open bot @flatfinderil_bot',
+    hint:'Free · Telegram · No sign-up',
+    cities_lbl:'Available cities',
+    contact:'Contact:',
+    tos:'Terms of Use',
+    privacy:'Privacy Policy',
+  },
+  he: {
+    sub:'נדל"ן בישראל',
+    h1:'מצא דירה ב<em>ישראל</em> תוך 2 דקות',
+    p:'בוט טלגרם חכם מחפש השכרה ומכירה ב-23 ערים. סינון לפי מחיר, חדרים ושכונה — ישירות במסנג\'ר.',
+    f1t:'חיפוש חכם', f1d:'סינון לפי מחיר, חדרים, עיר',
+    f2t:'23 ערים',   f2d:'צפון, מרכז ודרום ישראל',
+    f3t:'מיידי',     f3d:'מודעות חדשות בזמן אמת',
+    btn:'פתח בוט @flatfinderil_bot',
+    hint:'חינם · Telegram · ללא הרשמה',
+    cities_lbl:'ערים זמינות',
+    contact:'צור קשר:',
+    tos:'תנאי שימוש',
+    privacy:'מדיניות פרטיות',
+  },
+};
+
+let currentLang = 'ru';
+
+function renderCities(l) {
+  const list = document.getElementById('cityList');
+  list.innerHTML = CITIES[l].map(c => `<span class="city-tag">${c}</span>`).join('');
+}
+
 function setLang(l) {
+  currentLang = l;
   const t = T[l];
   document.querySelectorAll('[data-i]').forEach(el => {
     const k = el.getAttribute('data-i');
-    if (t[k] !== undefined) el.textContent = t[k];
+    if (t[k] !== undefined) el.innerHTML = t[k];
   });
   document.querySelectorAll('.lang-btn').forEach(b =>
     b.classList.toggle('active', b.textContent === l.toUpperCase())
   );
   document.documentElement.lang = l;
   document.body.style.direction = l === 'he' ? 'rtl' : 'ltr';
+  renderCities(l);
 }
 
 setLang('ru');
