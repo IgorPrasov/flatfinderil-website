@@ -361,7 +361,8 @@ function setLang(l) {
     if(t[k] !== undefined) el.innerHTML = t[k];
   });
 }
-setLang('ru');
+const _urlLang = new URLSearchParams(location.search).get('lang');
+setLang(_urlLang && T[_urlLang] ? _urlLang : 'ru');
 </script>
 </body>
 </html>

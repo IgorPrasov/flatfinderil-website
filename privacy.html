@@ -253,7 +253,8 @@ function setLang(l) {
   document.documentElement.lang = l;
   document.body.style.direction = l === 'he' ? 'rtl' : 'ltr';
 }
-setLang('ru');
+const _urlLang = new URLSearchParams(location.search).get('lang');
+setLang(_urlLang && T[_urlLang] ? _urlLang : 'ru');
 </script>
 </body>
 </html>
