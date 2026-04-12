@@ -1213,12 +1213,7 @@ function toBotLink() { window.open('https://t.me/flatfinderil_bot','_blank'); }
 function scrollTo(id) { document.getElementById(id)?.scrollIntoView({behavior:'smooth'}); }
 
 // ── Live News Loader ──────────────────────────────────────────────────────────
-// Fetches RSS directly in the browser (Times of Israel has CORS open)
-
-const RSS_FEEDS = [
-  { url: 'https://www.timesofisrael.com/topic/real-estate/feed/', name: 'Times of Israel', lang: 'en' },
-  { url: 'https://www.timesofisrael.com/topic/mortgages/feed/',   name: 'Times of Israel', lang: 'en' },
-];
+// Fetches news via /news (Cloudflare Pages Function — server-side, no CORS issues)
 
 const CAT_ICONS = { news:'📰', project:'🏗️', mortgage:'🏦', program:'🏛️' };
 const CAT_TAG   = { news:'tag-news', project:'tag-project', mortgage:'tag-mortgage', program:'tag-program' };
@@ -1227,52 +1222,6 @@ const CAT_LABEL = {
   en:  { news:'News',    project:'Project', mortgage:'Mortgage', program:'Program' },
   he:  { news:'חדשות',  project:'פרויקט',  mortgage:'משכנתא',  program:'תוכנית'  },
 };
-
-const _CAT_KW = {
-  mortgage: ['mortgage','interest rate','prime rate','rate cut','rate hike','loan','bank of israel','boi','refinanc'],
-  program:  ['affordable','lottery','subsidy','government program','ministry of housing','social housing','first-time buyer','mechir'],
-  project:  ['construction','developer','urban renewal','new tower','new neighborhood','building permit','pinui','new development'],
-};
-
-function _classifyItem(text) {
-  const t = text.toLowerCase();
-  for (const [cat, kws] of Object.entries(_CAT_KW))
-    if (kws.some(k => t.includes(k))) return cat;
-  return 'news';
-}
-
-function _extractLink(itemEl) {
-  // In RSS 2.0 parsed as XML, <link> text content is the URL
-  const linkEl = itemEl.getElementsByTagName('link')[0];
-  const txt = linkEl?.textContent?.trim();
-  if (txt && txt.startsWith('http')) return txt;
-  // Fallback: guid
-  const guid = itemEl.querySelector('guid')?.textContent?.trim();
-  if (guid && guid.startsWith('http')) return guid;
-  return '';
-}
-
-function _stripHtml(s) { return (s||'').replace(/<[^>]+>/g,'').trim(); }
-
-function _parseRSS(xmlText, feedName, feedLang) {
-  const xml = new DOMParser().parseFromString(xmlText, 'text/xml');
-  const items = [];
-  xml.querySelectorAll('item').forEach(el => {
-    const title = _stripHtml(el.querySelector('title')?.textContent || '');
-    const body  = _stripHtml(el.querySelector('description')?.textContent || '').substring(0, 300);
-    const url   = _extractLink(el);
-    const pub   = el.querySelector('pubDate')?.textContent?.trim() || '';
-    if (!title || !url) return;
-    items.push({
-      title, body, url,
-      date: pub ? new Date(pub).toISOString().slice(0,10) : new Date().toISOString().slice(0,10),
-      source: feedName,
-      lang: feedLang,
-      category: _classifyItem(title + ' ' + body),
-    });
-  });
-  return items;
-}
 
 function _fmtDate(dateStr) {
   if (!dateStr) return '';
@@ -1338,32 +1287,22 @@ function _renderTicker(items) {
   el.innerHTML = items.slice(0,10).map(i => i.title + ' &nbsp;•&nbsp; ').join('');
 }
 
-function _applyNewsItems(items) {
+function _applyNewsData(data) {
+  const items = data?.items || [];
   if (!items.length) return;
-  _newsCache = { items };
-  _renderTicker(items);
+  const tickerItems = data.ticker?.length ? data.ticker.map(t => ({title: t})) : items;
+  _renderTicker(tickerItems);
   _renderFeatured(items[0]);
   _renderNewsGrid(items.slice(1, 5));
 }
 
 function loadLiveNews() {
-  Promise.all(RSS_FEEDS.map(f =>
-    fetch(f.url)
-      .then(r => r.ok ? r.text() : '')
-      .then(t => t ? _parseRSS(t, f.name, f.lang) : [])
-      .catch(() => [])
-  )).then(results => {
-    const all = results.flat();
-    // Sort by date, dedupe by title prefix
-    all.sort((a,b) => b.date.localeCompare(a.date));
-    const seen = new Set();
-    const deduped = all.filter(i => {
-      const k = i.title.slice(0,50).toLowerCase();
-      if (seen.has(k)) return false;
-      seen.add(k); return true;
-    });
-    if (deduped.length) _applyNewsItems(deduped);
-  });
+  fetch('/news')
+    .then(r => r.ok ? r.json() : null)
+    .then(data => {
+      if (data?.items?.length) { _newsCache = data; _applyNewsData(data); }
+    })
+    .catch(() => {});
 }
 
 calcMort();
