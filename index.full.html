@@ -1213,7 +1213,12 @@ function toBotLink() { window.open('https://t.me/flatfinderil_bot','_blank'); }
 function scrollTo(id) { document.getElementById(id)?.scrollIntoView({behavior:'smooth'}); }
 
 // ── Live News Loader ──────────────────────────────────────────────────────────
-const NEWS_API = 'https://flatfinderil-bot-production.up.railway.app/news?limit=20';
+// Fetches RSS directly in the browser (Times of Israel has CORS open)
+
+const RSS_FEEDS = [
+  { url: 'https://www.timesofisrael.com/topic/real-estate/feed/', name: 'Times of Israel', lang: 'en' },
+  { url: 'https://www.timesofisrael.com/topic/mortgages/feed/',   name: 'Times of Israel', lang: 'en' },
+];
 
 const CAT_ICONS = { news:'📰', project:'🏗️', mortgage:'🏦', program:'🏛️' };
 const CAT_TAG   = { news:'tag-news', project:'tag-project', mortgage:'tag-mortgage', program:'tag-program' };
@@ -1222,6 +1227,52 @@ const CAT_LABEL = {
   en:  { news:'News',    project:'Project', mortgage:'Mortgage', program:'Program' },
   he:  { news:'חדשות',  project:'פרויקט',  mortgage:'משכנתא',  program:'תוכנית'  },
 };
+
+const _CAT_KW = {
+  mortgage: ['mortgage','interest rate','prime rate','rate cut','rate hike','loan','bank of israel','boi','refinanc'],
+  program:  ['affordable','lottery','subsidy','government program','ministry of housing','social housing','first-time buyer','mechir'],
+  project:  ['construction','developer','urban renewal','new tower','new neighborhood','building permit','pinui','new development'],
+};
+
+function _classifyItem(text) {
+  const t = text.toLowerCase();
+  for (const [cat, kws] of Object.entries(_CAT_KW))
+    if (kws.some(k => t.includes(k))) return cat;
+  return 'news';
+}
+
+function _extractLink(itemEl) {
+  // In RSS 2.0 parsed as XML, <link> text content is the URL
+  const linkEl = itemEl.getElementsByTagName('link')[0];
+  const txt = linkEl?.textContent?.trim();
+  if (txt && txt.startsWith('http')) return txt;
+  // Fallback: guid
+  const guid = itemEl.querySelector('guid')?.textContent?.trim();
+  if (guid && guid.startsWith('http')) return guid;
+  return '';
+}
+
+function _stripHtml(s) { return (s||'').replace(/<[^>]+>/g,'').trim(); }
+
+function _parseRSS(xmlText, feedName, feedLang) {
+  const xml = new DOMParser().parseFromString(xmlText, 'text/xml');
+  const items = [];
+  xml.querySelectorAll('item').forEach(el => {
+    const title = _stripHtml(el.querySelector('title')?.textContent || '');
+    const body  = _stripHtml(el.querySelector('description')?.textContent || '').substring(0, 300);
+    const url   = _extractLink(el);
+    const pub   = el.querySelector('pubDate')?.textContent?.trim() || '';
+    if (!title || !url) return;
+    items.push({
+      title, body, url,
+      date: pub ? new Date(pub).toISOString().slice(0,10) : new Date().toISOString().slice(0,10),
+      source: feedName,
+      lang: feedLang,
+      category: _classifyItem(title + ' ' + body),
+    });
+  });
+  return items;
+}
 
 function _fmtDate(dateStr) {
   if (!dateStr) return '';
@@ -1245,13 +1296,14 @@ function _renderFeatured(item) {
   const icon = CAT_ICONS[item.category] || '📰';
   const tagCls = CAT_TAG[item.category] || 'tag-news';
   const catLabel = (CAT_LABEL[lang] || CAT_LABEL.en)[item.category] || item.category;
-  el.onclick = () => item.url ? window.open(item.url, '_blank') : toBotLink();
+  el.onclick = () => window.open(item.url, '_blank');
+  el.style.cursor = 'pointer';
   el.innerHTML = `
     <div class="featured-img">${icon}</div>
     <div class="featured-body">
       <span class="tag ${tagCls}">${catLabel}</span>
       <h2>${item.title}</h2>
-      <p>${item.body || ''}</p>
+      <p>${item.body}</p>
       <div class="meta">
         <span class="meta-date">${_fmtDate(item.date)}</span>
         <span class="meta-src">📰 ${item.source}</span>
@@ -1266,10 +1318,11 @@ function _renderNewsGrid(items) {
   el.innerHTML = items.map(item => {
     const tagCls = CAT_TAG[item.category] || 'tag-news';
     const catLabel = (CAT_LABEL[lang] || CAT_LABEL.en)[item.category] || item.category;
-    return `<div class="card" onclick="${item.url ? `window.open('${item.url}','_blank')` : 'toBotLink()'}">
+    const safeUrl = item.url.replace(/'/g, '%27');
+    return `<div class="card" style="cursor:pointer" onclick="window.open('${safeUrl}','_blank')">
       <span class="tag ${tagCls}">${catLabel}</span>
       <h3>${item.title}</h3>
-      <p>${(item.body || '').substring(0, 160)}${item.body && item.body.length > 160 ? '…' : ''}</p>
+      <p>${item.body.substring(0,160)}${item.body.length>160?'…':''}</p>
       <div class="meta" style="margin-top:10px">
         <span class="meta-date">${_fmtDate(item.date)}</span>
         <span class="meta-src" style="font-size:11px;color:var(--text3)">📰 ${item.source}</span>
@@ -1279,33 +1332,38 @@ function _renderNewsGrid(items) {
   }).join('');
 }
 
-function _renderTicker(headlines) {
+function _renderTicker(items) {
   const el = document.getElementById('tickerText');
-  if (!el || !headlines.length) return;
-  el.innerHTML = headlines.map(h => h + ' &nbsp;•&nbsp; ').join('');
+  if (!el || !items.length) return;
+  el.innerHTML = items.slice(0,10).map(i => i.title + ' &nbsp;•&nbsp; ').join('');
 }
 
-function _applyNewsData(data) {
-  if (!data || !data.items || !data.items.length) return;
-  // For RU: prefer EN articles (more readable than Hebrew); for HE: prefer HE
-  let items = data.items;
-  const preferLang = lang === 'he' ? 'he' : 'en';
-  const preferred = items.filter(i => i.lang === preferLang);
-  const mixed = preferred.length >= 3 ? preferred : items; // fallback to all if not enough
-  if (data.ticker && data.ticker.length) _renderTicker(data.ticker);
-  _renderFeatured(mixed[0]);
-  _renderNewsGrid(mixed.slice(1, 5));
+function _applyNewsItems(items) {
+  if (!items.length) return;
+  _newsCache = { items };
+  _renderTicker(items);
+  _renderFeatured(items[0]);
+  _renderNewsGrid(items.slice(1, 5));
 }
 
 function loadLiveNews() {
-  fetch(NEWS_API)
-    .then(r => r.ok ? r.json() : null)
-    .then(data => {
-      if (!data || !data.items || !data.items.length) return;
-      _newsCache = data;
-      _applyNewsData(data);
-    })
-    .catch(() => { /* keep hardcoded fallback */ });
+  Promise.all(RSS_FEEDS.map(f =>
+    fetch(f.url)
+      .then(r => r.ok ? r.text() : '')
+      .then(t => t ? _parseRSS(t, f.name, f.lang) : [])
+      .catch(() => [])
+  )).then(results => {
+    const all = results.flat();
+    // Sort by date, dedupe by title prefix
+    all.sort((a,b) => b.date.localeCompare(a.date));
+    const seen = new Set();
+    const deduped = all.filter(i => {
+      const k = i.title.slice(0,50).toLowerCase();
+      if (seen.has(k)) return false;
+      seen.add(k); return true;
+    });
+    if (deduped.length) _applyNewsItems(deduped);
+  });
 }
 
 calcMort();
