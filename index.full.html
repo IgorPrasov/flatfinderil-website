@@ -1178,6 +1178,7 @@ const T = {
 };
 
 let lang = 'ru';
+let _newsCache = null; // cached API response
 function setLang(l) {
   lang = l;
   document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.textContent===l.toUpperCase()));
@@ -1190,6 +1191,8 @@ function setLang(l) {
   });
   const yt = { ru:'лет', en:' years', he:' שנים' }[l];
   document.getElementById('cYearsV').textContent = document.getElementById('cYears').value + yt;
+  // Re-render news cards with updated language labels/dates
+  if (_newsCache) _applyNewsData(_newsCache);
 }
 
 function calcMort() {
@@ -1282,15 +1285,25 @@ function _renderTicker(headlines) {
   el.innerHTML = headlines.map(h => h + ' &nbsp;•&nbsp; ').join('');
 }
 
+function _applyNewsData(data) {
+  if (!data || !data.items || !data.items.length) return;
+  // For RU: prefer EN articles (more readable than Hebrew); for HE: prefer HE
+  let items = data.items;
+  const preferLang = lang === 'he' ? 'he' : 'en';
+  const preferred = items.filter(i => i.lang === preferLang);
+  const mixed = preferred.length >= 3 ? preferred : items; // fallback to all if not enough
+  if (data.ticker && data.ticker.length) _renderTicker(data.ticker);
+  _renderFeatured(mixed[0]);
+  _renderNewsGrid(mixed.slice(1, 5));
+}
+
 function loadLiveNews() {
   fetch(NEWS_API)
     .then(r => r.ok ? r.json() : null)
     .then(data => {
       if (!data || !data.items || !data.items.length) return;
-      const items = data.items;
-      if (data.ticker && data.ticker.length) _renderTicker(data.ticker);
-      _renderFeatured(items[0]);
-      _renderNewsGrid(items.slice(1, 5));
+      _newsCache = data;
+      _applyNewsData(data);
     })
     .catch(() => { /* keep hardcoded fallback */ });
 }
