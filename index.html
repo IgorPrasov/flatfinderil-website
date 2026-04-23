@@ -18,6 +18,7 @@
   <link rel="alternate" hreflang="ru"        href="https://flatfinderil.com/">
   <link rel="alternate" hreflang="en"        href="https://flatfinderil.com/en/">
   <link rel="alternate" hreflang="he"        href="https://flatfinderil.com/he/">
+  <link rel="alternate" hreflang="fr"        href="https://flatfinderil.com/fr/">
   <link rel="alternate" hreflang="x-default" href="https://flatfinderil.com/">
 
   <!-- Google Search Console -->
@@ -204,9 +205,35 @@ body { font-family: 'Segoe UI', Arial, sans-serif; background: #0d1b2a; color: #
 .faq-item.open .faq-a { display: block; }
 
 /* SOCIAL */
-.social-row { display: flex; gap: 10px; align-items: center; margin-bottom: 8px; }
-.soc-btn { width: 40px; height: 40px; border-radius: 10px; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.1); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,.5); text-decoration: none; transition: background .15s, color .15s, transform .15s; }
-.soc-btn:hover { background: #1a73e8; border-color: #1a73e8; color: #fff; transform: translateY(-2px); }
+.social-row { display: flex; gap: 14px; align-items: center; margin-bottom: 8px; }
+.soc-btn { display: flex; flex-direction: column; align-items: center; gap: 5px; text-decoration: none; transition: transform .15s; }
+.soc-btn:hover { transform: translateY(-2px); }
+.soc-icon { width: 44px; height: 44px; border-radius: 12px; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.1); display: flex; align-items: center; justify-content: center; transition: background .15s, border-color .15s; }
+.soc-btn:hover .soc-icon { background: rgba(255,255,255,.15); border-color: rgba(255,255,255,.25); }
+.soc-btn.tg .soc-icon { color: #29b6f6; }
+.soc-btn.ig .soc-icon { color: #e1306c; }
+.soc-btn.em .soc-icon { color: #4caf50; }
+.soc-label { font-size: 10px; color: rgba(255,255,255,.35); letter-spacing: .3px; }
+
+/* NEWS */
+.news-section { max-width: 620px; width: 100%; margin-bottom: 36px; }
+.news-section h2 { font-size: 11px; font-weight: 700; color: rgba(255,255,255,.6); text-align: center; margin-bottom: 14px; letter-spacing: .5px; text-transform: uppercase; }
+.news-grid { display: flex; flex-direction: column; gap: 10px; }
+.news-card { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.08); border-radius: 12px; padding: 14px 16px; text-decoration: none; color: inherit; display: block; transition: background .15s, border-color .15s; }
+.news-card:hover { background: rgba(255,255,255,.09); border-color: rgba(255,255,255,.18); }
+.news-card-top { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+.news-badge { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 20px; text-transform: uppercase; letter-spacing: .4px; }
+.badge-mortgage { background: rgba(26,115,232,.25); color: #6ab0ff; }
+.badge-market   { background: rgba(76,175,80,.2);  color: #80c883; }
+.badge-new_buildings { background: rgba(255,152,0,.2); color: #ffb74d; }
+.badge-rent     { background: rgba(156,39,176,.2); color: #ce93d8; }
+.badge-news     { background: rgba(255,255,255,.1); color: rgba(255,255,255,.5); }
+.news-date { font-size: 10px; color: rgba(255,255,255,.3); margin-left: auto; }
+.news-title { font-size: 13px; font-weight: 600; color: rgba(255,255,255,.85); line-height: 1.4; margin-bottom: 4px; }
+.news-body { font-size: 11px; color: rgba(255,255,255,.4); line-height: 1.5; }
+.news-source { font-size: 10px; color: rgba(255,255,255,.25); margin-top: 6px; }
+.news-loading { text-align: center; padding: 20px; font-size: 12px; color: rgba(255,255,255,.3); }
+.news-more { display: block; text-align: center; margin-top: 12px; font-size: 12px; color: #1a73e8; cursor: pointer; background: none; border: none; font-family: inherit; text-decoration: underline; }
 
 /* FOOTER */
 .footer { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(13,27,42,.95); backdrop-filter: blur(8px); border-top: 1px solid rgba(255,255,255,.06); padding: 12px 24px; font-size: 11px; color: rgba(255,255,255,.2); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
@@ -229,6 +256,7 @@ body { font-family: 'Segoe UI', Arial, sans-serif; background: #0d1b2a; color: #
   <button class="lang-btn active" onclick="setLang('ru')">RU</button>
   <button class="lang-btn" onclick="location.href='/en/'">EN</button>
   <button class="lang-btn" onclick="location.href='/he/'">HE</button>
+  <button class="lang-btn" onclick="setLang('fr')">FR</button>
 </div>
 
 <div class="logo">
@@ -317,15 +345,27 @@ body { font-family: 'Segoe UI', Arial, sans-serif; background: #0d1b2a; color: #
   </div>
 </div>
 
+<!-- NEWS -->
+<div class="news-section" id="news">
+  <h2 data-i="news_lbl">Новости рынка недвижимости</h2>
+  <div class="news-grid" id="newsGrid">
+    <div class="news-loading" id="newsLoading">⏳ Загружаем новости…</div>
+  </div>
+  <button class="news-more" id="newsMore" style="display:none" onclick="loadMoreNews()" data-i="news_more">Показать ещё</button>
+</div>
+
 <div class="social-row">
-  <a href="https://t.me/flatfinderil_bot" target="_blank" class="soc-btn" title="Telegram">
-    <svg viewBox="0 0 24 24" fill="none" width="18" height="18"><path d="M22 2L11 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  <a href="https://t.me/flatfinderil_bot" target="_blank" rel="noopener noreferrer" class="soc-btn tg">
+    <div class="soc-icon"><svg viewBox="0 0 24 24" fill="none" width="20" height="20"><path d="M22 2L11 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <span class="soc-label">Telegram</span>
   </a>
-  <a href="https://www.instagram.com/flatfinderil/" target="_blank" class="soc-btn" title="Instagram">
-    <svg viewBox="0 0 24 24" fill="none" width="18" height="18"><rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+  <a href="https://www.instagram.com/flatfinderil/" target="_blank" rel="noopener noreferrer" class="soc-btn ig">
+    <div class="soc-icon"><svg viewBox="0 0 24 24" fill="none" width="20" height="20"><rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></div>
+    <span class="soc-label">Instagram</span>
   </a>
-  <a href="mailto:info@flatfinderil.com" class="soc-btn" title="Email">
-    <svg viewBox="0 0 24 24" fill="none" width="18" height="18"><rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" stroke-width="2"/><path d="M2 7l10 7 10-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+  <a href="mailto:info@flatfinderil.com" class="soc-btn em">
+    <div class="soc-icon"><svg viewBox="0 0 24 24" fill="none" width="20" height="20"><rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" stroke-width="2"/><path d="M2 7l10 7 10-7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+    <span class="soc-label">Email</span>
   </a>
 </div>
 
@@ -340,6 +380,7 @@ body { font-family: 'Segoe UI', Arial, sans-serif; background: #0d1b2a; color: #
 <script>
 const CITIES = {
   ru: ['Тель-Авив','Иерусалим','Хайфа','Беэр-Шева','Нетания','Ашдод','Ришон-ле-Цион','Петах-Тиква','Холон','Бат-Ям','Герцлия','Рамат-Ган','Реховот','Ашкелон','Эйлат','Нацрат-Илит','Кфар-Саба','Раанана','Модиин','Беней-Брак','Лод','Рамла','Акко'],
+  fr: ['Tel Aviv','Jérusalem','Haïfa','Beer Sheva','Netanya','Ashdod','Rishon LeZion','Petah Tikva','Holon','Bat Yam','Herzliya','Ramat Gan','Rehovot','Ashkelon','Eilat','Nazareth Illit','Kfar Saba','Ra\'anana','Modi\'in','Bnei Brak','Lod','Ramla','Acre'],
 };
 const T = {
   ru: {
@@ -370,13 +411,126 @@ const T = {
     contact:'Связаться:',
     tos:'Правила пользования',
     privacy:'Политика конфиденциальности',
+    news_lbl:'Новости рынка недвижимости',
+    news_more:'Показать ещё',
+    news_empty:'Новости временно недоступны',
+  },
+  fr: {
+    sub:'Immobilier en Israël',
+    h1:'Trouvez un appartement en <em>Israël</em> en 2 minutes',
+    p:'Notre bot Telegram intelligent recherche des locations et ventes dans 23 villes d\'Israël. Filtres par prix, pièces et quartier — directement dans le messenger. Idéal pour les immigrants, étrangers et locaux.',
+    f1t:'Recherche intelligente', f1d:'Filtre par prix, pièces, ville',
+    f2t:'23 villes', f2d:'Nord, Centre et Sud d\'Israël',
+    f3t:'Instantané', f3d:'Annonces fraîches en temps réel',
+    btn:'Ouvrir le bot @flatfinderil_bot',
+    hint:'Gratuit · Telegram · Sans inscription',
+    cities_lbl:'Recherche d\'appartements dans les villes',
+    how_lbl:'Comment ça marche',
+    s1:'Ouvrez le bot dans Telegram',
+    s2:'Choisissez la ville, le prix et le nombre de pièces',
+    s3:'Recevez instantanément les annonces actuelles',
+    faq_lbl:'Questions fréquentes',
+    q1:'Comment trouver un appartement à louer en Israël ?',
+    a1:'Ouvrez le bot Telegram @flatfinderil_bot, choisissez une ville et indiquez vos critères : prix, nombre de pièces, type de transaction. Le bot affichera instantanément les annonces actuelles.',
+    q2:'Dans quelles villes la recherche fonctionne-t-elle ?',
+    a2:'23 villes : Tel Aviv, Jérusalem, Haïfa, Beer Sheva, Netanya, Ashdod, Rishon LeZion, Petah Tikva, Holon, Bat Yam, Herzliya, Ramat Gan, Rehovot, Ashkelon, Eilat, Nazareth Illit, Kfar Saba, Ra\'anana, Modi\'in, Bnei Brak, Lod, Ramla, Acre.',
+    q3:'Est-ce gratuit ?',
+    a3:'Oui, la recherche de base est entièrement gratuite. Les fonctionnalités avancées et les notifications sont disponibles par abonnement.',
+    q4:'Le bot est-il adapté aux nouveaux immigrants ?',
+    a4:'Oui, FlatFinderIL a été créé notamment pour les immigrants. Le bot fonctionne en plusieurs langues et inclut des informations sur les subventions pour les nouveaux olim.',
+    q5:'Peut-on publier une annonce de vente ou de location ?',
+    a5:'Oui, vous pouvez publier une annonce via le bot. Des milliers d\'acheteurs et locataires potentiels la verront immédiatement.',
+    contact:'Contact :',
+    tos:'Conditions d\'utilisation',
+    privacy:'Politique de confidentialité',
+    news_lbl:'Actualités du marché immobilier',
+    news_more:'Voir plus',
+    news_empty:'Actualités temporairement indisponibles',
   }
 };
+
+// ── News section ──────────────────────────────────────────────────────────────
+const API = 'https://flatfinderil-bot-production.up.railway.app';
+let _newsItems = [];
+let _newsShown = 5;
+let _newsLang = 'ru';
+
+const CAT_LABELS = {
+  ru: { mortgage:'Ипотека', market:'Рынок', new_buildings:'Новостройки', rent:'Аренда', news:'Новости' },
+  fr: { mortgage:'Crédit', market:'Marché', new_buildings:'Neuf', rent:'Location', news:'Actualités' },
+};
+
+function _badgeClass(cat) {
+  const safe = (cat||'news').replace(/[^a-z_]/g,'');
+  return 'news-badge badge-' + safe;
+}
+
+function _renderNewsCards(items, lang) {
+  const labels = CAT_LABELS[lang] || CAT_LABELS.ru;
+  return items.map(item => {
+    const cat = item.category || 'news';
+    const catLabel = labels[cat] || cat;
+    const date = item.date ? item.date.slice(5) : '';  // MM-DD
+    const body = (item.body || '').slice(0, 120);
+    const url  = item.url || '#';
+    return `<a class="news-card" href="${url}" target="_blank" rel="noopener noreferrer">
+      <div class="news-card-top">
+        <span class="${_badgeClass(cat)}">${catLabel}</span>
+        <span class="news-date">${date}</span>
+      </div>
+      <div class="news-title">${item.title || ''}</div>
+      ${body ? `<div class="news-body">${body}…</div>` : ''}
+      ${item.source ? `<div class="news-source">${item.source}</div>` : ''}
+    </a>`;
+  }).join('');
+}
+
+function renderNewsGrid() {
+  const grid = document.getElementById('newsGrid');
+  const t = T[_newsLang] || T.ru;
+  if (!_newsItems.length) {
+    grid.innerHTML = `<div class="news-loading">${t.news_empty || 'Новости недоступны'}</div>`;
+    document.getElementById('newsMore').style.display = 'none';
+    return;
+  }
+  const visible = _newsItems.slice(0, _newsShown);
+  grid.innerHTML = _renderNewsCards(visible, _newsLang);
+  document.getElementById('newsMore').style.display = _newsShown < _newsItems.length ? 'block' : 'none';
+}
+
+function loadMoreNews() {
+  _newsShown += 5;
+  renderNewsGrid();
+}
+
+async function fetchNews(lang) {
+  _newsLang = lang;
+  const grid = document.getElementById('newsGrid');
+  const t = T[lang] || T.ru;
+  const loading = document.getElementById('newsLoading');
+  if (loading) loading.style.display = 'block';
+
+  try {
+    const resp = await fetch(`${API}/api/news?lang=${lang}&n=20`, { signal: AbortSignal.timeout(8000) });
+    const data = await resp.json();
+    _newsItems = data.items || [];
+    _newsShown = 5;
+    renderNewsGrid();
+  } catch(e) {
+    grid.innerHTML = `<div class="news-loading">${t.news_empty || 'Новости временно недоступны'}</div>`;
+    document.getElementById('newsMore').style.display = 'none';
+  }
+}
+
+// ── i18n ──────────────────────────────────────────────────────────────────────
 function renderCities(l) {
   const list = document.getElementById('cityList');
   list.innerHTML = (CITIES[l]||CITIES.ru).map(c=>`<span class="city-tag">${c}</span>`).join('');
 }
+
+let _currentLang = 'ru';
 function setLang(l) {
+  _currentLang = l;
   const t = T[l]||T.ru;
   document.querySelectorAll('[data-i]').forEach(el=>{
     const k=el.getAttribute('data-i');
@@ -385,8 +539,19 @@ function setLang(l) {
   document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.textContent===l.toUpperCase()));
   document.documentElement.lang=l;
   renderCities(l);
+  fetchNews(l);
 }
+
+// ── Init ──────────────────────────────────────────────────────────────────────
 setLang('ru');
+
+// Scroll to #news on load if hash present
+if (location.hash === '#news') {
+  setTimeout(() => {
+    const el = document.getElementById('news');
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 400);
+}
 </script>
 </body>
 </html>
