@@ -450,14 +450,13 @@ const T = {
 };
 
 // ── News section ──────────────────────────────────────────────────────────────
-const API = 'https://flatfinderil-bot-production.up.railway.app';
 let _newsItems = [];
 let _newsShown = 5;
 let _newsLang = 'ru';
 
 const CAT_LABELS = {
-  ru: { mortgage:'Ипотека', market:'Рынок', new_buildings:'Новостройки', rent:'Аренда', news:'Новости' },
-  fr: { mortgage:'Crédit', market:'Marché', new_buildings:'Neuf', rent:'Location', news:'Actualités' },
+  ru: { mortgage:'Ипотека', market:'Рынок', new_buildings:'Новостройки', rent:'Аренда', news:'Новости', program:'Программы', project:'Стройка' },
+  fr: { mortgage:'Crédit', market:'Marché', new_buildings:'Neuf', rent:'Location', news:'Actualités', program:'Programmes', project:'Construction' },
 };
 
 function _badgeClass(cat) {
@@ -511,7 +510,8 @@ async function fetchNews(lang) {
   if (loading) loading.style.display = 'block';
 
   try {
-    const resp = await fetch(`${API}/api/news?lang=${lang}&n=20`, { signal: AbortSignal.timeout(8000) });
+    // Use Cloudflare Pages Function /news (no CORS issues, server-side RSS fetch)
+    const resp = await fetch('/news', { signal: AbortSignal.timeout(10000) });
     const data = await resp.json();
     _newsItems = data.items || [];
     _newsShown = 5;
