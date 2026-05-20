@@ -79,6 +79,8 @@ nav a{
 }
 nav a:hover{color:var(--blue);background:#f0f5ff}
 nav a.active{color:var(--blue);font-weight:600}
+nav a.nav-app{background:#863bff;color:#fff!important;padding:7px 15px!important;border-radius:20px!important;font-weight:600!important;margin-right:4px}
+nav a.nav-app:hover{background:#7e14ff!important;transform:translateY(-1px)}
 .header-right{display:flex;align-items:center;gap:10px;flex-shrink:0}
 .search-box{
   display:flex;align-items:center;gap:6px;
@@ -549,6 +551,7 @@ footer{background:var(--navy);color:rgba(255,255,255,.5);padding:44px 24px 20px;
       <a href="#projects" data-i="nav_projects">Проекты</a>
       <a href="#mortgage" data-i="nav_mortgage">Ипотека</a>
       <a href="#programs" data-i="nav_programs">Программы</a>
+      <a href="/app/" class="nav-app" data-i="nav_app">🔍 Поиск жилья</a>
     </nav>
     <div class="header-right">
       <div class="search-box">🔍 <span data-i="search_hint">Поиск по сайту...</span></div>
@@ -1017,6 +1020,7 @@ footer{background:var(--navy);color:rgba(255,255,255,.5);padding:44px 24px 20px;
         <a href="#projects" data-i="nav_projects">Проекты</a>
         <a href="#mortgage" data-i="nav_mortgage">Ипотека</a>
         <a href="#programs" data-i="nav_programs">Программы</a>
+        <a href="/app/" data-i="nav_app" style="color:#a78bfa">🔍 Поиск жилья</a>
       </div>
       <div class="footer-col">
         <h4 data-i="footer_col2">Регионы</h4>
@@ -1046,7 +1050,7 @@ footer{background:var(--navy);color:rgba(255,255,255,.5);padding:44px 24px 20px;
 const T = {
   ru:{
     topbar_news:"Новости рынка недвижимости Израиля",
-    nav_news:"Новости",nav_regions:"Регионы",nav_projects:"Проекты",nav_mortgage:"Ипотека",nav_programs:"Программы",
+    nav_news:"Новости",nav_regions:"Регионы",nav_projects:"Проекты",nav_mortgage:"Ипотека",nav_programs:"Программы",nav_app:"🔍 Поиск жилья",
     tg_btn:"Telegram бот",search_hint:"Поиск по сайту...",ticker_label:"СРОЧНО",loading_news:"Загрузка новостей…",
     hero_title:"Рынок недвижимости <em>Израиля</em> — полная картина",
     hero_sub:"Актуальные новости, строительные проекты, ипотечные программы и государственные субсидии. Север, Центр и Юг страны.",
@@ -1099,7 +1103,7 @@ const T = {
   },
   en:{
     topbar_news:"Israel Real Estate Market News",
-    nav_news:"News",nav_regions:"Regions",nav_projects:"Projects",nav_mortgage:"Mortgage",nav_programs:"Programs",
+    nav_news:"News",nav_regions:"Regions",nav_projects:"Projects",nav_mortgage:"Mortgage",nav_programs:"Programs",nav_app:"🔍 Find housing",
     tg_btn:"Telegram bot",search_hint:"Search...",ticker_label:"LIVE",loading_news:"Loading news…",
     hero_title:"Israel Real Estate Market — <em>the full picture</em>",
     hero_sub:"Current news, construction projects, mortgage programs and state subsidies for all regions and population segments.",
@@ -1145,7 +1149,7 @@ const T = {
   },
   he:{
     topbar_news:"חדשות שוק הנדל\"ן בישראל",
-    nav_news:"חדשות",nav_regions:"אזורים",nav_projects:"פרויקטים",nav_mortgage:"משכנתה",nav_programs:"תוכניות",
+    nav_news:"חדשות",nav_regions:"אזורים",nav_projects:"פרויקטים",nav_mortgage:"משכנתה",nav_programs:"תוכניות",nav_app:"🔍 חיפוש דירות",
     tg_btn:"מצא דיור",search_hint:"חיפוש באתר...",ticker_label:"בשידור חי",loading_news:"טוען חדשות…",
     hero_title:"שוק הנדל\"ן בישראל — <em>התמונה המלאה</em>",
     hero_sub:"חדשות עדכניות, פרויקטי בנייה, תוכניות משכנתה וסובסידיות ממשלתיות לכל שכבות האוכלוסייה. צפון, מרכז ודרום.",
@@ -1191,7 +1195,7 @@ const T = {
   },
   fr:{
     topbar_news:"Actualités du marché immobilier israélien",
-    nav_news:"Actualités",nav_regions:"Régions",nav_projects:"Projets",nav_mortgage:"Immobilier",nav_programs:"Programmes",
+    nav_news:"Actualités",nav_regions:"Régions",nav_projects:"Projets",nav_mortgage:"Immobilier",nav_programs:"Programmes",nav_app:"🔍 Chercher un logement",
     tg_btn:"Trouver un logement",search_hint:"Recherche...",ticker_label:"EN DIRECT",loading_news:"Chargement des actualités…",
     hero_title:"Marché immobilier <em>israélien</em> — le tableau complet",
     hero_sub:"Actualités, projets de construction, programmes hypothécaires et subventions gouvernementales pour toutes les régions.",
