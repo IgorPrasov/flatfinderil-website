@@ -465,12 +465,22 @@ footer{background:var(--navy);color:rgba(255,255,255,.5);padding:44px 24px 20px;
 .modal-hd{padding:22px 26px 16px;border-bottom:1px solid #f0f0f0}
 .modal-title{font-size:19px;font-weight:700;color:var(--navy);line-height:1.35;margin:8px 0 10px}
 .modal-meta{display:flex;align-items:center;gap:14px;font-size:12px;color:var(--text3)}
-.modal-body{padding:20px 26px;font-size:15px;line-height:1.75;color:#333}
+.modal-body{padding:20px 26px;font-size:15px;line-height:1.75;color:#333;min-height:60px}
+.modal-body p{margin:0 0 12px}
+.modal-loading{color:#999;font-size:13px;font-style:italic;padding:4px 0 8px}
+.modal-attrib{margin:0 26px 4px;padding:12px 16px;background:#f8f9fa;border-radius:8px;font-size:12px;color:#666;border-left:3px solid var(--blue)}
+.modal-attrib a{color:var(--blue);text-decoration:none;font-weight:600}
+.modal-attrib a:hover{text-decoration:underline}
+.modal-gov-table{width:100%;border-collapse:collapse;font-size:14px;margin:8px 0}
+.modal-gov-table tr{border-bottom:1px solid #f0f0f0}
+.modal-gov-table td{padding:9px 12px;vertical-align:top}
+.modal-gov-table td:first-child{font-weight:600;color:var(--navy);width:48%;white-space:nowrap}
+.modal-gov-desc{font-size:14px;color:#555;line-height:1.6;margin-bottom:14px;padding:12px;background:#f0f7ff;border-radius:8px}
 .modal-ft{padding:16px 26px;border-top:1px solid #f0f0f0;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
 .modal-close{border:1px solid #e0e0e0;background:#f5f5f5;padding:9px 18px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:500;transition:.15s}
 .modal-close:hover{background:#e8e8e8}
-.modal-read{background:var(--blue);color:#fff;padding:10px 20px;border-radius:8px;text-decoration:none;font-size:14px;font-weight:600;transition:.15s}
-.modal-read:hover{background:#1557b0}
+.modal-read{background:transparent;color:var(--text3);padding:9px 14px;border-radius:8px;text-decoration:none;font-size:12px;border:1px solid #e0e0e0;transition:.15s}
+.modal-read:hover{color:var(--navy);border-color:#bbb}
 @media(max-width:720px){.modal-box{margin:0;border-radius:0;min-height:100vh}}
 
 /* ═══════════════════════════════════════════
@@ -517,9 +527,10 @@ footer{background:var(--navy);color:rgba(255,255,255,.5);padding:44px 24px 20px;
       <div class="modal-meta" id="modalMeta"></div>
     </div>
     <div class="modal-body" id="modalBody"></div>
+    <div class="modal-attrib" id="modalAttrib" style="display:none"></div>
     <div class="modal-ft">
       <button class="modal-close" id="modalCloseBtn" onclick="closeNewsModal()">✕ Закрыть</button>
-      <a class="modal-read" id="modalReadLink" href="#" target="_blank" rel="noopener noreferrer" id="modalReadBtn">Читать оригинал →</a>
+      <a class="modal-read" id="modalReadLink" href="#" target="_blank" rel="noopener noreferrer">↗ Источник</a>
     </div>
   </div>
 </div>
@@ -1315,34 +1326,128 @@ function _readLabel() {
 // ── News Modal ────────────────────────────────────────────────────────────────
 let _currentModal = null;
 
+// Domains where /article proxy can fetch full content
+const _PROXY_DOMAINS = [
+  'timesofisrael.com', 'jpost.com', 'haaretz.com', 'haaretz.co.il',
+  'calcalist.co.il', 'ynet.co.il', 'globes.co.il', 'en.globes.co.il',
+  'walla.co.il', 'vesty.co.il', 'cursorinfo.co.il', 'israeltoday.co.il',
+  'boi.org.il',
+];
+
+function _isProxyable(url) {
+  try {
+    const h = new URL(url).hostname;
+    return _PROXY_DOMAINS.some(d => h === d || h === 'www.' + d || h.endsWith('.' + d));
+  } catch { return false; }
+}
+
+function _govTableHTML(item) {
+  const g = item.govData;
+  const isMe = g._type === 'mechir';
+  const rows = isMe ? [
+    ['Проект / Project',        g.ProjectName || '—'],
+    ['Город / City',            g.LamasName || g.Neighborhood || '—'],
+    ['Квартир в лотерее',       g.LotteryHousingUnits ? String(g.LotteryHousingUnits) : '—'],
+    ['Цена за м² / Price/m²',   g.PriceForMeter ? `₪${Number(g.PriceForMeter).toLocaleString()}` : '—'],
+    ['Заявок / Subscribers',    g.LotterySubscriberTotal ? Number(g.LotterySubscriberTotal).toLocaleString() : '—'],
+    ['Победителей / Winners',   g.LotteryWinnersTotal ? Number(g.LotteryWinnersTotal).toLocaleString() : '—'],
+    ['Дата лотереи',            g.LotteryExecutionDate ? g.LotteryExecutionDate.slice(0,10) : '—'],
+    ['Статус / Status',         g.LotteryStatusValue || '—'],
+  ] : [
+    ['Проект / Project',        g.ProjectName || '—'],
+    ['Город / City',            g.LamasName || g.CityName || '—'],
+    ['Район',                   g.NeighborhoodName || '—'],
+    ['Квартир / Units',         g.NumberOfApartments || g.ApartmentsForSale || '—'],
+    ['Ср. цена / Avg. Price/m²', g.PricePerMeter ? `₪${Number(g.PricePerMeter).toLocaleString()}` : '—'],
+  ].filter(r => r[1] && r[1] !== '—');
+
+  const descKey = isMe
+    ? { ru: 'Государственная программа субсидированного жилья «Мехир ла-Миштакен» (מחיר למשתכן) — продажа квартир ниже рыночной цены по лотерее.',
+        en: 'Mechir LaMishtaken (מחיר למשתכן) is Israel\'s subsidized housing lottery — apartments sold below market price.',
+        he: 'מחיר למשתכן — תוכנית לדיור בר-השגה, מכירת דירות במחיר מסובסד בהגרלה.' }
+    : { ru: 'Новые квартиры на продажу от Министерства строительства Израиля.',
+        en: 'New apartments for sale — Ministry of Construction and Housing.',
+        he: 'דירות חדשות למכירה — משרד הבינוי והשיכון.' };
+
+  return `<div class="modal-gov-desc">${descKey[lang] || descKey.en}</div>
+<table class="modal-gov-table">${rows.map(([k,v]) => `<tr><td>${k}</td><td>${_esc(String(v))}</td></tr>`).join('')}</table>
+<p style="margin-top:14px;font-size:13px"><a href="https://data.gov.il/dataset/mechir-lamishtaken" target="_blank" rel="noopener" style="color:var(--blue)">
+  ${lang==='he'?'← מלא מרשם ב-data.gov.il':lang==='en'?'Full registry on data.gov.il →':'Полный реестр на data.gov.il →'}
+</a></p>`;
+}
+
+function _setModalAttrib(source, url) {
+  const el = document.getElementById('modalAttrib');
+  if (!el) return;
+  const fn = {
+    ru: (s, u) => `📰 Источник: <a href="${u}" target="_blank" rel="noopener">${s}</a>. Права на материал принадлежат первоисточнику.`,
+    en: (s, u) => `📰 Source: <a href="${u}" target="_blank" rel="noopener">${s}</a>. All rights belong to the original publisher.`,
+    he: (s, u) => `📰 מקור: <a href="${u}" target="_blank" rel="noopener">${s}</a>. כל הזכויות שמורות לבעלי המקור.`,
+    fr: (s, u) => `📰 Source: <a href="${u}" target="_blank" rel="noopener">${s}</a>. Tous droits réservés à l'éditeur original.`,
+  }[lang] || ((s, u) => `📰 Source: <a href="${u}" target="_blank" rel="noopener">${s}</a>.`);
+  el.innerHTML = fn(source, url);
+  el.style.display = '';
+}
+
 function openNewsModal(item) {
   _currentModal = item;
   const lbl = {
-    ru:{ close:'Закрыть', read:'Читать оригинал →', src:'Источник' },
-    en:{ close:'Close',   read:'Read original →',   src:'Source'   },
-    he:{ close:'סגור',    read:'← קרא מקור',        src:'מקור'     },
-    fr:{ close:'Fermer',  read:'Lire l\'original →', src:'Source'   },
-  }[lang] || { close:'Close', read:'Read original →', src:'Source' };
+    ru:{ close:'Закрыть', read:'↗ Открыть источник' },
+    en:{ close:'Close',   read:'↗ Open source'       },
+    he:{ close:'סגור',    read:'↗ פתח מקור'          },
+    fr:{ close:'Fermer',  read:'↗ Ouvrir la source'  },
+  }[lang] || { close:'Close', read:'↗ Open source' };
 
-  const tagCls = CAT_TAG[item.category] || 'tag-news';
+  const tagCls   = CAT_TAG[item.category]  || 'tag-news';
   const catLabel = (CAT_LABEL[lang] || CAT_LABEL.en)[item.category] || '';
-  document.getElementById('modalTag').innerHTML  = `<span class="tag ${tagCls}">${catLabel}</span>`;
+  document.getElementById('modalTag').innerHTML     = `<span class="tag ${tagCls}">${catLabel}</span>`;
   document.getElementById('modalTitle').textContent = item.title || '';
-  document.getElementById('modalMeta').innerHTML =
+  document.getElementById('modalMeta').innerHTML    =
     `<span>📅 ${_fmtDate(item.date)}</span><span>📰 ${_esc(item.source)}</span>`;
-  document.getElementById('modalBody').textContent = item.body || '';
   document.getElementById('modalCloseBtn').textContent = '✕ ' + lbl.close;
   const readLink = document.getElementById('modalReadLink');
-  readLink.href = item.url;
+  readLink.href        = item.url;
   readLink.textContent = lbl.read;
-  const modal = document.getElementById('newsModal');
-  modal.classList.add('open');
+
+  // Attribution
+  _setModalAttrib(item.source, item.url);
+
+  const bodyEl = document.getElementById('modalBody');
+
+  // govData: render structured table immediately
+  if (item.govData) {
+    bodyEl.innerHTML = _govTableHTML(item);
+    document.getElementById('newsModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+    return;
+  }
+
+  // Try proxy for allowed domains, otherwise show snippet
+  if (_isProxyable(item.url)) {
+    bodyEl.innerHTML = `<p class="modal-loading">⏳ ${lang==='ru'?'Загрузка статьи…':lang==='he'?'טוען מאמר…':'Loading article…'}</p><p style="color:#777;font-size:14px">${_esc(item.body)}</p>`;
+    fetch('/article?url=' + encodeURIComponent(item.url))
+      .then(r => r.ok ? r.json() : null)
+      .then(d => {
+        if (!document.getElementById('newsModal').classList.contains('open')) return;
+        if (d?.bodyHtml) {
+          bodyEl.innerHTML = d.bodyHtml;
+        } else {
+          bodyEl.innerHTML = `<p>${_esc(item.body)}</p>`;
+        }
+      })
+      .catch(() => { bodyEl.innerHTML = `<p>${_esc(item.body)}</p>`; });
+  } else {
+    bodyEl.innerHTML = `<p>${_esc(item.body)}</p>`;
+  }
+
+  document.getElementById('newsModal').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
 
 function closeNewsModal() {
   document.getElementById('newsModal').classList.remove('open');
   document.body.style.overflow = '';
+  document.getElementById('modalAttrib').style.display = 'none';
 }
 
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeNewsModal(); });

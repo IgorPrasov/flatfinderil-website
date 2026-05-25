@@ -237,6 +237,86 @@ async function fetchFeed(feed) {
   } catch { return []; }
 }
 
+// ── data.gov.il: Mechir LaMishtaken lottery ───────────────────────────────────
+const DATAGOV_BASE  = 'https://data.gov.il/api/3/action/datastore_search';
+const MECHIR_RES    = '7c8255d0-49ef-49db-8904-4cf917586031';
+const SALE_RES      = 'ea93b3c9-15e2-4b74-a632-097ee53737e4';
+
+async function fetchMechir() {
+  try {
+    const r = await fetch(`${DATAGOV_BASE}?resource_id=${MECHIR_RES}&limit=10&sort=LotteryExecutionDate+desc`, {
+      headers: { 'Accept': 'application/json' }, cf: { cacheTtl: 3600, cacheEverything: true },
+    });
+    if (!r.ok) return [];
+    const { result } = await r.json();
+    return (result?.records || []).map(rec => {
+      const city    = rec.LamasName || rec.Neighborhood || 'ישראל';
+      const project = rec.ProjectName || 'Mechir LaMishtaken';
+      const units   = rec.LotteryHousingUnits ? `${rec.LotteryHousingUnits} units` : '';
+      const price   = rec.PriceForMeter ? `₪${Number(rec.PriceForMeter).toLocaleString()}/m²` : '';
+      const subs    = rec.LotterySubscriberTotal || '';
+      const winners = rec.LotteryWinnersTotal || '';
+      let date = new Date().toISOString().slice(0, 10);
+      if (rec.LotteryExecutionDate) { try { date = new Date(rec.LotteryExecutionDate).toISOString().slice(0,10); } catch {} }
+      const title = `Mechir LaMishtaken: ${project} — ${city}${units ? ', ' + units : ''}`;
+      const body  = [units ? `${units} apartments` : '', price ? `Price: ${price}` : '',
+        subs ? `${Number(subs).toLocaleString()} applicants` : '', winners ? `${Number(winners).toLocaleString()} winners` : '',
+        rec.LotteryStatusValue ? `Status: ${rec.LotteryStatusValue}` : ''].filter(Boolean).join(' · ');
+      return { title, body: body || title, url: 'https://data.gov.il/dataset/mechir-lamishtaken',
+        date, source: 'data.gov.il — Ministry of Housing', lang: 'en', category: 'program', region: null,
+        govData: { ...rec, _type: 'mechir' } };
+    });
+  } catch { return []; }
+}
+
+async function fetchApartments() {
+  try {
+    const r = await fetch(`${DATAGOV_BASE}?resource_id=${SALE_RES}&limit=6&sort=_id+desc`, {
+      headers: { 'Accept': 'application/json' }, cf: { cacheTtl: 3600, cacheEverything: true },
+    });
+    if (!r.ok) return [];
+    const { result } = await r.json();
+    return (result?.records || []).slice(0, 4).map(rec => {
+      const city    = rec.LamasName || rec.CityName || 'ישראל';
+      const project = rec.ProjectName || 'New Project';
+      const units   = rec.NumberOfApartments || rec.ApartmentsForSale || '';
+      const price   = rec.PricePerMeter || rec.AveragePrice || '';
+      const title   = `New apartments for sale: ${project} — ${city}${units ? ', ' + units + ' units' : ''}`;
+      const body    = [units ? `${units} apartments` : '', price ? `Avg. ₪${Number(price).toLocaleString()}/m²` : '',
+        rec.NeighborhoodName ? `Neighborhood: ${rec.NeighborhoodName}` : ''].filter(Boolean).join(' · ') || title;
+      return { title, body, url: 'https://data.gov.il/dataset/mechir-lamishtaken',
+        date: new Date().toISOString().slice(0,10), source: 'data.gov.il — Ministry of Housing',
+        lang: 'en', category: 'project', region: null, govData: { ...rec, _type: 'sale' } };
+    });
+  } catch { return []; }
+}
+
+// ── Bank of Israel press releases ─────────────────────────────────────────────
+async function fetchBOI() {
+  try {
+    const r = await fetch('https://www.boi.org.il/en/communication-and-publications/press-releases/', {
+      headers: { 'User-Agent': 'Mozilla/5.0 FlatFinderIL/1.0', 'Accept-Language': 'en-US,en;q=0.9' },
+      cf: { cacheTtl: 1800, cacheEverything: true },
+    });
+    if (!r.ok) return [];
+    const html = await r.text();
+    const items = [];
+    const re = /href="(\/en\/communication-and-publications\/press-releases\/[^"]+)"[^>]*>\s*<[^>]+>([^<]{10,})<\//g;
+    let m;
+    while ((m = re.exec(html)) !== null && items.length < 8) {
+      const title = (m[2] || '').replace(/<[^>]+>/g,'').trim();
+      if (!title || title.length < 8) continue;
+      const nearby = html.substring(Math.max(0, m.index - 300), m.index + 400);
+      const dm = nearby.match(/(\d{1,2})[\/\-\.](\d{2})[\/\-\.](\d{4})/);
+      let date = new Date().toISOString().slice(0, 10);
+      if (dm) { try { date = new Date(`${dm[3]}-${dm[2].padStart(2,'0')}-${dm[1].padStart(2,'0')}`).toISOString().slice(0,10); } catch {} }
+      items.push({ title, body: title, url: 'https://www.boi.org.il' + m[1],
+        date, source: 'Bank of Israel', lang: 'en', category: classify(title), region: null });
+    }
+    return items;
+  } catch { return []; }
+}
+
 // ── Handler ───────────────────────────────────────────────────────────────────
 export async function onRequest(context) {
   if (context.request.method === 'OPTIONS')
@@ -255,8 +335,13 @@ export async function onRequest(context) {
   const REGIONAL = [13, 14, 15]; // north, center, south
 
   const idxs = [...new Set([...MAIN, ...REGIONAL])];
-  const results = await Promise.all(idxs.map(i => fetchFeed(FEEDS[i])));
-  let items = results.flat();
+  const [rssResults, mechirItems, saleItems, boiItems] = await Promise.all([
+    Promise.all(idxs.map(i => fetchFeed(FEEDS[i]))),
+    fetchMechir(),
+    fetchApartments(),
+    fetchBOI(),
+  ]);
+  let items = [...rssResults.flat(), ...boiItems, ...mechirItems, ...saleItems];
 
   // Sort by date, deduplicate
   items.sort((a, b) => b.date.localeCompare(a.date));
@@ -265,7 +350,7 @@ export async function onRequest(context) {
     const k = i.title.slice(0, 50).toLowerCase().replace(/\s+/g,'');
     if (seen.has(k)) return false;
     seen.add(k); return true;
-  }).slice(0, 40);
+  }).slice(0, 50);
 
   // Group by region
   const regions = { north: [], center: [], south: [] };
@@ -276,13 +361,13 @@ export async function onRequest(context) {
     updated: new Date().toISOString(),
     total: items.length,
     ticker: items.slice(0, 10).map(i => i.title),
-    items: items.slice(0, 30),
+    items: items.slice(0, 40),
     regions,
   }), {
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
       'Access-Control-Allow-Origin': '*',
-      'Cache-Control': 'public, max-age=1800',
+      'Cache-Control': 'public, max-age=1800, stale-while-revalidate=300',
     },
   });
 }
