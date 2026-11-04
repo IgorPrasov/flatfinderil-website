@@ -59,22 +59,6 @@ const FEEDS = [
     url: 'https://news.google.com/rss/search?q=Israel+real+estate+housing+mortgage+site:haaretz.com&hl=en-IL&gl=IL&ceid=IL:en',
     lang: 'en', src: 'Haaretz EN',
   },
-  // ── Russian-language Israeli media (no MigNews, no 9tv) ──────────────────
-  {
-    id: 'vesty',
-    url: 'https://news.google.com/rss/search?q=%D0%BD%D0%B5%D0%B4%D0%B2%D0%B8%D0%B6%D0%B8%D0%BC%D0%BE%D1%81%D1%82%D1%8C+%D0%98%D0%B7%D1%80%D0%B0%D0%B8%D0%BB%D1%8C+site:vesty.co.il&hl=ru&gl=RU&ceid=RU:ru',
-    lang: 'ru', src: 'Вести',
-  },
-  {
-    id: 'cursorinfo',
-    url: 'https://news.google.com/rss/search?q=%D0%BD%D0%B5%D0%B4%D0%B2%D0%B8%D0%B6%D0%B8%D0%BC%D0%BE%D1%81%D1%82%D1%8C+%D0%98%D0%B7%D1%80%D0%B0%D0%B8%D0%BB%D1%8C+site:cursorinfo.co.il&hl=ru&gl=RU&ceid=RU:ru',
-    lang: 'ru', src: 'Cursorinfo',
-  },
-  {
-    id: 'israeltoday',
-    url: 'https://news.google.com/rss/search?q=%D0%BD%D0%B5%D0%B4%D0%B2%D0%B8%D0%B6%D0%B8%D0%BC%D0%BE%D1%81%D1%82%D1%8C+%D0%98%D0%B7%D1%80%D0%B0%D0%B8%D0%BB%D1%8C+site:israeltoday.co.il&hl=ru&gl=RU&ceid=RU:ru',
-    lang: 'ru', src: 'IsraelToday',
-  },
   // ── Regional feeds (Hebrew, Israel geo) ──────────────────────────────────
   {
     id: 'north',
@@ -154,7 +138,10 @@ function cleanBody(raw, title) {
   const cut = t.search(/\n|\r|•|·|\s{3,}/);
   if (cut > 20) t = t.slice(0, cut);
   if (/^https?:\/\//i.test(t.trim())) return '';
-  return t.trim().slice(0, 280);
+  const result = t.trim().slice(0, 280);
+  // Discard useless Google News bodies that are just the source name (< 25 chars)
+  if (result.length < 25) return '';
+  return result;
 }
 
 function classify(text) {
@@ -242,57 +229,91 @@ const DATAGOV_BASE  = 'https://data.gov.il/api/3/action/datastore_search';
 const MECHIR_RES    = '7c8255d0-49ef-49db-8904-4cf917586031';
 const SALE_RES      = 'ea93b3c9-15e2-4b74-a632-097ee53737e4';
 
-async function fetchMechir() {
+// Localisation strings for gov data items
+const L = {
+  mechirTitle: {
+    ru: (p,c,u) => `Мехир ла-Миштакен: ${p} — ${c}${u ? ', ' + u + ' кв.' : ''}`,
+    he: (p,c,u) => `מחיר למשתכן: ${p} — ${c}${u ? ', ' + u + ' יח"ד' : ''}`,
+    en: (p,c,u) => `Mechir LaMishtaken: ${p} — ${c}${u ? ', ' + u + ' units' : ''}`,
+    fr: (p,c,u) => `Mechir LaMishtaken: ${p} — ${c}${u ? ', ' + u + ' logements' : ''}`,
+  },
+  mechirBody: {
+    ru: (u,pr,s,w,st) => [u?`${u} квартир`:'', pr?`Цена: ${pr}`:'', s?`Заявок: ${Number(s).toLocaleString()}`:'', w?`Победителей: ${Number(w).toLocaleString()}`:'', st?`Статус: ${st}`:''].filter(Boolean).join(' · '),
+    he: (u,pr,s,w,st) => [u?`${u} יח"ד`:'', pr?`מחיר: ${pr}`:'', s?`${Number(s).toLocaleString()} מועמדים`:'', w?`${Number(w).toLocaleString()} זוכים`:'', st?`סטטוס: ${st}`:''].filter(Boolean).join(' · '),
+    en: (u,pr,s,w,st) => [u?`${u} apartments`:'', pr?`Price: ${pr}`:'', s?`${Number(s).toLocaleString()} applicants`:'', w?`${Number(w).toLocaleString()} winners`:'', st?`Status: ${st}`:''].filter(Boolean).join(' · '),
+    fr: (u,pr,s,w,st) => [u?`${u} appartements`:'', pr?`Prix: ${pr}`:'', s?`${Number(s).toLocaleString()} candidats`:'', w?`${Number(w).toLocaleString()} gagnants`:'', st?`Statut: ${st}`:''].filter(Boolean).join(' · '),
+  },
+  saleTitle: {
+    ru: (p,c,u) => `Новостройки в продаже: ${p} — ${c}${u ? ', ' + u + ' кв.' : ''}`,
+    he: (p,c,u) => `דירות חדשות למכירה: ${p} — ${c}${u ? ', ' + u + ' יח"ד' : ''}`,
+    en: (p,c,u) => `New apartments for sale: ${p} — ${c}${u ? ', ' + u + ' units' : ''}`,
+    fr: (p,c,u) => `Nouveaux logements: ${p} — ${c}${u ? ', ' + u + ' logements' : ''}`,
+  },
+  saleBody: {
+    ru: (u,pr,n) => [u?`${u} квартир`:'', pr?`Ср. ₪${Number(pr).toLocaleString()}/м²`:'', n?`Район: ${n}`:''].filter(Boolean).join(' · '),
+    he: (u,pr,n) => [u?`${u} יח"ד`:'', pr?`ממוצע ₪${Number(pr).toLocaleString()}/מ"ר`:'', n?`שכונה: ${n}`:''].filter(Boolean).join(' · '),
+    en: (u,pr,n) => [u?`${u} apartments`:'', pr?`Avg. ₪${Number(pr).toLocaleString()}/m²`:'', n?`Neighborhood: ${n}`:''].filter(Boolean).join(' · '),
+    fr: (u,pr,n) => [u?`${u} appartements`:'', pr?`Moy. ₪${Number(pr).toLocaleString()}/m²`:'', n?`Quartier: ${n}`:''].filter(Boolean).join(' · '),
+  },
+  mechirSrc: { ru: 'data.gov.il — Министерство строительства', he: 'data.gov.il — משרד הבינוי', en: 'data.gov.il — Ministry of Housing', fr: 'data.gov.il — Ministère du Logement' },
+};
+
+async function fetchMechir(lang = 'ru') {
   try {
     const r = await fetch(`${DATAGOV_BASE}?resource_id=${MECHIR_RES}&limit=10&sort=LotteryExecutionDate+desc`, {
       headers: { 'Accept': 'application/json' }, cf: { cacheTtl: 3600, cacheEverything: true },
     });
     if (!r.ok) return [];
     const { result } = await r.json();
+    const tFn  = L.mechirTitle[lang]  || L.mechirTitle.ru;
+    const bFn  = L.mechirBody[lang]   || L.mechirBody.ru;
+    const src  = L.mechirSrc[lang]    || L.mechirSrc.ru;
     return (result?.records || []).map(rec => {
       const city    = rec.LamasName || rec.Neighborhood || 'ישראל';
       const project = rec.ProjectName || 'Mechir LaMishtaken';
-      const units   = rec.LotteryHousingUnits ? `${rec.LotteryHousingUnits} units` : '';
+      const units   = rec.LotteryHousingUnits || '';
       const price   = rec.PriceForMeter ? `₪${Number(rec.PriceForMeter).toLocaleString()}/m²` : '';
       const subs    = rec.LotterySubscriberTotal || '';
       const winners = rec.LotteryWinnersTotal || '';
       let date = new Date().toISOString().slice(0, 10);
       if (rec.LotteryExecutionDate) { try { date = new Date(rec.LotteryExecutionDate).toISOString().slice(0,10); } catch {} }
-      const title = `Mechir LaMishtaken: ${project} — ${city}${units ? ', ' + units : ''}`;
-      const body  = [units ? `${units} apartments` : '', price ? `Price: ${price}` : '',
-        subs ? `${Number(subs).toLocaleString()} applicants` : '', winners ? `${Number(winners).toLocaleString()} winners` : '',
-        rec.LotteryStatusValue ? `Status: ${rec.LotteryStatusValue}` : ''].filter(Boolean).join(' · ');
-      return { title, body: body || title, url: 'https://data.gov.il/dataset/mechir-lamishtaken',
-        date, source: 'data.gov.il — Ministry of Housing', lang: 'en', category: 'program', region: null,
+      const title = tFn(project, city, units);
+      const body  = bFn(units, price, subs, winners, rec.LotteryStatusValue) || title;
+      return { title, body, url: 'https://data.gov.il/dataset/mechir-lamishtaken',
+        date, source: src, lang, category: 'program', region: null,
         govData: { ...rec, _type: 'mechir' } };
     });
   } catch { return []; }
 }
 
-async function fetchApartments() {
+async function fetchApartments(lang = 'ru') {
   try {
     const r = await fetch(`${DATAGOV_BASE}?resource_id=${SALE_RES}&limit=6&sort=_id+desc`, {
       headers: { 'Accept': 'application/json' }, cf: { cacheTtl: 3600, cacheEverything: true },
     });
     if (!r.ok) return [];
     const { result } = await r.json();
+    const tFn  = L.saleTitle[lang] || L.saleTitle.ru;
+    const bFn  = L.saleBody[lang]  || L.saleBody.ru;
+    const src  = L.mechirSrc[lang] || L.mechirSrc.ru;
     return (result?.records || []).slice(0, 4).map(rec => {
       const city    = rec.LamasName || rec.CityName || 'ישראל';
-      const project = rec.ProjectName || 'New Project';
+      const project = rec.ProjectName || (lang === 'ru' ? 'Новый проект' : lang === 'he' ? 'פרויקט חדש' : 'New Project');
       const units   = rec.NumberOfApartments || rec.ApartmentsForSale || '';
       const price   = rec.PricePerMeter || rec.AveragePrice || '';
-      const title   = `New apartments for sale: ${project} — ${city}${units ? ', ' + units + ' units' : ''}`;
-      const body    = [units ? `${units} apartments` : '', price ? `Avg. ₪${Number(price).toLocaleString()}/m²` : '',
-        rec.NeighborhoodName ? `Neighborhood: ${rec.NeighborhoodName}` : ''].filter(Boolean).join(' · ') || title;
+      const title   = tFn(project, city, units);
+      const body    = bFn(units, price, rec.NeighborhoodName) || title;
       return { title, body, url: 'https://data.gov.il/dataset/mechir-lamishtaken',
-        date: new Date().toISOString().slice(0,10), source: 'data.gov.il — Ministry of Housing',
-        lang: 'en', category: 'project', region: null, govData: { ...rec, _type: 'sale' } };
+        date: new Date().toISOString().slice(0,10), source: src,
+        lang, category: 'project', region: null, govData: { ...rec, _type: 'sale' } };
     });
   } catch { return []; }
 }
 
 // ── Bank of Israel press releases ─────────────────────────────────────────────
-async function fetchBOI() {
+const BOI_SRC = { ru: 'Банк Израиля', he: 'בנק ישראל', en: 'Bank of Israel', fr: 'Banque d\'Israël' };
+
+async function fetchBOI(lang = 'ru') {
   try {
     const r = await fetch('https://www.boi.org.il/en/communication-and-publications/press-releases/', {
       headers: { 'User-Agent': 'Mozilla/5.0 FlatFinderIL/1.0', 'Accept-Language': 'en-US,en;q=0.9' },
@@ -311,7 +332,7 @@ async function fetchBOI() {
       let date = new Date().toISOString().slice(0, 10);
       if (dm) { try { date = new Date(`${dm[3]}-${dm[2].padStart(2,'0')}-${dm[1].padStart(2,'0')}`).toISOString().slice(0,10); } catch {} }
       items.push({ title, body: title, url: 'https://www.boi.org.il' + m[1],
-        date, source: 'Bank of Israel', lang: 'en', category: classify(title), region: null });
+        date, source: BOI_SRC[lang] || BOI_SRC.en, lang: 'en', category: classify(title), region: null });
     }
     return items;
   } catch { return []; }
@@ -324,22 +345,25 @@ export async function onRequest(context) {
 
   const lang = new URL(context.request.url).searchParams.get('lang') || 'ru';
 
-  // Feed index selection by language
+  // FEEDS indices after removing Russian sources:
+  // 0=calcalist, 1=ynet, 2=globes, 3=haaretz, 4=walla, 5=cbs
+  // 6=jpost, 7=timesofisrael, 8=globes_en, 9=haaretz_en
+  // 10=north, 11=center, 12=south
   const MAIN = {
-    ru: [10, 11, 12, 0, 1, 2, 5],     // RU Israeli sites + HE + JPost
-    he: [0, 1, 2, 3, 4, 5],           // All Hebrew feeds
-    en: [6, 7, 8, 9, 0, 1],           // EN + Hebrew
-    fr: [10, 11, 12, 5, 6, 0, 1],     // Same as RU (no FR Israeli sources)
-  }[lang] || [10, 11, 12, 0, 1, 5];
+    ru: [6, 7, 8, 9],        // RU UI → English Israeli press (no Russian sources available)
+    he: [0, 1, 2, 3, 4, 5], // Hebrew: Calcalist, Ynet, Globes, Haaretz, Walla, CBS
+    en: [6, 7, 8, 9],        // English: JPost, Times of Israel, Globes EN, Haaretz EN
+    fr: [6, 7, 8, 9],        // FR: fall back to English
+  }[lang] || [6, 7, 8, 9];
 
-  const REGIONAL = [13, 14, 15]; // north, center, south
+  const REGIONAL = [10, 11, 12]; // north, center, south
 
   const idxs = [...new Set([...MAIN, ...REGIONAL])];
   const [rssResults, mechirItems, saleItems, boiItems] = await Promise.all([
     Promise.all(idxs.map(i => fetchFeed(FEEDS[i]))),
-    fetchMechir(),
-    fetchApartments(),
-    fetchBOI(),
+    fetchMechir(lang),
+    fetchApartments(lang),
+    fetchBOI(lang),
   ]);
   let items = [...rssResults.flat(), ...boiItems, ...mechirItems, ...saleItems];
 

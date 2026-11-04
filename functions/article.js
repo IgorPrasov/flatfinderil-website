@@ -13,6 +13,8 @@
  */
 
 const ALLOWED_DOMAINS = [
+  // Google News (redirect source — resolved before fetching)
+  'news.google.com',
   // English press
   'timesofisrael.com', 'www.timesofisrael.com',
   'jpost.com', 'www.jpost.com',
@@ -150,20 +152,53 @@ function getSourceLabel(hostname) {
   return hostname;
 }
 
+const CORS = { 'Content-Type': 'application/json; charset=utf-8', 'Access-Control-Allow-Origin': '*' };
+
+// Resolve Google News redirect URL to the actual article URL
+async function resolveGoogleNews(url) {
+  try {
+    const r = await fetch(url, {
+      method: 'HEAD',
+      redirect: 'follow',
+      headers: { 'User-Agent': 'Mozilla/5.0 (compatible; FlatFinderIL/2.0)' },
+    });
+    // r.url is the final URL after redirects
+    if (r.url && r.url !== url && !r.url.includes('news.google.com')) return r.url;
+    // HEAD didn't redirect away — try GET
+    const r2 = await fetch(url, {
+      method: 'GET',
+      redirect: 'follow',
+      headers: { 'User-Agent': 'Mozilla/5.0 (compatible; FlatFinderIL/2.0)', 'Accept': 'text/html' },
+    });
+    if (r2.url && r2.url !== url) return r2.url;
+  } catch {}
+  return null;
+}
+
 export async function onRequest(context) {
   const reqUrl = new URL(context.request.url);
   const articleUrl = reqUrl.searchParams.get('url');
 
   if (!articleUrl)
     return new Response(JSON.stringify({ error: 'Missing ?url= parameter' }),
-      { status: 400, headers: { 'Content-Type': 'application/json' } });
+      { status: 400, headers: CORS });
 
-  if (!isDomainAllowed(articleUrl))
-    return new Response(JSON.stringify({ error: 'Domain not in allowlist' }),
-      { status: 403, headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' } });
+  // Resolve Google News redirect → actual article URL
+  let finalUrl = articleUrl;
+  try {
+    const { hostname } = new URL(articleUrl);
+    if (hostname === 'news.google.com') {
+      const resolved = await resolveGoogleNews(articleUrl);
+      if (resolved) finalUrl = resolved;
+    }
+  } catch {}
+
+  if (!isDomainAllowed(finalUrl))
+    return new Response(JSON.stringify({ error: 'Domain not in allowlist', resolvedUrl: finalUrl }),
+      { status: 403, headers: CORS });
 
   try {
-    const resp = await fetch(articleUrl, {
+    const resp = await fetch(finalUrl, {
       headers: {
         'User-Agent': 'Mozilla/5.0 (compatible; FlatFinderIL/2.0; +https://flatfinderil.com)',
         'Accept': 'text/html,application/xhtml+xml',
@@ -171,12 +206,13 @@ export async function onRequest(context) {
       },
       cf: { cacheTtl: 3600, cacheEverything: true },
     });
+    // If upstream blocks us, still return the resolved URL so the client can open it directly
     if (!resp.ok)
-      return new Response(JSON.stringify({ error: `Upstream ${resp.status}` }),
-        { status: 502, headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' } });
+      return new Response(JSON.stringify({ error: `Upstream ${resp.status}`, resolvedUrl: finalUrl }),
+        { status: 200, headers: CORS });
 
     const html = await resp.text();
-    const { hostname } = new URL(articleUrl);
+    const { hostname } = new URL(finalUrl);
     const { safeHtml, bodyText } = extractBody(html);
     const title    = extractTitle(html);
     const date     = extractDate(html);
@@ -186,7 +222,7 @@ export async function onRequest(context) {
       title:     title || '',
       date,
       source:    getSourceLabel(hostname),
-      sourceUrl: articleUrl,
+      sourceUrl: finalUrl,
       summary:   metaDesc,
       bodyHtml:  safeHtml || (metaDesc ? `<p>${metaDesc}</p>` : ''),
       bodyText:  bodyText || metaDesc,
@@ -199,6 +235,6 @@ export async function onRequest(context) {
     });
   } catch (err) {
     return new Response(JSON.stringify({ error: String(err) }),
-      { status: 500, headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' } });
+      { status: 500, headers: CORS });
   }
 }
