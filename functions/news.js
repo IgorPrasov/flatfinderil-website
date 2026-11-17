@@ -369,7 +369,13 @@ async function fetchBotNews(lang) {
     const all = (data.items || []).filter(i => i.title);
     return {
       manual: all.filter(i => i.manual && i.lang === botLang).map(norm),
-      judea: all.filter(i => !i.manual && i.region === 'judea_samaria').map(norm),
+      // Only real-estate items: housing topic AND project/developer category (or the
+      // tracked developer by name). The bot tags ANY story that mentions the region,
+      // which would otherwise pull in politics and car-feed noise.
+      judea: all.filter(i => !i.manual && i.region === 'judea_samaria'
+        && (i.topic || 'housing') === 'housing'
+        && (i.category === 'project' || i.category === 'developer'
+            || /הרי זהב|harei zahav|harey zahav/i.test(`${i.title} ${i.body || ''}`))).map(norm),
     };
   } catch { return { manual: [], judea: [] }; }
 }
