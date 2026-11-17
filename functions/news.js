@@ -3,6 +3,7 @@
  * Israeli real estate news — curated Israeli sources only.
  * Sources: Jerusalem Post, Calcalist, Globes, Ynet, Haaretz, Times of Israel,
  *          Walla, Vesty (RU), Cursorinfo (RU), IsraelToday (RU) + CBS/Bank of Israel data
+ *          + FlatFinderIL bot API (dashboard-written news, Judea & Samaria developers)
  */
 
 const FEEDS = [
@@ -338,6 +339,41 @@ async function fetchBOI(lang = 'ru') {
   } catch { return []; }
 }
 
+// ── FlatFinderIL bot API: news written in the analytics dashboard + Judea & Samaria ──
+// Manual items (pinned first) and developer news about Judea & Samaria (incl. Harei Zahav)
+// come from the bot. If the bot is down the site just keeps its own feeds.
+const BOT_API = 'https://flatfinderil-bot-production.up.railway.app';
+
+async function fetchBotNews(lang) {
+  try {
+    const botLang = lang === 'fr' ? 'en' : lang;
+    const r = await fetch(`${BOT_API}/api/news?lang=${botLang}&limit=300`, {
+      headers: { 'Accept': 'application/json' },
+      signal: AbortSignal.timeout(4000),
+      cf: { cacheTtl: 120, cacheEverything: true },
+    });
+    if (!r.ok) return { manual: [], judea: [] };
+    const data = await r.json();
+    const norm = (i) => ({
+      title: String(i.title || '').slice(0, 200),
+      body: String(i.body || i.title || '').slice(0, 1000),
+      url: /^https?:\/\//i.test(i.url || '') ? i.url : '',
+      date: String(i.date || new Date().toISOString().slice(0, 10)),
+      source: i.source || 'FlatFinderIL',
+      lang: i.lang || botLang,
+      // the site has no separate "developer" tag: show it as a project
+      category: i.category === 'developer' ? 'project' : (i.category || 'news'),
+      region: i.region || null,
+      pinned: !!i.pinned,
+    });
+    const all = (data.items || []).filter(i => i.title);
+    return {
+      manual: all.filter(i => i.manual && i.lang === botLang).map(norm),
+      judea: all.filter(i => !i.manual && i.region === 'judea_samaria').map(norm),
+    };
+  } catch { return { manual: [], judea: [] }; }
+}
+
 // ── Handler ───────────────────────────────────────────────────────────────────
 export async function onRequest(context) {
   if (context.request.method === 'OPTIONS')
@@ -359,13 +395,14 @@ export async function onRequest(context) {
   const REGIONAL = [10, 11, 12]; // north, center, south
 
   const idxs = [...new Set([...MAIN, ...REGIONAL])];
-  const [rssResults, mechirItems, saleItems, boiItems] = await Promise.all([
+  const [rssResults, mechirItems, saleItems, boiItems, bot] = await Promise.all([
     Promise.all(idxs.map(i => fetchFeed(FEEDS[i]))),
     fetchMechir(lang),
     fetchApartments(lang),
     fetchBOI(lang),
+    fetchBotNews(lang),
   ]);
-  let items = [...rssResults.flat(), ...boiItems, ...mechirItems, ...saleItems];
+  let items = [...rssResults.flat(), ...boiItems, ...mechirItems, ...saleItems, ...bot.manual, ...bot.judea];
 
   // Sort by date, deduplicate
   items.sort((a, b) => b.date.localeCompare(a.date));
@@ -374,10 +411,14 @@ export async function onRequest(context) {
     const k = i.title.slice(0, 50).toLowerCase().replace(/\s+/g,'');
     if (seen.has(k)) return false;
     seen.add(k); return true;
-  }).slice(0, 50);
+  });
+
+  // Pinned manual news always lead (the first item becomes the featured story)
+  const pinned = items.filter(i => i.pinned);
+  items = [...pinned, ...items.filter(i => !i.pinned)].slice(0, 50);
 
   // Group by region
-  const regions = { north: [], center: [], south: [] };
+  const regions = { north: [], center: [], south: [], judea_samaria: [] };
   for (const item of items)
     if (item.region && regions[item.region]?.length < 3) regions[item.region].push(item);
 
