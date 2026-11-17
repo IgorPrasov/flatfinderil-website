@@ -79,6 +79,10 @@ nav a{
 }
 nav a:hover{color:var(--blue);background:#f0f5ff}
 nav a.active{color:var(--blue);font-weight:600}
+.btn-refresh{background:transparent;border:1px solid rgba(128,128,128,.35);color:inherit;width:36px;height:36px;border-radius:50%;font-size:20px;line-height:1;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;margin-right:8px;padding:0}
+.btn-refresh:hover{border-color:#863bff;color:#863bff}
+.btn-refresh.spin{animation:ffspin .8s linear infinite;pointer-events:none}
+@keyframes ffspin{to{transform:rotate(360deg)}}
 nav a.nav-app{background:#863bff;color:#fff!important;padding:7px 15px!important;border-radius:20px!important;font-weight:600!important;margin-right:4px}
 nav a.nav-app:hover{background:#7e14ff!important;transform:translateY(-1px)}
 .header-right{display:flex;align-items:center;gap:10px;flex-shrink:0}
@@ -648,6 +652,7 @@ footer{background:var(--navy);color:rgba(255,255,255,.5);padding:44px 24px 20px;
       <a href="/app/" class="nav-app" data-i="nav_app">🔍 Поиск жилья</a>
     </nav>
     <div class="header-right">
+      <button id="refreshBtn" class="btn-refresh" type="button" onclick="refreshNews()" title="Обновить / Refresh / רענון" aria-label="Refresh">⟳</button>
       <div class="search-box">🔍 <span data-i="search_hint">Поиск по сайту...</span></div>
       <a href="https://t.me/flatfinderil_bot" target="_blank" class="btn-tg">
         📲 <span data-i="tg_btn">Telegram бот</span>
@@ -1869,9 +1874,9 @@ function _applyNewsData(data) {
   _renderCatNews('progNewsGrid', items, 'program', 2);
 }
 
-function loadLiveNews() {
+function loadLiveNews(fresh) {
   const _fetchLang = lang; // capture current lang at fetch time
-  fetch('/news?lang=' + _fetchLang)
+  const _p = fetch('/news?lang=' + _fetchLang + (fresh ? '&_=' + Date.now() : ''), fresh ? { cache: 'no-store' } : undefined)
     .then(r => r.ok ? r.json() : null)
     .then(data => {
       if (data?.items?.length) {
@@ -1882,6 +1887,13 @@ function loadLiveNews() {
       }
     })
     .catch(() => {});
+  return _p;
+}
+
+function refreshNews() {
+  const b = document.getElementById('refreshBtn');
+  if (b) b.classList.add('spin');
+  loadLiveNews(true).finally(() => { if (b) setTimeout(() => b.classList.remove('spin'), 300); });
 }
 
 calcMort();
