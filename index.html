@@ -1893,7 +1893,11 @@ function loadLiveNews(fresh) {
 function refreshNews() {
   const b = document.getElementById('refreshBtn');
   if (b) b.classList.add('spin');
-  loadLiveNews(true).finally(() => { if (b) setTimeout(() => b.classList.remove('spin'), 300); });
+  // Full reload bypassing caches: new URL each time, keep the chosen language
+  const u = new URL(location.href);
+  u.searchParams.set('lang', lang);
+  u.searchParams.set('_', Date.now());
+  location.replace(u.toString());
 }
 
 calcMort();
