@@ -703,6 +703,13 @@ footer{background:var(--navy);color:rgba(255,255,255,.5);padding:44px 24px 20px;
           </div>
           <div class="region-badge">9</div>
         </div>
+        <div class="region-card" onclick="scrollTo('judea')">
+          <div class="region-icon">⛰️</div>
+          <div class="region-info">
+            <h4 data-i="reg_js">Иудея и Самария</h4>
+            <p>Ариэль, Маале-Адумим, Эфрат</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -805,6 +812,22 @@ footer{background:var(--navy);color:rgba(255,255,255,.5);padding:44px 24px 20px;
         </div>
         <div class="region-sec-body">
           <div class="region-news-row" id="south-news-row">
+            <div class="region-loading" data-i="loading_news">⏳ Загрузка новостей…</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- JUDEA & SAMARIA -->
+      <div id="judea" class="region-section">
+        <div class="region-sec-head" style="background:linear-gradient(135deg,#4a2c6d,#7b4aa8)">
+          <div style="font-size:24px">⛰️</div>
+          <div>
+            <h3 data-i="reg_js_title">Иудея и Самария</h3>
+            <p>Ариэль · Маале-Адумим · Модиин-Илит · Бейтар-Илит · Эфрат · Гуш-Эцион</p>
+          </div>
+        </div>
+        <div class="region-sec-body">
+          <div class="region-news-row" id="judea_samaria-news-row">
             <div class="region-loading" data-i="loading_news">⏳ Загрузка новостей…</div>
           </div>
         </div>
@@ -1316,7 +1339,7 @@ const T = {
     n2_body:"Четвёртое снижение подряд. Заёмщик с ипотекой 1.5M₪ экономит около 400 шекелей в месяц.",
     n3_title:"Минстрой открыл лотерею «Мехир ла-Миштакен» в 6 городах",
     n3_body:"Заявки до 30 апреля. Квартиры в Беэр-Шеве, Ашдоде, Хадере, Лоде — скидка до 30%.",
-    reg_north_title:"Север страны",reg_center_title:"Центр страны",reg_south_title:"Юг страны",
+    reg_north_title:"Север страны",reg_center_title:"Центр страны",reg_south_title:"Юг страны",reg_js_title:"Иудея и Самария",reg_js:"Иудея и Самария",
     rn1_title:"Хайфа: «Бат-Галим Тауэр» — 320 кв. у моря, от 2.1M₪",rn1_body:"40-этажный комплекс с видом на море. Сдача 2028.",
     rn2_title:"Нетания: 1200 квартир «Ям Хатихон» — старт продаж",rn2_body:"Компания Gav-Yam открыла продажи. Первая очередь — конец 2027.",
     rn3_title:"Хадера: субсидия 200K₪ для молодых семей",rn3_body:"Муниципальная программа. Заявки до 1 мая 2026.",
@@ -1362,7 +1385,7 @@ const T = {
     n1_title:"Tel Aviv home prices up 8% in Q1 2026",n1_body:"Average apartment price in Tel Aviv hit a record 4.2M shekels. Growth especially visible in Florentin, Neve Tzedek and Port areas.",
     n2_title:"Bank of Israel cuts rate to 3.75% — monthly payment drops 400₪",n2_body:"Fourth consecutive cut. Borrowers with 1.5M₪ mortgage save about 400 shekels per month.",
     n3_title:"Ministry opens 'Mechir LaMishtaken' lottery in 6 cities",n3_body:"Applications until April 30. Apartments in Beer Sheva, Ashdod, Hadera — up to 30% discount.",
-    reg_north_title:"North of Israel",reg_center_title:"Center of Israel",reg_south_title:"South of Israel",
+    reg_north_title:"North of Israel",reg_center_title:"Center of Israel",reg_south_title:"South of Israel",reg_js_title:"Judea & Samaria",reg_js:"Judea & Samaria",
     rn1_title:"Haifa: 'Bat Galim Tower' — 320 apts at sea, from 2.1M₪",rn1_body:"40-floor complex with Mediterranean views. Completion 2028.",
     rn2_title:"Netanya: 1,200 apts 'Yam HaTichon' — sales launched",rn2_body:"Gav-Yam opened pre-construction sales. First phase — end 2027.",
     rn3_title:"Hadera: 200K₪ subsidy for young families",rn3_body:"Municipal program. Applications until May 1, 2026.",
@@ -1408,7 +1431,7 @@ const T = {
     n1_title:"מחירי הדיור בתל אביב עלו ב-8% ברבעון הראשון של 2026",n1_body:"לפי הלמ\"ס, מחיר ממוצע לדירה בתל אביב הגיע לשיא של 4.2 מיליון שקלים. עלייה בולטת בשכונות פלורנטין, נווה צדק ונמל.",
     n2_title:"בנק ישראל הוריד ריבית ל-3.75% — התשלום החודשי ירד ב-400₪",n2_body:"הפחתה רביעית ברציפות. לווה עם משכנתה של 1.5M₪ חוסך כ-400 שקל בחודש.",
     n3_title:"משרד הבינוי פתח הגרלת מחיר למשתכן ב-6 ערים",n3_body:"הגשת בקשות עד 30 באפריל. דירות בבאר שבע, אשדוד, חדרה, לוד — עד 30% הנחה.",
-    reg_north_title:"צפון הארץ",reg_center_title:"מרכז הארץ",reg_south_title:"דרום הארץ",
+    reg_north_title:"צפון הארץ",reg_center_title:"מרכז הארץ",reg_south_title:"דרום הארץ",reg_js_title:"יהודה ושומרון",reg_js:"יהודה ושומרון",
     rn1_title:"חיפה: 'מגדל בת גלים' — 320 דירות לחוף, מ-2.1M₪",rn1_body:"קומפלקס 40 קומות עם נוף לים התיכון. מסירה 2028.",
     rn2_title:"נתניה: 1,200 דירות 'ים התיכון' — פתיחת מכירות",rn2_body:"גב-ים פתחה מכירות בשלב היסודות. שלב ראשון — סוף 2027.",
     rn3_title:"חדרה: סובסידיה 200K₪ למשפחות צעירות",rn3_body:"תוכנית עירונית. הגשת בקשות עד 1 במאי 2026.",
@@ -1454,7 +1477,7 @@ const T = {
     n1_title:"Prix des logements à Tel Aviv en hausse de 8% au T1 2026",n1_body:"Selon le CBS, le prix moyen d'un appartement à Tel Aviv a atteint un record de 4,2M shekels. Hausse notable dans les quartiers Florentin, Neve Tzedek et le Port.",
     n2_title:"La Banque d'Israël abaisse son taux à 3,75% — mensualité réduite de 400₪",n2_body:"Quatrième baisse consécutive. Un emprunteur avec un prêt de 1,5M₪ économise environ 400 shekels par mois.",
     n3_title:"Le Ministère ouvre la loterie 'Mechir LaMishtaken' dans 6 villes",n3_body:"Dépôt des candidatures jusqu'au 30 avril. Appartements à Beer Sheva, Ashdod, Hadera — jusqu'à 30% de réduction.",
-    reg_north_title:"Nord d'Israël",reg_center_title:"Centre d'Israël",reg_south_title:"Sud d'Israël",
+    reg_north_title:"Nord d'Israël",reg_center_title:"Centre d'Israël",reg_south_title:"Sud d'Israël",reg_js_title:"Judée-Samarie",reg_js:"Judée-Samarie",
     rn1_title:"Haïfa : 'Tour Bat Galim' — 320 appts vue mer, dès 2,1M₪",rn1_body:"Complexe de 40 étages avec vue sur la Méditerranée. Livraison 2028.",
     rn2_title:"Netanya : 1 200 appts 'Yam HaTichon' — ventes lancées",rn2_body:"Gav-Yam a ouvert les ventes. Première phase — fin 2027.",
     rn3_title:"Hadera : subvention 200K₪ pour jeunes familles",rn3_body:"Programme municipal. Candidatures jusqu'au 1er mai 2026.",
@@ -1643,8 +1666,9 @@ function openNewsModal(item) {
     `<span>📅 ${_fmtDate(item.date)}</span><span>📰 ${_esc(item.source)}</span>`;
   document.getElementById('modalCloseBtn').textContent = '✕ ' + lbl.close;
   const readLink = document.getElementById('modalReadLink');
-  readLink.href        = item.url;
+  readLink.href        = item.url || '#';
   readLink.textContent = lbl.read;
+  readLink.style.display = item.url ? '' : 'none';
 
   // Attribution
   _setModalAttrib(item.source, item.url);
@@ -1836,6 +1860,7 @@ function _applyNewsData(data) {
   _renderRegionNews('north',  regions.north);
   _renderRegionNews('center', regions.center);
   _renderRegionNews('south',  regions.south);
+  _renderRegionNews('judea_samaria', regions.judea_samaria);
   // Populate projects news section
   _renderCatNews('projNewsGrid', items, 'project', 2);
   // Populate mortgage news section
