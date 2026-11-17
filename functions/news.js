@@ -439,7 +439,7 @@ export async function onRequest(context) {
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
       'Access-Control-Allow-Origin': '*',
-      'Cache-Control': 'public, max-age=1800, stale-while-revalidate=300',
+      'Cache-Control': 'public, max-age=60, stale-while-revalidate=300',
     },
   });
 }
