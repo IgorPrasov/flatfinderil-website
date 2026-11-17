@@ -374,8 +374,9 @@ async function fetchBotNews(lang) {
       // which would otherwise pull in politics and car-feed noise.
       judea: all.filter(i => !i.manual && i.region === 'judea_samaria'
         && (i.topic || 'housing') === 'housing'
-        && (i.category === 'project' || i.category === 'developer'
-            || /הרי זהב|harei zahav|harey zahav/i.test(`${i.title} ${i.body || ''}`))).map(norm),
+        && (/הרי זהב|harei zahav|harey zahav/i.test(`${i.title} ${i.body || ''}`)
+            || ((i.category === 'project' || i.category === 'developer')
+                && /דירות|דירה|דיור|יחידות דיור|יח"ד|בנייה|בניה|בנייי|פרויקט|קבלן|יזם|נדל"ן|נדלן|שכירות|התחדשות|מכרז|שיווק|housing|apartment|construction|real estate|units|developer|project/i.test(i.title)))).map(norm),
     };
   } catch { return { manual: [], judea: [] }; }
 }
